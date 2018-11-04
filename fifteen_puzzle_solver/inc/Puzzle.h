@@ -14,7 +14,7 @@ class Puzzle
 	//auto clone() -> Puzzle; TODO zamiast tu w metodzie  wykonujacej robic memcopy
 public:
 
-	Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY);
+	Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY, std::vector<uint_fast8_t> org);
 
 	Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY, Puzzle &puzel, Moves mov);	// wyrzucic???
 

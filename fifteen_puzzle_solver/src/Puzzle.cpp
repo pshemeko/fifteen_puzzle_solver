@@ -5,12 +5,11 @@
 
 
 
-Puzzle::Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY)
+Puzzle::Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY, std::vector<uint_fast8_t> org)
+	:dimensionX{ puzzleDimensionX }, dimensionY{ puzzleDimensionY }, board{ std::move(org) }
 {
-	dimensionX = puzzleDimensionX;
-	dimensionY = puzzleDimensionY;
-
-	board.reserve(dimensionX*dimensionY);
+	
+	
 	//TODO dokonczyc konstruktor
 }
 
@@ -22,32 +21,34 @@ void Puzzle::Fill(std::vector<uint_fast8_t> org)
 		board.swap(org);
 	}
 }
-
-std::list<int> Puzzle::DisplayElements()
-{
-
-}
-
-std::list<Moves> Puzzle::PossibleMoves()
-{
-
-}
+//
+//std::list<int> Puzzle::DisplayElements()
+//{
+//
+//}
+//
+//std::list<Moves> Puzzle::PossibleMoves()
+//{
+//
+//}
 
 bool Puzzle::IsOnFinishState()
 {
-	bool good = true;
+	//bool good = true;
 	for (uint_fast8_t i = 0; i< board.size()-1; i++)
 	{
 		if (i+1 != board[i]) return false;
 	}
+	if (board[board.size() - 1] != 0) return false;
+	return true;
 }
 
 Puzzle::~Puzzle()
 {
 }
 
-
-bool Puzzle::MoveZero(Moves mov)
-{
-}
+//
+//bool Puzzle::MoveZero(Moves mov)
+//{
+//}
 
