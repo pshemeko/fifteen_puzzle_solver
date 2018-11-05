@@ -7,8 +7,8 @@
 // jako Depenency Injection do klasy metod jak BFS DFS i Agwiazdka
 class Contex
 {
-	uint_fast8_t sizeX;
-	uint_fast8_t sizeY;
+	puzzleDataType sizeX;
+	puzzleDataType sizeY;
 
 public:
 	std::shared_ptr<Puzzle> start;
@@ -17,7 +17,7 @@ public:
     auto GetStartPuzzle()  -> std::shared_ptr<Puzzle>;
     auto GetFinishPuzzle() -> std::shared_ptr<Puzzle>;
 
-	Contex(uint_fast8_t size_x, uint_fast8_t size_y, std::vector< uint_fast8_t> setup);
+	Contex(puzzleDataType size_x, puzzleDataType size_y, std::vector< puzzleDataType> setup);
 	~Contex();
 };
 

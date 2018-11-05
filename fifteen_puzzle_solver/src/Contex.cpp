@@ -3,7 +3,7 @@
 #include <numeric>
 
 
-Contex::Contex(uint_fast8_t size_x, uint_fast8_t size_y, std::vector< uint_fast8_t> setup)
+Contex::Contex(puzzleDataType size_x, puzzleDataType size_y, std::vector< puzzleDataType> setup)
 	:sizeX{size_x}, sizeY{size_y}
 {
     //Puzzle pu = Puzzle(size_x, size_y, setup);
@@ -13,7 +13,7 @@ Contex::Contex(uint_fast8_t size_x, uint_fast8_t size_y, std::vector< uint_fast8
 	//finish =  Puzzle(size_x, size_y, setup);
 	//start->Fill(setup);
 
-    auto initVector = std::vector<uint_fast8_t>(size_x * size_y);
+    auto initVector = std::vector<puzzleDataType>(size_x * size_y);
     std::iota(std::begin(initVector), std::end(initVector) - 1, 1);
     initVector.back() = 0;
     finish = std::shared_ptr<Puzzle>(new Puzzle(size_x, size_y, initVector));

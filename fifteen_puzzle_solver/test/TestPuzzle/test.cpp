@@ -9,9 +9,10 @@ TEST(TestCaseNameMoj, TestNameMoj) {
 }
 
 TEST(PuzzleClassTEST, IsOnFinishStateTEST) {
-	uint_fast8_t x = 2;
-	uint_fast8_t y = 2;
-	//Puzzle puz(x, y);
+	puzzleDataType x = 2;
+	puzzleDataType y = 2;
+	Puzzle puz(x, y, {1,2,3,0});
+	//EXPECT_TRUE(puz.IsOnFinishState({ 1,2,3,0 }));
 	//uint_fast8_t tab[] = { 1,2,3,0 };
 	//std::vector<uint_fast8_t> board(x*y);
 	//std::iota(std::begin(board), std::end(board) - 1, 1);
@@ -30,4 +31,6 @@ TEST(PuzzleClassTEST, IsOnFinishStateTEST) {
 	//EXPECT_EQ(1, 1);
 	//EXPECT_TRUE(true);
 	//ASSERT_FALSE(0);
+
+
 }

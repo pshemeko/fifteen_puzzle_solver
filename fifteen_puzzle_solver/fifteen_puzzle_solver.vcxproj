@@ -156,6 +156,7 @@
     <ClInclude Include="inc\Contex.h" />
     <ClInclude Include="inc\Enums.h" />
     <ClInclude Include="inc\Exception_wrong_move.h" />
+    <ClInclude Include="inc\Node.h" />
     <ClInclude Include="inc\Puzzle.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
@@ -169,6 +170,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Contex.cpp" />
+    <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Puzzle.cpp" />
   </ItemGroup>
   <ItemGroup>

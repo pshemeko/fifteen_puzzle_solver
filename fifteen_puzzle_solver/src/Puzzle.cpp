@@ -5,23 +5,28 @@
 
 
 
-Puzzle::Puzzle(uint_fast8_t puzzleDimensionX, uint_fast8_t puzzleDimensionY, std::vector<uint_fast8_t> org)
+Puzzle::Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, std::vector<puzzleDataType> org)
 	:dimensionX{ puzzleDimensionX }, dimensionY{ puzzleDimensionY }, board{ std::move(org) }
 {
-    // or give it to autput function
-    for (std::size_t i = 0; i < board.size(); ++i)
-    {
-        if (0 == board[i])
-        {
-            zeroPosition = i;
-            break;
-        }
-    }
-	
+   
+	setZero();
 	//TODO dokonczyc konstruktor
 }
 
-void Puzzle::Fill(std::vector<uint_fast8_t> org)
+void Puzzle::setZero()
+{
+	// or give it to autput function
+	for (std::size_t i = 0; i < board.size(); ++i)
+	{
+		if (0 == board[i])
+		{
+			zeroPosition = i;
+			break;
+		}
+	}
+}
+
+void Puzzle::Fill(std::vector<puzzleDataType> org)
 {
 	if (org.size() != board.size()) throw Exception_wrong_move("Wrong numbers of Parametrs in Puzzle::Fill");
 	else
@@ -46,14 +51,20 @@ std::list<Moves> Puzzle::PossibleMoves()
     return l;
 }
 
-bool Puzzle::IsOnFinishState()
+bool Puzzle::IsOnFinishState(std::vector<puzzleDataType> org)
 {
-	//bool good = true;
-	for (uint_fast8_t i = 0; i< board.size()-1; ++i)
+	/*for (uint_fast8_t i = 0; i< board.size()-1; ++i)
 	{
 		if (i+1 != board[i]) return false;
 	}
 	if (board[board.size() - 1] != 0) return false;
+	return true;
+	*/
+
+	for (size_t i = 0; i < board.size(); ++i)
+	{
+		if (board[i] != org[i]) return false;
+	}
 	return true;
 }
 
@@ -136,4 +147,15 @@ auto Puzzle::toString()->std::string
         if ( 0 == i % dimensionY) s += "\n";
     }
     return s;
+}
+
+
+auto Puzzle::operator==(Puzzle const& rhs) const -> bool
+{
+	return this->board == rhs.board;
+}
+
+auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
+{
+	return !(operator==(rhs));
 }
