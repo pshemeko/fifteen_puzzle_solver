@@ -2,7 +2,7 @@
 
 #include "Enums.h"
 #include <list>
-#include<vector>
+#include <vector>
 
 
 typedef uint16_t puzzleDataType;

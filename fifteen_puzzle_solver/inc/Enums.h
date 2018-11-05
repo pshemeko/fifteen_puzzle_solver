@@ -7,3 +7,16 @@ enum Moves
 	Up,
 	Down
 };
+
+enum Strategy
+{
+	bfs,
+	dfs,
+	astr
+};
+
+enum Heuristics
+{
+	hamm,
+	manh
+};
