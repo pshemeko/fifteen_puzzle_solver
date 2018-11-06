@@ -11,7 +11,8 @@ TEST(TestCaseNameMoj, TestNameMoj) {
 TEST(PuzzleClassTEST, IsOnFinishStateTEST) {
 	puzzleDataType x = 2;
 	puzzleDataType y = 2;
-	Puzzle puz(x, y, {1,2,3,0});
+	Puzzle puz(x, y, std::vector<puzzleDataType>{1,2,3,0});
+	int a;
 	//EXPECT_TRUE(puz.IsOnFinishState({ 1,2,3,0 }));
 	//uint_fast8_t tab[] = { 1,2,3,0 };
 	//std::vector<uint_fast8_t> board(x*y);

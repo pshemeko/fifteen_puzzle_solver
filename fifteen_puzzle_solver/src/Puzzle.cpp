@@ -159,3 +159,15 @@ auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
 {
 	return !(operator==(rhs));
 }
+
+auto Puzzle::hasHFunction() -> double
+{
+	double hash = 0.0;
+	double two = 1.0;//2^0, 2^1, 2^2, 2^3....
+	for (size_t i = 0; i < board.size(); ++i)
+	{
+		hash += two * static_cast<int>(board[i]);
+		two *= 2.0;
+	}
+	return hash;
+}

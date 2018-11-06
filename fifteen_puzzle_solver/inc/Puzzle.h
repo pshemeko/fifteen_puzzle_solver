@@ -55,6 +55,8 @@ public:
 
 	auto operator==(Puzzle const& rhs) const -> bool;
 	auto operator!=(Puzzle const& rhs) const -> bool;
+
+	auto hasHFunction() -> double;
 };
 
 
