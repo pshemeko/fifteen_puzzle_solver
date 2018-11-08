@@ -2,17 +2,19 @@
 #include "Puzzle.h"
 #include <numeric>
 
+
+
 TEST(TestCaseNameMoj, TestNameMoj) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
   ASSERT_FALSE(0);
 }
 
-TEST(PuzzleClassTEST, IsOnFinishStateTEST) {
+TEST(PuzzleClass, IsOnFinishState) {
 	puzzleDataType x = 2;
 	puzzleDataType y = 2;
 	Puzzle puz(x, y, std::vector<puzzleDataType>{1,2,3,0});
-	int a;
+	//int a;
 	//EXPECT_TRUE(puz.IsOnFinishState({ 1,2,3,0 }));
 	//uint_fast8_t tab[] = { 1,2,3,0 };
 	//std::vector<uint_fast8_t> board(x*y);

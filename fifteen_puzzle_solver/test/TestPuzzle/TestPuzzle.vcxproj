@@ -114,13 +114,14 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir)inc;$(MSBuildThisFileDirectory)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName)\inc;$(SolutionDir)$(SolutionName);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;$(MSBuildThisFileDirectory)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName)\inc;$(SolutionDir)$(SolutionName);$(ProjectDir);$(ProjectDir)x64\Release;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>$(ProjectDir)inc;$(MSBuildThisFileDirectory)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName)\inc;$(SolutionDir)$(SolutionName);$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)x64\Release;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
