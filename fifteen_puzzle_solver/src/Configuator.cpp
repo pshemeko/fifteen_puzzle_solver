@@ -2,8 +2,8 @@
 #include "Configuator.h"
 
 
-Configuator::Configuator(int argc, char** argv)
-	:argc{ argc }, argv{argv}
+Configuator::Configuator(int argc, char** argv, Contex conteks)
+	:argc{ argc }, argv{argv}, conteks{conteks}
 {
 }
 
@@ -40,5 +40,18 @@ void Configuator::set()
     fileWithStartPuzzel = argv[3];
     fileOutputSolution = argv[4];
     fileAdditionalInformation = argv[5];
+	
+	conteks.set(fileWithStartPuzzel); // teraz w conteks.start mamy ustawienia poczatkowe ukladanki
     
+}
+
+auto Configuator::returnMethod() -> Methods*
+{
+	if (strategy == Strategy::bfs)
+	{
+		Methods *metho = new MethodBFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
+
+		return metho;
+	}
+	
 }

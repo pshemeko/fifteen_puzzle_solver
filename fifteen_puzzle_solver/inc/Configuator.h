@@ -1,14 +1,21 @@
 #pragma once
 #include "Puzzle.h"
+#include "MethodBFS.h"
+#include "Contex.h"
+
 #include <vector>
 
+//ma zrobic contex oraz konkretna metode np MethodBFS
+
+// konfiguruje z danych wejsciowych pliku i wtworzy metode do dzialania np. BFS Astar
 class Configuator
 {
 	int argc;
 	char** argv;
+	Contex conteks;
 
 public:
-	Configuator(int argc, char** argv); //  char * argv[]
+	Configuator(int argc, char** argv, Contex conteks); //  char * argv[]
 	~Configuator();
 
     char* fileWithStartPuzzel;
@@ -23,5 +30,7 @@ public:
 
     auto set() -> void;
 
+	auto returnMethod()-> Methods*;
+ 
 };
 
