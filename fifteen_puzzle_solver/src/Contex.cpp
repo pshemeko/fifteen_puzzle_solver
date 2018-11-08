@@ -29,6 +29,23 @@ auto Contex::GetFinishPuzzle()->std::shared_ptr<Puzzle>
     return finish;
 }
 
+auto Contex::set(char* name) -> void
+{
+    std::ifstream file;
+    file.open(name);
+
+    file >> sizeX;
+    file >> sizeY;
+
+    for (size_t i = 0; i < sizeX; ++i)
+    {
+        //TODO teraz robie
+
+        ale sutasdfa
+    }
+
+}
+
 Contex::~Contex()
 {
 }

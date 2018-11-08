@@ -8,6 +8,8 @@
 typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;
 
+//// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
+
 class Puzzle
 {
 	void setZero();
@@ -26,12 +28,14 @@ public:
 
 	Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, Puzzle &puzel, Moves mov);	// wyrzucic???
 
+    auto PositionZero() ->  size_t;
+
 	//auto DisplayElements() -> std::list<int>; // potrzeba do wyswietlania elementow //Albo jako lista list 
 
 	// mozliwe ruchy dla tego kloca, tej ukladanki
 	auto PossibleMoves() ->std::list<Moves>;
 
-	auto IsOnFinishState(std::vector<puzzleDataType> org) -> bool;
+	auto IsOnFinishState() -> bool;
 
     // zrobic jako template  /// MOZE zwracac operator lub null
 	auto MoveZero(Moves mov) -> bool;// moze rzucac wyj¹tek exception_wrong_move - wyjatki dzialaja dluzej // 
@@ -57,6 +61,9 @@ public:
 	auto operator!=(Puzzle const& rhs) const -> bool;
 
 	auto hasHFunction() -> double;
+    friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
+
+    // moze zrobic wczytywanie z pliku tutaj
 };
 
 

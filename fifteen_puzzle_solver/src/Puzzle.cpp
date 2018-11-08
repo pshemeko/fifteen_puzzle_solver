@@ -8,9 +8,14 @@
 Puzzle::Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, std::vector<puzzleDataType> org)
 	:dimensionX{ puzzleDimensionX }, dimensionY{ puzzleDimensionY }, board{ std::move(org) }
 {
-   
+    //if (puzzleDimensionX*puzzleDimensionY != org.size()) { throw Exception_wrong_move("zly wymiar vektora lub wymiary x,y"); };
 	setZero();
 	//TODO dokonczyc konstruktor
+}
+
+auto Puzzle::PositionZero() ->  size_t
+{
+    return zeroPosition;
 }
 
 void Puzzle::setZero()
@@ -51,7 +56,7 @@ std::list<Moves> Puzzle::PossibleMoves()
     return l;
 }
 
-bool Puzzle::IsOnFinishState(std::vector<puzzleDataType> org)
+bool Puzzle::IsOnFinishState() //std::vector<puzzleDataType> org)
 {
 	/*for (uint_fast8_t i = 0; i< board.size()-1; ++i)
 	{
@@ -61,10 +66,11 @@ bool Puzzle::IsOnFinishState(std::vector<puzzleDataType> org)
 	return true;
 	*/
 
-	for (size_t i = 0; i < board.size(); ++i)
+	for (size_t i = 0; i < board.size()-1; ++i)
 	{
-		if (board[i] != org[i]) return false;
+		if (board[i] != i+1) return false;
 	}
+    
 	return true;
 }
 
@@ -107,6 +113,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
         if (CanMoveLeft())
         {
             std::swap(board[zeroPosition], board[zeroPosition - 1]);
+            zeroPosition -= 1;
             isMoved = true;
         }
     }
@@ -115,6 +122,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
         if (CanMoveRight())
         {
             std::swap(board[zeroPosition], board[zeroPosition + 1]);
+            zeroPosition += 1;
             isMoved = true;
         }
     }
@@ -123,6 +131,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
         if (CanMoveUp())
         {
             std::swap(board[zeroPosition], board[zeroPosition - dimensionY]);
+            zeroPosition -= dimensionY;
             isMoved = true;
         }
     }
@@ -131,6 +140,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
         if (CanMoveDown())
         {
             std::swap(board[zeroPosition], board[zeroPosition + dimensionY]);
+            zeroPosition += dimensionY;
             isMoved = true;
         }
     }
@@ -170,4 +180,16 @@ auto Puzzle::hasHFunction() -> double
 		two *= 2.0;
 	}
 	return hash;
+}
+
+std::ostream& operator<<(std::ostream& os, const Puzzle& puz) 
+{
+    for (size_t i = 0; i < puz.board.size(); ++i)
+    {
+        if (i % (puz.dimensionY) == 0) os << "\n";
+        os << puz.board[i] << "\t";
+        
+    }
+    
+    return os;
 }
