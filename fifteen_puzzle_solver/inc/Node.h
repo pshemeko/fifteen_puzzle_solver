@@ -14,6 +14,10 @@ public:
 	
 	//Node();
 	Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves operatorUsed);
+
+	// lub
+	//Node(std::shared_ptr<Node> parent,, Moves operatorUsed);
+
 	
 	~Node();
 };

@@ -1,5 +1,7 @@
 #pragma once
 #include <Contex.h>
+#include <Puzzle.h>
+#include <Node.h>
 
 class Methods
 {
