@@ -19,21 +19,30 @@ auto MethodBFS::run() -> void
 
 	int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
         
-	std::list<Node> frontier;
-	std::list<Node> explored;
+	std::list<std::shared_ptr<Node>> frontier;
+	std::list<std::shared_ptr<Node>> explored;
 
     std::shared_ptr<Node> root = std::make_shared<Node>(startPuzzel); // poczatkowy wezel
+    //Puzzle father = *root->puzel;
+
+    std::shared_ptr<Node> father = root;
+    ////// od tad petla
+
 
     for (auto mov : order)
     {
-        Puzzle puz = *root->puzel;
-        puz.MoveZero(mov);
-        std::cout << "puz nowy ma hash" << puz.hasHFunction() << "  root stary ma hash: " << (*root->puzel).hasHFunction() << std::endl ;
+        std::shared_ptr<Puzzle> puz = father->puzel;
+        puz->MoveZero(mov);
+        std::shared_ptr<Node> nod = std::make_shared<Node>(father, puz, mov);
+        frontier.push_back(nod);
 
-        //std::shared_ptr<Puzzle> newest = root->puzel;
-
+        std::cout << "puz nowy ma hash" << puz->hasHFunction() << "  root stary ma hash: " << (*root->puzel).hasHFunction() << std::endl ;
 
     }
+    //teraz biore pierwszy i przetwarzam
 
+    father = frontier.front();
+    explored.push_back(father);
+    frontier.pop_front();
 
 }
