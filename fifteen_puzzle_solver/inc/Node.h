@@ -14,6 +14,9 @@ public:
 	
 	//Node();
 	Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves operatorUsed);
+    Node(std::shared_ptr<Puzzle> puzel);
+
+    Node() = default; // potrzebny by stworzyc pierwszy weze³
 
 	// lub
 	//Node(std::shared_ptr<Node> parent,, Moves operatorUsed);

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../fifteen_puzzle_solver/inc/Puzzle.h"
+#include "../fifteen_puzzle_solver/inc/MethodBFS.h"
+#include "../fifteen_puzzle_solver/inc/Methods.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

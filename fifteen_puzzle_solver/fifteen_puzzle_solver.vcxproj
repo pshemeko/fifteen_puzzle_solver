@@ -158,16 +158,15 @@
     <ClInclude Include="inc\Contex.h" />
     <ClInclude Include="inc\Enums.h" />
     <ClInclude Include="inc\Exception_wrong_move.h" />
+    <ClInclude Include="inc\MethodBFS.h" />
     <ClInclude Include="inc\Methods.h" />
     <ClInclude Include="inc\Node.h" />
     <ClInclude Include="inc\Puzzle.h" />
-    <ClInclude Include="MethodBFS.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fifteen_puzzle_solver.cpp" />
-    <ClCompile Include="MethodBFS.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -176,6 +175,7 @@
     </ClCompile>
     <ClCompile Include="src\Configuator.cpp" />
     <ClCompile Include="src\Contex.cpp" />
+    <ClCompile Include="src\MethodBFS.cpp" />
     <ClCompile Include="src\Methods.cpp" />
     <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Puzzle.cpp" />

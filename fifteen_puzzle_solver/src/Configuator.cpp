@@ -41,8 +41,24 @@ void Configuator::set()
     fileOutputSolution = argv[4];
     fileAdditionalInformation = argv[5];
 	
-	conteks.set(fileWithStartPuzzel); // teraz w conteks.start mamy ustawienia poczatkowe ukladanki
+	//conteks.set(fileWithStartPuzzel); // teraz w conteks.start mamy ustawienia poczatkowe ukladanki
+    conteks.set(const_cast<char *>("4x4_02_00001.txt"));
     
+}
+
+auto Configuator::setTest() -> void
+{
+    strategy = Strategy::bfs;
+    heuristic = Heuristics::hamm;
+    orderEnum.push_back(Moves::Left);
+    orderEnum.push_back(Moves::Right);
+    orderEnum.push_back(Moves::Up);
+    orderEnum.push_back(Moves::Down);
+    conteks.set(const_cast<char *>("4x4_02_00001.txt"));
+    
+    fileOutputSolution = const_cast<char *>("jeden.txt");
+    fileAdditionalInformation = const_cast<char *>("dwa.txt");
+
 }
 
 auto Configuator::returnMethod() -> Methods*

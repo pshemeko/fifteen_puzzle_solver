@@ -7,6 +7,13 @@ Node::Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves op
 {
 }
 
+Node::Node(std::shared_ptr<Puzzle> puzel)
+    : puzel{ puzel }
+{
+     operatorUsed = Moves::Down;
+
+}
+
 
 Node::~Node()
 {

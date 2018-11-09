@@ -12,9 +12,9 @@ protected:
 	char* fileAdditionalInformation;
 
 public:
-	virtual auto run() -> void = 0;
+	 virtual auto run() -> void = 0;
 	Methods(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation);
-	virtual ~Methods();
+	 virtual ~Methods();
 
 };
 
