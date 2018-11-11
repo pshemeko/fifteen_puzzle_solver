@@ -2,6 +2,7 @@
 #include <Contex.h>
 #include <Puzzle.h>
 #include <Node.h>
+#include "Solution.h"
 
 class Methods
 {
@@ -12,7 +13,7 @@ protected:
 	char* fileAdditionalInformation;
 
 public:
-	 virtual auto run() -> void = 0;
+	 virtual auto run(Solution &sol) -> void = 0;
 	Methods(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation);
 	 virtual ~Methods();
 

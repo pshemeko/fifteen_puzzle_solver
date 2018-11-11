@@ -162,6 +162,7 @@
     <ClInclude Include="inc\Methods.h" />
     <ClInclude Include="inc\Node.h" />
     <ClInclude Include="inc\Puzzle.h" />
+    <ClInclude Include="inc\Solution.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <ClCompile Include="src\Methods.cpp" />
     <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Puzzle.cpp" />
+    <ClCompile Include="src\Solution.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="fifteen_puzzle_solver.rc" />

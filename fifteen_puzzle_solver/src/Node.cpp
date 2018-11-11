@@ -11,7 +11,7 @@ Node::Node(std::shared_ptr<Puzzle> puzel)
     : puzel{ puzel }
 {
      operatorUsed = Moves::Down;
-
+	 parrent == nullptr;
 }
 
 

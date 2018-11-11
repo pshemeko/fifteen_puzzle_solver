@@ -41,8 +41,10 @@ void Configuator::set()
     fileOutputSolution = argv[4];
     fileAdditionalInformation = argv[5];
 	
-	//conteks.set(fileWithStartPuzzel); // teraz w conteks.start mamy ustawienia poczatkowe ukladanki
-    conteks.set(const_cast<char *>("4x4_02_00001.txt"));
+	conteks.set(fileWithStartPuzzel); // teraz w conteks.start mamy ustawienia poczatkowe ukladanki
+    //conteks.set(const_cast<char *>("4x4_02_00001.txt"));
+
+	//TODO tutaj tworz reszte rzeczy tj Methods potem na tej metodzie rób run oraz tworz Solution j¹ przekaz do run
     
 }
 
@@ -61,7 +63,7 @@ auto Configuator::setTest() -> void
 
 }
 
-auto Configuator::returnMethod() -> Methods*
+auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych metod
 {
 	if (strategy == Strategy::bfs)
 	{

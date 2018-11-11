@@ -19,7 +19,7 @@ public:
 	~Configuator();
 
     //tymcvzasowo do testowania
-    Configuator(Contex con) : conteks{ con } {
+    Configuator(Contex con) : conteks{ con } {	// TODO zmien na konstruktor by bral z parametrow programu dane
         argc = 0;
        // argv = (char**)malloc(sizeof(char*)); // const_cast<char **>();
        // argv[0] = const_cast<char *>("a");
