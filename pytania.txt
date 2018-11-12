@@ -1,0 +1,4 @@
+czym jest w zaaniu: liczba stanów odwiedzoonych - frontier??
+a czym liczba stanów przetworzonych	- explored??
+
+jak obliczyc g³êbokoœæ rekursji?? czy to jest ilosc operatorów?

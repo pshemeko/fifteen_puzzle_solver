@@ -72,7 +72,7 @@ auto Configuator::setTest() -> void	// TODO TYMCZASOWO uzywam tej funkcji do tes
     orderEnum.push_back(Moves::Right);
     
     
-    conteks.set(const_cast<char *>("4x4_02_00001.txt"));
+    conteks.set(const_cast<char *>("4x4_04_00019.txt"));
     
     fileOutputSolution = const_cast<char *>("jeden.txt");
     fileAdditionalInformation = const_cast<char *>("dwa.txt");

@@ -2,6 +2,9 @@
 #include <Contex.h>
 #include <Puzzle.h>
 #include <Node.h>
+#include <time.h>
+#include <chrono>
+#include <string>
 #include "Solution.h"
 
 class Methods

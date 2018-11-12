@@ -12,11 +12,13 @@ MethodBFS::~MethodBFS()
 {
 }
 
-
 auto MethodBFS::run(Solution &solution) -> void
 {
 
 	using namespace std;
+	
+	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+
 	//TODO  zaimplementoac caly algorytm
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 	std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
@@ -29,6 +31,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	std::shared_ptr<Node> root = std::make_shared<Node>(startPuzzel); // poczatkowy wezel
 	//Puzzle father = *root->puzel;
+	frontier.push_back(root);
 
 	std::shared_ptr<Node> father = root;
 	////// od tad petla
@@ -37,10 +40,15 @@ auto MethodBFS::run(Solution &solution) -> void
 	bool stillRun = true;
 	//Puzzle puzelKoncowy = *startPuzzel.get();
 	std::shared_ptr<Node> wezelKoncowy = root;
+
 	while (stillRun)
 	{
-		std::cout << "\t\t\t\t\t\t\t\t\t\tstill run: " << stillRun << std::endl;
-		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == ile) stillRun = false;
+		//std::cout << "\t\t\t\t\t\t\t\t\t\tstill run: " << stillRun << std::endl;
+		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == ile)
+		{
+			stillRun = false;
+			cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
+		}
 
 		for (auto mov : order)
 		{
@@ -53,13 +61,16 @@ auto MethodBFS::run(Solution &solution) -> void
 				{
 
 					cout << "czy zmienil plozenie zera " << zmienil << " z ruchem" << mov;
-					cout << puzelek; 
+					//cout << puzelek;
 					std::shared_ptr<Puzzle> kopia = std::make_shared<Puzzle>(puzelek);
 
 					std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov);
 					////sprawdz czy jest docelowy
 					if (nod->puzel->IsOnFinishState()) {
-						std::cout << " \n teraz uruchomil sie break";
+						cout << "\nkoncowy puzel:";
+						cout << *nod->puzel;
+						std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
+						std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
 						wezelKoncowy = nod;
 						//puzelKoncowy = puzelek;
 						stillRun = false;
@@ -80,25 +91,42 @@ auto MethodBFS::run(Solution &solution) -> void
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-							std::cout << "jest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+							std::cout << "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+								break;
 						}
 					}
+					for (auto x : explored)
+					{
+						//Node d = *x.get(); 
+						//Puzzle pp = *x->puzel; 
+
+						if ((x->puzel->hasHFunction()) == nod->puzel->hasHFunction())
+						{
+							czyJuzJest = true;
+							//if (  *nod.get() == *x.get()) czyJuzJest = true;
+							std::cout << "\n\t\t\t\tjest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+							break;
+						}
+					}
+
 					if (!czyJuzJest)
 					{
 						frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
-						std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << std::endl; //(*father->puzel).hasHFunction() << std::endl;
+						std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() <<" :" ; //(*father->puzel).hasHFunction() << std::endl;
+						cout << *nod->puzel << endl;
 					}
 
 
-				}
+			}
+
 		}
 		//teraz biore pierwszy i przetwarzam
 		
 		father = frontier.front();
 		explored.push_back(father);
 		frontier.pop_front();
-		ile++;
+		if(stillRun) ile++;///// czy ok 
 		std::cout << "\n koniec for:" << ile;
 	}
 	std::cout << "\n wyszlo z while" <<" ile:" << ile;
@@ -108,28 +136,33 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	//******************************** WYSWIETLANIE 
 
+	//TODO zle wypisuje operatory brakuje jednego i sa pomieszane
+
 	std::list<Moves> listMovesRevert;
 	bool oneMore = true;
+	std::shared_ptr <Node> wezel = wezelKoncowy;
 	while (oneMore)
 	{
-		listMovesRevert.push_back(father->operatorUsed);
-		father = father->parrent;
-		std::cout << "\noneMore:" << oneMore << " operator:" << father->operatorUsed;
-		if (father->parrent == nullptr) oneMore = false;
+		listMovesRevert.push_back(wezel->operatorUsed);
+		//std::cout << "\noneMore:" << oneMore << " operator:" << wezel->operatorUsed;
+		wezel = wezel->parrent;
+		if (wezel->parrent == nullptr) oneMore = false;
 	}
 	cout <<  "\t\t size listrevert:" << listMovesRevert.size();
 	// zaweira w dobrej kolejnosci kolejnosc ruchow od poczatku do rozwiazania
 	
-	std::list<Moves> listMoves;
-	for (std::list<Moves>::reverse_iterator it = listMoves.rbegin(); it != listMoves.rend(); ++it)
-	{
-		listMoves.push_back(*it);
-	}
+	//std::list<Moves> listMoves;
+	//for (std::list<Moves>::reverse_iterator it = listMoves.rbegin(); it != listMoves.rend(); ++it)
+	//{
+	//	listMoves.push_back(*it);
+	//}
+
+	std::reverse(std::begin(listMovesRevert), std::end(listMovesRevert)); // odwracam liste
 
 	solution.fileSolution << "glebokosc:" << ile << std::endl;
 	std::cout << "\nglebokosc:" << ile << std::endl;
 
-	for(auto x : listMoves)
+	for(auto x : listMovesRevert)
 	{
 		solution.fileSolution << x <<" ";
 		std::cout << x << " ";
@@ -139,4 +172,28 @@ auto MethodBFS::run(Solution &solution) -> void
 	
 
 
+	// *********************************************      zbieranie wynikow
+
+
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+
+	solution.length_of_the_solution_found = listMovesRevert.size();
+	solution.number_of_visited_states = frontier.size() + explored.size();
+	solution.number_of_processed_states = explored.size();
+	////?????????TODO czy to jest dobrze?
+	solution.maximum_depth_of_recursion_achieved = ile;
+	for (auto x : listMovesRevert)
+	{
+		if (x == Moves::Down)	solution.solution += "D";
+		if (x == Moves::Up)		solution.solution += "U";
+		if (x == Moves::Left)	solution.solution += "L";
+		if (x == Moves::Right)	solution.solution += "R";
+	}
+	cout << "\n Czas rozwiazania: " << solution.time_duration_of_process.count();
+	cout << "\n Dlugosc znalezionego rozwiazania w milisekundach: " << solution.length_of_the_solution_found;
+	cout << "\n Operatory uzyte: " << solution.solution;
+	cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
+	cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
+	cout << endl;
+	//solution.save();
 }
