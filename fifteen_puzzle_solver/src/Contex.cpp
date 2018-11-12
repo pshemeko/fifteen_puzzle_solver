@@ -19,6 +19,7 @@ Contex::Contex(puzzleDataType size_x, puzzleDataType size_y, std::vector< puzzle
     std::iota(std::begin(initVector), std::end(initVector) - 1, 1);
     initVector.back() = 0;
     finish = std::shared_ptr<Puzzle>(new Puzzle(size_x, size_y, initVector));
+	
 }
 
 auto Contex::GetStartPuzzle()->std::shared_ptr<Puzzle>
@@ -57,6 +58,7 @@ auto Contex::set(char* name) -> void
 
 	 wsk = std::make_shared<Puzzle>(pp);
 	swap(start, wsk);
+
 	//std::cout << std::endl <<" wielkosc tablicy data:"<< data.size() << std::endl;
 	//for (size_t i = 0; i < data.size(); ++i)
 	//{

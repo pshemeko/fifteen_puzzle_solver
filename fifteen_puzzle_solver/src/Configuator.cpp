@@ -12,6 +12,20 @@ Configuator::~Configuator()
 {
 }
 
+Configuator::Configuator(Contex con) // TODO zmien na konstruktor by bral z parametrow programu dane
+: conteks{ con } 
+{	
+		argc = 0;
+		// argv = (char**)malloc(sizeof(char*)); // const_cast<char **>();
+		// argv[0] = const_cast<char *>("a");
+		fileWithStartPuzzel = const_cast<char *>("brak.txt");
+		fileOutputSolution = const_cast<char *>("brak1.txt");
+		fileAdditionalInformation = const_cast<char *>("brak2.txt");
+		order = const_cast<char *>("dupaRight");
+		//orderEnum.push_back(Moves::Down);
+
+}
+
 void Configuator::set()
 {
 
@@ -48,14 +62,16 @@ void Configuator::set()
     
 }
 
-auto Configuator::setTest() -> void
+auto Configuator::setTest() -> void	// TODO TYMCZASOWO uzywam tej funkcji do testowania
 {
     strategy = Strategy::bfs;
     heuristic = Heuristics::hamm;
+	orderEnum.push_back(Moves::Down);
+	orderEnum.push_back(Moves::Up);
     orderEnum.push_back(Moves::Left);
     orderEnum.push_back(Moves::Right);
-    orderEnum.push_back(Moves::Up);
-    orderEnum.push_back(Moves::Down);
+    
+    
     conteks.set(const_cast<char *>("4x4_02_00001.txt"));
     
     fileOutputSolution = const_cast<char *>("jeden.txt");

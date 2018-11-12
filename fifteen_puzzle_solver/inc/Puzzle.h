@@ -9,7 +9,7 @@ typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;
 
 
-static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 20;
+static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 5;
 
 
 //// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
@@ -46,8 +46,10 @@ public:
 
 	void Fill(std::vector<puzzleDataType> org); // chyba skasowac
 
-	Puzzle(Puzzle const &) = default;
+	Puzzle(const Puzzle &) = default;
 	Puzzle(Puzzle &&) = default;
+	
+	Puzzle & operator =(const Puzzle &);
 
 	~Puzzle();
 

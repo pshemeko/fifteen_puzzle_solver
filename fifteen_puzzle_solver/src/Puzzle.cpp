@@ -39,6 +39,16 @@ void Puzzle::Fill(std::vector<puzzleDataType> org)
 		board.swap(org);
 	}
 }
+
+//Puzzle::Puzzle(const Puzzle &p)
+//{
+//	dimensionX = p.dimensionX;
+//	dimensionY = p.dimensionY;
+//	zeroPosition = p.zeroPosition;
+//	board = p.board;
+//
+//}
+
 //
 //std::list<int> Puzzle::DisplayElements()
 //{
@@ -72,6 +82,18 @@ bool Puzzle::IsOnFinishState() //std::vector<puzzleDataType> org)
 	}
     
 	return true;
+}
+
+Puzzle & Puzzle::operator=(const Puzzle &p)
+{
+	//Puzzle pu(p);
+		dimensionX = p.dimensionX;
+		dimensionY = p.dimensionY;
+		zeroPosition = p.zeroPosition;
+		board = p.board;
+
+		return *this;
+	// TODO: tu wstawiæ instrukcjê return
 }
 
 Puzzle::~Puzzle()
