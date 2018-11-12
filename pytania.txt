@@ -1,4 +1,15 @@
-czym jest w zaaniu: liczba stanów odwiedzoonych - frontier??
+ania aby uruchomic program z parametrami musiesz to co tu opisali zrobic:
+https://www.mblog.boo.pl/artykul-407-visual-studio-uruchamianie-aplikacji-konsolowej-z-argumentami-wiersza-polecen.html
+
+jak przyspieszyc??
+1) zmienic metode HasHFunction na pole w klasie raz wyliczane w konstruktorze -
+	- wiecej miejsca ale przy przeszukiwanie tablic frontier bedzie sybcej
+
+
+
+PYTANIA
+
+czym jest w zadaniu: liczba stanów odwiedzoonych - frontier??
 a czym liczba stanów przetworzonych	- explored??
 
 jak obliczyc g³êbokoœæ rekursji?? czy to jest ilosc operatorów?
