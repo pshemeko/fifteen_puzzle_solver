@@ -11,12 +11,16 @@ public:
 	Moves operatorUsed;	
 
 	std::shared_ptr<Node> parrent;
+
+    int recursionDeph; // glebokos
 	
 	//Node();
 	Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves operatorUsed);
     Node(std::shared_ptr<Puzzle> puzel);
+    Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves operatorUsed, int recursionDeph);
 
-    Node() = default; // potrzebny by stworzyc pierwszy weze³
+
+    Node() = default; // potrzebny by stworzyc pierwszy weze³ TODO Chyba wywalic
 	//Node(Node const &)=default;
 	// lub
 	//Node(std::shared_ptr<Node> parent,, Moves operatorUsed);

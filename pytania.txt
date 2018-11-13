@@ -5,6 +5,8 @@ jak przyspieszyc??
 1) zmienic metode HasHFunction na pole w klasie raz wyliczane w konstruktorze -
 	- wiecej miejsca ale przy przeszukiwanie tablic frontier bedzie sybcej
 
+????
+jak zmienic ezplored na mape lub std::unordered_set<std::size_t> - wywala mi bledy
 
 
 PYTANIA

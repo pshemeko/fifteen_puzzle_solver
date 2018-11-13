@@ -159,6 +159,7 @@
     <ClInclude Include="inc\Enums.h" />
     <ClInclude Include="inc\Exception_wrong_move.h" />
     <ClInclude Include="inc\MethodBFS.h" />
+    <ClInclude Include="inc\MethodDFS.h" />
     <ClInclude Include="inc\Methods.h" />
     <ClInclude Include="inc\Node.h" />
     <ClInclude Include="inc\Puzzle.h" />
@@ -176,7 +177,9 @@
     </ClCompile>
     <ClCompile Include="src\Configuator.cpp" />
     <ClCompile Include="src\Contex.cpp" />
+    <ClCompile Include="src\Enums.cpp" />
     <ClCompile Include="src\MethodBFS.cpp" />
+    <ClCompile Include="src\MethodDFS.cpp" />
     <ClCompile Include="src\Methods.cpp" />
     <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Puzzle.cpp" />
