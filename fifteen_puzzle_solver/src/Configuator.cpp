@@ -28,11 +28,10 @@ Configuator::Configuator(Contex con) // TODO zmien na konstruktor by bral z para
 
 void Configuator::set()
 {
-
-    if (argv[1] == "bfs") strategy = Strategy::bfs;
-    if (argv[1] == "dfs") strategy = Strategy::dfs;
-    if (argv[1] == "astr") strategy = Strategy::astr;
-
+    if (argv[1] == std::string("bfs")) strategy = Strategy::bfs;
+    if (argv[1] == std::string("dfs")) strategy = Strategy::dfs;
+    if (argv[1] == std::string("astr")) strategy = Strategy::astr;
+    
     if (argv[2] == "hamm") { heuristic = Heuristics::hamm; }
     else if (argv[2] == "manh") { heuristic = Heuristics::manh; }
     else
@@ -50,6 +49,15 @@ void Configuator::set()
             if (order[i] == 'd') orderEnum.push_back(Moves::Down);
         }
     }
+/*
+    std::cout << std::endl<<argv[2] << std::endl;
+    for (auto x : orderEnum)
+    {
+        std::cout << x << ", ";
+    }
+    std::cout << std::endl << argv[1] << std::endl;
+    if (argv[1] == const_cast<char *>("bfs")) std::cout << "\nsparsowalo dan3e bfs\n";
+*/
 
     fileWithStartPuzzel = argv[3];
     fileOutputSolution = argv[4];
@@ -94,7 +102,7 @@ auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych met
 
 		return metho;
 	}
-    	
+    	// TODO usun to i zmien na A gwiazdka
 	 Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
 	 return metho;
 }

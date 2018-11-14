@@ -21,7 +21,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	//TODO  zaimplementoac caly algorytm
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
-	std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
+	std::cout << "\n                  Method BFS                 fcja run Puzel Poczatkowy:";
 	std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
 	int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 

@@ -19,7 +19,7 @@ enum Moves
 
 enum Strategy
 {
-	bfs,
+	bfs = 5,
 	dfs,
 	astr
 };
