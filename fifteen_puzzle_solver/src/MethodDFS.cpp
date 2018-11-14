@@ -42,8 +42,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	//for (auto x : order) cout << x << " ";
 
-	cout << endl << "!!!!!!!!!!!!!  DFS !!!!!!!!!!!!!";
-
+	cout << endl << "\n**************************************  DFS **************************************\n";
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
 
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
@@ -166,7 +165,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 					SHOW_INFO("\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
 					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
-					SHOW_DEBUG(*nod->puzel << endl;); // to chyba bez sensu
+					SHOW_PUZZEL(*nod->puzel << endl;); // to chyba bez sensu
 					//cout << *nod->puzel << endl;
 				}
 
@@ -221,7 +220,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	}
 
 	solution.fileSolution << "glebokosc:" << solvedNode->recursionDeph << std::endl;
-	SHOW_INFO("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
+	SHOW_DEBUG("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
 	//std::cout << "\nglebokosc:" << solvedNode->recursionDeph << std::endl;
 
 	if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
@@ -229,7 +228,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		for (auto x : listMoves)
 		{
 			solution.fileSolution << x << " ";
-			SHOW_INFO(x << " ";);
+			SHOW_DEBUG(x << " ";);
 			//std::cout << x << " ";
 		}
 
@@ -273,10 +272,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_INFO(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
 	SHOW_INFO("\nPuzel koncowy:";);
 	SHOW_INFO(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;);
-    cout << endl << endl << endl << endl << "Puzel poczatkowy:\n";
-    std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
-    cout << "\nPuzel koncowy:";
-    std::cout << *solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;
+
+    //cout << endl << endl << endl << endl << "Puzel poczatkowy:\n";
+    //std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
+    //cout << "\nPuzel koncowy:";
+    //std::cout << *solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;
 
 	SHOW_INFO("\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count(););
 	SHOW_INFO("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
