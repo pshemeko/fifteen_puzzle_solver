@@ -36,9 +36,6 @@ public:
 
 	//auto DisplayElements() -> std::list<int>; // potrzeba do wyswietlania elementow //Albo jako lista list 
 
-	// mozliwe ruchy dla tego kloca, tej ukladanki
-	auto PossibleMoves() ->std::list<Moves>;
-
 	auto IsOnFinishState() -> bool;
 
     // zrobic jako template  /// MOZE zwracac operator lub null
@@ -70,6 +67,12 @@ public:
     friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
 
     // moze zrobic wczytywanie z pliku tutaj
+
+	// chyba nie potrzebne te nizej sa
+
+		// mozliwe ruchy dla tego kloca, tej ukladanki
+	auto PossibleMoves()->std::list<Moves>;
+
 };
 
 

@@ -20,7 +20,7 @@ public:
 	~Configuator();
 
     //tymcvzasowo do testowania
-	Configuator(Contex con);
+	//Configuator(Contex con);
 
     char* fileWithStartPuzzel;
     char* fileOutputSolution;
@@ -33,6 +33,8 @@ public:
     std::vector<Moves> orderEnum; // jedno z nich skasuj
 
     auto set() -> void;
+	// do test Methods
+	auto setForTest() -> void;
 
     // tymczasowo
 

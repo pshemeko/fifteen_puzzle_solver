@@ -2,6 +2,24 @@
 #include "MethodBFS.h"
 #include <queue>
 
+//#define SHOW_PUZZEL(msg)
+//#define SHOW_INFO(msg)
+//#define SHOW_DEBUG(msg)
+
+#ifndef SHOW_PUZZEL
+#define SHOW_PUZZEL(msg) std::cout<< msg
+#endif // !SHOW
+
+#ifndef SHOW_INFO
+#define SHOW_INFO(msg) std::cout<< msg
+#endif // !SHOW_INFO
+
+#ifndef SHOW_DEBUG
+#define SHOW_DEBUG(msg) std::cout<< msg
+#endif // !SHOW_DEBUG
+
+
+
 
 MethodBFS::MethodBFS(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation, std::vector<Moves> orderEnum)
 	:Methods(contex, fileOutputSolution, fileAdditionalInformation), order{orderEnum}
@@ -21,8 +39,9 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	//TODO  zaimplementoac caly algorytm
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
-	std::cout << "\n                  Method BFS                 fcja run Puzel Poczatkowy:";
-	std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
+	std::cout << "\n                  Method BFS                 fcja run\n ";
+	SHOW_PUZZEL("Puzel Poczatkowy:"<< *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;)
+	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
 	int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 
 	//std::list<std::shared_ptr<Node>> frontier;
@@ -52,7 +71,8 @@ auto MethodBFS::run(Solution &solution) -> void
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == ile)
 		{
 			//stillRun = false;
-			cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
+			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
+			SHOW_INFO( "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
 			continue;
 		}
 
@@ -74,10 +94,14 @@ auto MethodBFS::run(Solution &solution) -> void
 
 				////sprawdz czy jest docelowy
 				if (nod->puzel->IsOnFinishState()) {
-					cout << "\nkoncowy puzel:";
-					cout << *nod->puzel;
-					std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
-					std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
+					SHOW_PUZZEL( "\nkoncowy puzel:";);
+					//cout << "\nkoncowy puzel:";
+					SHOW_PUZZEL( *nod->puzel;);
+					//cout << *nod->puzel;
+					SHOW_PUZZEL( " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					//std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
+					SHOW_PUZZEL( "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					//std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
 					wezelKoncowy = nod;
 					//puzelKoncowy = puzelek;
 					stillRun = false;
@@ -94,7 +118,8 @@ auto MethodBFS::run(Solution &solution) -> void
 					{
 						czyJuzJest = true;
 						//if (  *nod.get() == *x.get()) czyJuzJest = true;
-						std::cout << "\n\t\t\t\tjest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+						//std::cout << "\n\t\t\t\tjest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+						SHOW_INFO( "\n\t\t\t\tjest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
 						break;
 					}
 				}
@@ -108,7 +133,8 @@ auto MethodBFS::run(Solution &solution) -> void
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-							std::cout << "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+							SHOW_INFO( "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+							//std::cout << "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
 							break;
 						}
 					}
@@ -118,9 +144,10 @@ auto MethodBFS::run(Solution &solution) -> void
 				if (!czyJuzJest)
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
-
-					std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
-					cout << *nod->puzel << endl;
+					SHOW_INFO( "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
+					SHOW_PUZZEL( *nod->puzel << endl;);
+					//cout << *nod->puzel << endl;
 				}
 
 
@@ -136,9 +163,12 @@ auto MethodBFS::run(Solution &solution) -> void
 
 
 		if (stillRun) ile++;///// czy ok 
-		std::cout << "\n koniec for:" << ile;
+		SHOW_DEBUG( "\n koniec for:" << ile;);
+		//std::cout << "\n koniec for:" << ile;
 	}
-	std::cout << "\n wyszlo z while" << " ile:" << ile;
+	SHOW_DEBUG( "\n wyszlo z while" << " ile:" << ile;);
+	//std::cout << "\n wyszlo z while" << " ile:" << ile;
+	
 	// teraz sprawdzanie i podawanie wynikow
 	//moze zrobic klase do tego
 
@@ -159,7 +189,8 @@ auto MethodBFS::run(Solution &solution) -> void
 			wezel = wezel->parrent;
 			if (wezel->parrent == nullptr) oneMore = false; //TODO tu wywala blad
 		}
-		cout << "\t\t size listrevert:" << listMoves.size();
+		SHOW_DEBUG( "\t\t size listrevert:" << listMoves.size(););
+		//cout << "\t\t size listrevert:" << listMoves.size();
 		// zaweira w dobrej kolejnosci kolejnosc ruchow od poczatku do rozwiazania
 
 		//std::list<Moves> listMoves;
@@ -174,20 +205,23 @@ auto MethodBFS::run(Solution &solution) -> void
 
 
 	solution.fileSolution << "glebokosc:" << ile << std::endl;
-	std::cout << "\nglebokosc:" << ile << std::endl;
+	SHOW_INFO( "\nglebokosc:" << ile << std::endl;);
+	//std::cout << "\nglebokosc:" << ile << std::endl;
 	
 	if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
 	{
 		for (auto x : listMoves)
 		{
 			solution.fileSolution << x << " ";
-			std::cout << x << " ";
+			SHOW_INFO( x << " ";);
+			//std::cout << x << " ";
 		}
 	}
 	else
 	{
 		solution.fileSolution << -1;
-		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
+		SHOW_INFO( "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
+		//std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
 	}
 	//std::cout << *wezelKoncowy->puzel.get();
 	
@@ -218,19 +252,33 @@ auto MethodBFS::run(Solution &solution) -> void
 		solution.solution = "-1";
 	}
 
-	cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
+	SHOW_INFO( "\n\n\n\n ***************************************   podsumowanie wynikow programu";);
+	//cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
 
-	cout << endl << endl << endl << endl<<"Puzel poczatkowy:\n";
-	std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
-	cout << "\nPuzel koncowy:";
-	std::cout << *wezelKoncowy->puzel.get() << " jego hash: " << wezelKoncowy->puzel->hasHFunction() << std::endl;
+	SHOW_INFO(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
+	//cout << endl << endl << endl << endl<<"Puzel poczatkowy:\n";
+	SHOW_INFO(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
+	SHOW_INFO("\nPuzel koncowy:";);
+	//cout << "\nPuzel koncowy:";
 	
+	SHOW_INFO(*wezelKoncowy->puzel.get() << " jego hash: " << wezelKoncowy->puzel->hasHFunction() << std::endl;);
+	//std::cout << *wezelKoncowy->puzel.get() << " jego hash: " << wezelKoncowy->puzel->hasHFunction() << std::endl;
+	
+	SHOW_INFO("\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count(););
+	SHOW_INFO("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
+	SHOW_INFO("\n Operatory uzyte: " << solution.solution;);
+	SHOW_INFO("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
+	SHOW_INFO("\n liczba stanow przetworzonych: " << solution.number_of_processed_states << std::endl;);
 
-	cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
-	cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
-	cout << "\n Operatory uzyte: " << solution.solution;
-	cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
-	cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
-	cout << endl;
+
+	//cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
+	//cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
+	//cout << "\n Operatory uzyte: " << solution.solution;
+	//cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
+	//cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
+	//cout << endl;
+
+
 	//solution.save();
 }

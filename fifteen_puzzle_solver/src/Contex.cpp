@@ -76,6 +76,11 @@ auto Contex::set(char* name) -> void
 
 }
 
+auto Contex::SetForTest(std::shared_ptr<Puzzle> st) -> void
+{
+	start = st;
+}
+
 Contex::~Contex()
 {
 }

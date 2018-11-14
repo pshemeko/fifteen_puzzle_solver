@@ -28,6 +28,8 @@ public:
 
     auto set(char* name) -> void; // ustawia puzla start z pliku w lini polecen
 
+	auto SetForTest(std::shared_ptr<Puzzle> st) -> void;
+
 	~Contex();
 };
 

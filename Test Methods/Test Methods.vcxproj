@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{DF045F13-6B3B-4E94-A05B-DB7FEFF6547C}</ProjectGuid>
+    <ProjectGuid>{5BE5A36A-9E1D-4741-A249-9AFE052FC1E6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>test_puzzle</RootNamespace>
+    <RootNamespace>TestMethods</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
   </PropertyGroup>
@@ -77,7 +77,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Przemek\szkoła\Vsem\git\fifteen_puzzle_solver-master\fifteen_puzzle_solver-master\fifteen_puzzle_solver\inc</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -151,7 +150,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)fifteen_puzzle_solver\x64\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Puzzle.obj;Node.obj;fifteen_puzzle_solver.obj;Contex.obj;Configuator.obj;pch.obj;Methods.obj;Solution.obj;MethodBFS.obj;MethodDFS.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Puzzle.obj;Node.obj;fifteen_puzzle_solver.obj;Contex.obj;Configuator.obj;pch.obj;Methods.obj;MethodBFS.obj;MethodDFS.obj;Solution.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -165,7 +164,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="unittest1.cpp" />
+    <ClCompile Include="unittestMethod1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fifteen_puzzle_solver\fifteen_puzzle_solver.vcxproj">

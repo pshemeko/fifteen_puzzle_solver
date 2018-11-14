@@ -1,7 +1,8 @@
 #pragma once
-#include <Contex.h>
-#include <Puzzle.h>
-#include <Node.h>
+//#include <Contex.h>
+#include "Contex.h"
+#include "Puzzle.h"
+#include "Node.h"
 #include <time.h>
 #include <chrono>
 #include <string>
