@@ -20,7 +20,6 @@
 
 
 
-
 MethodBFS::MethodBFS(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation, std::vector<Moves> orderEnum)
 	:Methods(contex, fileOutputSolution, fileAdditionalInformation), order{orderEnum}
 {

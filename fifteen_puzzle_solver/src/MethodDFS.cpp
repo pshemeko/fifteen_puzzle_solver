@@ -4,6 +4,23 @@
 #include <stack>
 #include <unordered_set>
 
+//#define SHOW_PUZZEL(msg)
+//#define SHOW_INFO(msg)
+//#define SHOW_DEBUG(msg)
+
+#ifndef SHOW_PUZZEL
+#define SHOW_PUZZEL(msg) std::cout<< msg
+#endif // !SHOW
+
+#ifndef SHOW_INFO
+#define SHOW_INFO(msg) std::cout<< msg
+#endif // !SHOW_INFO
+
+#ifndef SHOW_DEBUG
+#define SHOW_DEBUG(msg) std::cout<< msg
+#endif // !SHOW_DEBUG
+
+
 using namespace std;
 
 MethodDFS::MethodDFS(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation, std::vector<Moves> orderEnum)
@@ -20,17 +37,20 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 {
 
 
+	SHOW_DEBUG("\n" << (Moves::Down) << "    i co teraz!!!\nkolejnosc:";);
+	//std::cout << "\n" << (Moves::Down) << "    i co teraz!!!\nkolejnosc:";
+	for (auto x : order) SHOW_DEBUG(x << " ";);
+	//for (auto x : order) cout << x << " ";
 
-	std::cout << "\n" << (Moves::Down) << "    i co teraz!!!\nkolejnosc:";
-	for (auto x : order) cout << x << " ";
 	cout << endl << "!!!!!!!!!!!!!  DFS !!!!!!!!!!!!!";
 
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
 
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
-
-	std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
-	std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
+	SHOW_PUZZEL("\n MethodBFS fcja run Puzel Poczatkowy:";);
+	//std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
+	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
 	//int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 
 						//std::list<std::shared_ptr<Node>> frontier;
@@ -55,25 +75,31 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	bool stillRun = true;
 	//bool notFoundSolution = false;
 	int iii = 5;
-	cout << "\nKOLEJNOSC WRZUCANA:";
-	for (auto x : order) cout << x << " ";
-
+	SHOW_DEBUG("\nKOLEJNOSC WRZUCANA:";);
+	//cout << "\nKOLEJNOSC WRZUCANA:";
+	//for (auto x : order) cout << x << " ";
+	for (auto x : order) SHOW_DEBUG(x << " ";);
 	//while (iii--) 
 	//while(stillRun)
 	while (stillRun)
 	{
-		cout << " iii:" << iii << endl;
+		SHOW_DEBUG(" iii:" << iii << endl;);
+		//cout << " iii:" << iii << endl;
 
 		// zdejmuje czowke i wrzucam do explored i przetwarzam ja teraz
 		father = frontier.top();
 		explored.insert(father->puzel->hasHFunction());
 		frontier.pop();
-		cout << "-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;
+
+		SHOW_INFO("-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
+		//cout << "-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
 		{
 			//stillRun = false;
-			cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
-			cout << "\n********************************************************************************************************************************************";
+			SHOW_INFO("\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
+			//cout << "\n********************************************************************************************************************************************";
+			SHOW_INFO("\n********************************************************************************************************************************************";);
 			continue;
 		}
 
@@ -89,10 +115,15 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				if (nod->puzel->IsOnFinishState())
 				{
-					cout << "\nkoncowy puzel:";
-					cout << *nod->puzel;
-					std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
-					std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
+					SHOW_PUZZEL("\nkoncowy puzel:";);
+					//cout << "\nkoncowy puzel:";
+					SHOW_PUZZEL(*nod->puzel;);
+					//cout << *nod->puzel;
+					SHOW_INFO(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					//std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
+					SHOW_INFO("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					//std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
+
 					solvedNode = nod;
 					//puzelKoncowy = puzelek;
 					stillRun = false;
@@ -106,7 +137,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				if (explored.find(hash) != std::end(explored))
 				{
-					cout << "\nISTNIEJE JUZ HASH w explored: " << hash;
+					SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << hash;);
+					//cout << "\nISTNIEJE JUZ HASH w explored: " << hash;
 					czyJuzJest = true;
 				}
 
@@ -132,8 +164,10 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				{
 					frontier.push(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
-					std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
-					cout << *nod->puzel << endl;
+					SHOW_INFO("\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
+					SHOW_DEBUG(*nod->puzel << endl;); // to chyba bez sensu
+					//cout << *nod->puzel << endl;
 				}
 
 
@@ -171,7 +205,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 			wezel = wezel->parrent;
 			if (wezel->parrent == nullptr) oneMore = false;			//TODO ******************************************* blad
 		}
-		cout << "\t\t size listrevert:" << listMoves.size();
+		SHOW_DEBUG("\t\t size listrevert:" << listMoves.size(););
+		//cout << "\t\t size listrevert:" << listMoves.size();
 		// zaweira w dobrej kolejnosci kolejnosc ruchow od poczatku do rozwiazania
 
 		//std::list<Moves> listMoves;
@@ -186,21 +221,24 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	}
 
 	solution.fileSolution << "glebokosc:" << solvedNode->recursionDeph << std::endl;
-	std::cout << "\nglebokosc:" << solvedNode->recursionDeph << std::endl;
+	SHOW_INFO("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
+	//std::cout << "\nglebokosc:" << solvedNode->recursionDeph << std::endl;
 
 	if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
 	{
 		for (auto x : listMoves)
 		{
 			solution.fileSolution << x << " ";
-			std::cout << x << " ";
+			SHOW_INFO(x << " ";);
+			//std::cout << x << " ";
 		}
 
 	}
 	else
 	{
 		solution.fileSolution << -1;
-		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
+		SHOW_INFO("!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
+		//std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
 	}
 	//std::cout << *wezelKoncowy->puzel.get();
 
@@ -229,20 +267,32 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	{
 		solution.solution = "-1";
 	}
-    cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
-
+	SHOW_INFO("\n\n\n\n ***************************************   podsumowanie wynikow programu";);
+    //cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
+	SHOW_INFO(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
+	SHOW_INFO(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+	SHOW_INFO("\nPuzel koncowy:";);
+	SHOW_INFO(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;);
     cout << endl << endl << endl << endl << "Puzel poczatkowy:\n";
     std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
     cout << "\nPuzel koncowy:";
     std::cout << *solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;
 
+	SHOW_INFO("\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count(););
+	SHOW_INFO("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
+	SHOW_INFO("\n Operatory uzyte: " << solution.solution;);
+	SHOW_INFO("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
+	SHOW_INFO("\n liczba stanow przetworzonych: " << solution.number_of_processed_states<<std::endl;);
 
-    cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
-    cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
-    cout << "\n Operatory uzyte: " << solution.solution;
-    cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
-    cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
-    cout << endl;
+    //cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
+    //cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
+    //cout << "\n Operatory uzyte: " << solution.solution;
+    //cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
+    //cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
+    //cout << endl;
+
+
+
     //solution.save();
 }
 //TODO jeszcze trzeba sprawdzac stany przetworzone czy nie ma elementu
