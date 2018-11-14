@@ -21,7 +21,8 @@ public:
 
 
     Node() = default; // potrzebny by stworzyc pierwszy weze³ TODO Chyba wywalic
-	//Node(Node const &)=default;
+	Node(const Node &) = default;
+	Node(Node &&) = default;
 	// lub
 	//Node(std::shared_ptr<Node> parent,, Moves operatorUsed);
 

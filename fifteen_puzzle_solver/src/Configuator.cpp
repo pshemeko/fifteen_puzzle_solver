@@ -89,16 +89,12 @@ auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych met
     }
 	if (strategy == Strategy::bfs)
 	{
-		//Methods *metho = new MethodBFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
-        Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
+		Methods *metho = new MethodBFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
+        //Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
 
 		return metho;
 	}
-    if (strategy == Strategy::dfs)
-    {
-        Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
-
-        return metho;
-    }
-	
+    	
+	 Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
+	 return metho;
 }

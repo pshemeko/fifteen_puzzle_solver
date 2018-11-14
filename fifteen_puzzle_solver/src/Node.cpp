@@ -11,14 +11,16 @@ Node::Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves op
 Node::Node(std::shared_ptr<Node> parent, std::shared_ptr<Puzzle> puzel, Moves operatorUsed, int recursionDeph)
 : puzel{ puzel }, parrent{ parent }, operatorUsed{ operatorUsed }, recursionDeph{ recursionDeph }
 {
-    
+	//recursionDeph = 0;
 }
 
 Node::Node(std::shared_ptr<Puzzle> puzel)
     : puzel{ puzel }
 {
-     operatorUsed = Moves::Down;
-	 parrent == nullptr;
+     //operatorUsed = Moves::Down;
+	 parrent = nullptr; 
+	 
+	 recursionDeph = 0;
 }
 
 

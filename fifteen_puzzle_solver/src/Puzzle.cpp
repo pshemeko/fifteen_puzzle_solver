@@ -192,14 +192,14 @@ auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
 	return !(operator==(rhs));
 }
 
-auto Puzzle::hasHFunction() -> double
+auto Puzzle::hasHFunction() -> size_t
 {
-	double hash = 0.0;
-	double two = 1.0;//2^0, 2^1, 2^2, 2^3....
+	size_t hash = 0;
+	size_t two = 1;//2^0, 2^1, 2^2, 2^3....
 	for (size_t i = 0; i < board.size(); ++i)
 	{
 		hash += two * static_cast<int>(board[i]);
-		two *= 2.0;
+		two *= 2;
 	}
 	return hash;
 }

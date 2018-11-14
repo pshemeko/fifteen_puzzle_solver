@@ -9,7 +9,7 @@ typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;
 
 
-static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 13;
+static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 2;
 
 
 //// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
@@ -66,7 +66,7 @@ public:
 	auto operator==(Puzzle const& rhs) const -> bool;
 	auto operator!=(Puzzle const& rhs) const -> bool;
 
-	auto hasHFunction() -> double;
+	auto hasHFunction() -> size_t;
     friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
 
     // moze zrobic wczytywanie z pliku tutaj
