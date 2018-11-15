@@ -253,7 +253,7 @@ auto MethodBFS::run(Solution &solution) -> void
 		solution.solution = "-1";
 	}
 
-	SHOW_INFO( "\n\n\n\n ***************************************   podsumowanie wynikow programu";);
+	SHOW_INFO( "\n\n\n\n***************************************  podsumowanie wynikow programu  ***************************************";);
 	//cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
 
 	SHOW_INFO(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
