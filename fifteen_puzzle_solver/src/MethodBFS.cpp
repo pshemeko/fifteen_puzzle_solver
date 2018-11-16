@@ -60,16 +60,19 @@ auto MethodBFS::run(Solution &solution) -> void
 	bool stillRun = true;
 	//Puzzle puzelKoncowy = *startPuzzel.get();
 	std::shared_ptr<Node> wezelKoncowy = root;
-
-	while (stillRun) // potem while(!frontier.empty()) // i wywalic to oganiczenie rekursjii
+    SHOW_DEBUG("\nwielkos frontier w BFS przed while:" << frontier.size(););
+	//while (stillRun) // potem 
+    while(!frontier.empty()) // i wywalic to oganiczenie rekursjii
 	{
+        SHOW_DEBUG("\nwielkows frontier w BFS w while:" << frontier.size(););
 		father = frontier.front();
 		explored.push_back(father);
 		frontier.pop_front();
+        SHOW_DEBUG("\n\t\tPobralem wezel: " << father->puzel->hasHFunction(););
 
 
 		//std::cout << "\t\t\t\t\t\t\t\t\t\tstill run: " << stillRun << std::endl;
-		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == ile)
+		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
 		{
 			//stillRun = false;
 			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
@@ -91,7 +94,7 @@ auto MethodBFS::run(Solution &solution) -> void
 				//cout << puzelek;
 				std::shared_ptr<Puzzle> kopia = std::make_shared<Puzzle>(puzelek);
 
-				std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov);
+				std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov, (father->recursionDeph) +1);
 
 				////sprawdz czy jest docelowy
 				if (nod->puzel->IsOnFinishState()) {
@@ -164,10 +167,12 @@ auto MethodBFS::run(Solution &solution) -> void
 
 
 		if (stillRun) ile++;///// czy ok 
-		SHOW_DEBUG( "\n koniec for:" << ile;);
+		SHOW_DEBUG( "\n koniec for(chyba niepotrzerbne juz):" << ile;); 
+        SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
 		//std::cout << "\n koniec for:" << ile;
 	}
 	SHOW_DEBUG( "\n wyszlo z while" << " ile:" << ile;);
+    SHOW_DEBUG("\n wyszlo z while - glebokosc rekursji" << " ile:" << father->recursionDeph;);
 	//std::cout << "\n wyszlo z while" << " ile:" << ile;
 	
 	// teraz sprawdzanie i podawanie wynikow

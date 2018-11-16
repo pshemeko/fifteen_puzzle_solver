@@ -20,7 +20,7 @@ namespace TestMethods
 		
 		TEST_METHOD(TestMethodBFSrun)
 		{
-			/*
+			
 			Contex con;
 
 			int argc = 6;
@@ -39,12 +39,31 @@ namespace TestMethods
 			solu.solution;
 			
 			std::string tmp = "DD";
-			//Assert::AreEqual(tmp, solu.solution);
+			Assert::AreEqual(tmp, solu.solution);
 			
-			*/
+			
 
 			// TODO: W tym miejscu dodaj kod testowy
 		}
+        TEST_METHOD(TestMethodBFSrun2)
+        {
+            Contex con;
+            int argc = 6;
+            char* argvTmp[6] = { "prog", "bfs","LRDU", "../../Test Methods/4x4_04_00019.txt", "dupa.txt", "dodatkowe.txt" };
+            char ** argv = argvTmp;
+            Configuator conf(argc, argv, con);
+            //conf.setForTest();
+            conf.set();
+            Methods *met = conf.returnMethod();	// to wrzucic 
+                                                //Solution solu(const_cast<char *>("jeden.txt"), const_cast<char *>("dwa.txt"));
+            Solution solu(argv[4], argv[5]);
+            met->run(solu);
+            solu.solution;
+
+            std::string tmp = "DLDR";
+            Assert::AreEqual(tmp, solu.solution);
+
+        }
 
 	};
 	TEST_CLASS(UnitTestmethodDFS)
@@ -53,6 +72,26 @@ namespace TestMethods
 
 		TEST_METHOD(TestMethodDFSrun)
 		{
+
+            Contex con;
+
+            int argc = 6;
+            char* argvTmp[6] = { "prog", "dfs","LRDU", "../../Test Methods/4x4_02_00001.txt", "dupa.txt", "dodatkowe.txt" };
+            char ** argv = argvTmp;
+            Configuator conf(argc, argv, con);
+
+            //conf.setForTest();
+            conf.set();
+            Methods *met = conf.returnMethod();	// to wrzucic 
+
+
+                                                //Solution solu(const_cast<char *>("jeden.txt"), const_cast<char *>("dwa.txt"));
+            Solution solu(argv[4], argv[5]);
+            met->run(solu);
+            solu.solution;
+
+            std::string tmp = "DD";
+            Assert::AreEqual(tmp, solu.solution);
 
 
 			// TODO: W tym miejscu dodaj kod testowy

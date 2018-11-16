@@ -80,8 +80,10 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	//while (iii--) 
 	//while(stillRun)
+    SHOW_DEBUG("\nwielkos frontier w DFS przed while:" << frontier.size(););
 	while (stillRun)
 	{
+        SHOW_DEBUG("\nwielkows frontier w DFS w while:" << frontier.size(););
 		SHOW_DEBUG(" iii:" << iii << endl;);
 		//cout << " iii:" << iii << endl;
 
@@ -143,7 +145,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				// czy potrzeba tez w frontiered sprawdzic?
 				/*
-				if (!czyJuzJest) // ale trzeba zmienic wtedy stack na list
+                //TODO trzeba to uwzglednic
+				if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list
 				{
 
 					for (auto x : frontier)
