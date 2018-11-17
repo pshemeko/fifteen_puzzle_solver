@@ -2,7 +2,7 @@
 #include "MethodBFS.h"
 #include <queue>
 
-//#define SHOW_PUZZEL(msg)
+#define SHOW_PUZZEL(msg)
 //#define SHOW_INFO(msg)
 //#define SHOW_DEBUG(msg)
 
@@ -60,15 +60,17 @@ auto MethodBFS::run(Solution &solution) -> void
 	bool stillRun = true;
 	//Puzzle puzelKoncowy = *startPuzzel.get();
 	std::shared_ptr<Node> wezelKoncowy = root;
-    SHOW_DEBUG("\nwielkos frontier w BFS przed while:" << frontier.size(););
+    SHOW_DEBUG("\nwielkosc frontier w BFS przed while:" << frontier.size(););
 	//while (stillRun) // potem 
-    while(!frontier.empty()) // i wywalic to oganiczenie rekursjii
+    while(stillRun && !frontier.empty()) // TODO jak zle zostaw samo stillRun
 	{
-        SHOW_DEBUG("\nwielkows frontier w BFS w while:" << frontier.size(););
+		SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
+
+        //SHOW_DEBUG("\nwielkows frontier w BFS w while:" << frontier.size(););
 		father = frontier.front();
 		explored.push_back(father);
 		frontier.pop_front();
-        SHOW_DEBUG("\n\t\tPobralem wezel: " << father->puzel->hasHFunction(););
+        SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction()<< "\twielkosc frontier w while:" << frontier.size(););
 
 
 		//std::cout << "\t\t\t\t\t\t\t\t\t\tstill run: " << stillRun << std::endl;
@@ -76,7 +78,7 @@ auto MethodBFS::run(Solution &solution) -> void
 		{
 			//stillRun = false;
 			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
-			SHOW_INFO( "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+			SHOW_DEBUG( "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
 			continue;
 		}
 
@@ -110,7 +112,7 @@ auto MethodBFS::run(Solution &solution) -> void
 					//puzelKoncowy = puzelek;
 					stillRun = false;
 					frontier.push_back(nod);
-
+					
 					break;
 				}
 				//////////////////////////TO DO  sprawdz czy dziala break jak docelowy to koniec moze lepiej goto;
@@ -148,7 +150,8 @@ auto MethodBFS::run(Solution &solution) -> void
 				if (!czyJuzJest)
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
-					SHOW_INFO( "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					SHOW_DEBUG( "\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
+						<< nod->operatorUsed << " Rozmiar frontier:" <<frontier.size(););
 					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
 					SHOW_PUZZEL( *nod->puzel << endl;);
 					//cout << *nod->puzel << endl;
@@ -167,9 +170,8 @@ auto MethodBFS::run(Solution &solution) -> void
 
 
 		if (stillRun) ile++;///// czy ok 
-		SHOW_DEBUG( "\n koniec for(chyba niepotrzerbne juz):" << ile;); 
-        SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
-		//std::cout << "\n koniec for:" << ile;
+		//SHOW_DEBUG( "\n koniec for(chyba niepotrzerbne juz):" << ile;); 
+    	//std::cout << "\n koniec for:" << ile;
 	}
 	SHOW_DEBUG( "\n wyszlo z while" << " ile:" << ile;);
     SHOW_DEBUG("\n wyszlo z while - glebokosc rekursji" << " ile:" << father->recursionDeph;);

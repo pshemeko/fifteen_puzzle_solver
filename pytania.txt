@@ -15,3 +15,6 @@ czym jest w zadaniu: liczba stanów odwiedzoonych - frontier??
 a czym liczba stanów przetworzonych	- explored??
 
 jak obliczyc g³êbokoœæ rekursji?? czy to jest ilosc operatorów?
+
+pytania:
+czy w DFS trzeba tez sprawdzac przed wrzuceniem wezla rowniez frontier (u nas jest to kolejkka wiec usze zmienic jak cos) czy wystarczy explored???

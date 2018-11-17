@@ -4,7 +4,7 @@
 #include <stack>
 #include <unordered_set>
 
-//#define SHOW_PUZZEL(msg)
+#define SHOW_PUZZEL(msg)
 //#define SHOW_INFO(msg)
 //#define SHOW_DEBUG(msg)
 
@@ -73,31 +73,31 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	std::shared_ptr<Node> solvedNode = root;
 	bool stillRun = true;
 	//bool notFoundSolution = false;
-	int iii = 5;
+	//int iii = 5;
 	SHOW_DEBUG("\nKOLEJNOSC WRZUCANA:";);
 	//cout << "\nKOLEJNOSC WRZUCANA:";
 	//for (auto x : order) cout << x << " ";
 	for (auto x : order) SHOW_DEBUG(x << " ";);
-	//while (iii--) 
+
 	//while(stillRun)
     SHOW_DEBUG("\nwielkos frontier w DFS przed while:" << frontier.size(););
-	while (stillRun)
+	while (stillRun && !frontier.empty()) // TODO jak zle zostaw samo stillRun
 	{
-        SHOW_DEBUG("\nwielkows frontier w DFS w while:" << frontier.size(););
-		SHOW_DEBUG(" iii:" << iii << endl;);
-		//cout << " iii:" << iii << endl;
+        SHOW_DEBUG("\nwielkows frontier  w while:" << frontier.size(););
 
 		// zdejmuje czowke i wrzucam do explored i przetwarzam ja teraz
 		father = frontier.top();
 		explored.insert(father->puzel->hasHFunction());
 		frontier.pop();
 
-		SHOW_INFO("-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
+		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size(););
+
+		SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
 		//cout << "-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
 		{
 			//stillRun = false;
-			SHOW_INFO("\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+			SHOW_DEBUG("\n\t\t\t\t************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
 			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
 			//cout << "\n********************************************************************************************************************************************";
 			SHOW_INFO("\n********************************************************************************************************************************************";);
@@ -120,9 +120,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					//cout << "\nkoncowy puzel:";
 					SHOW_PUZZEL(*nod->puzel;);
 					//cout << *nod->puzel;
-					SHOW_INFO(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
 					//std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
-					SHOW_INFO("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					SHOW_DEBUG("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
 					//std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
 
 					solvedNode = nod;
@@ -166,7 +166,10 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				{
 					frontier.push(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
-					SHOW_INFO("\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					//SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
+						<< nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
+					
 					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
 					SHOW_PUZZEL(*nod->puzel << endl;); // to chyba bez sensu
 					//cout << *nod->puzel << endl;
