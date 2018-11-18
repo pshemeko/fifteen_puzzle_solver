@@ -58,7 +58,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 //std::list<std::shared_ptr<Node>> frontier;
 //std::list<std::shared_ptr<Node>> explored;
 
-	auto frontier = std::stack<std::shared_ptr<Node>>{};
+	auto frontier = std::list<std::shared_ptr<Node>>{};
 	auto explored = std::unordered_set<std::size_t>{};
 
 	//jako ze wrzucam w odwrotnej kolejnosci trzba odwroic w tej metodzie
@@ -68,7 +68,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	std::shared_ptr<Node> root = std::make_shared<Node>(startPuzzel); // poczatkowy wezel
 																	  //Puzzle father = *root->puzel;
 	//frontier.push_back(root);
-	frontier.push(root);
+	frontier.push_back(root);
 
 	std::shared_ptr<Node> father = root;
 
@@ -88,9 +88,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
         SHOW_DEBUG("\nwielkows frontier  w while:" << frontier.size(););
 
 		// zdejmuje czowke i wrzucam do explored i przetwarzam ja teraz
-		father = frontier.top();
+		father = frontier.front();// top();
 		explored.insert(father->puzel->hasHFunction());
-		frontier.pop();
+		frontier.pop_front();// pop();
 
 		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size(););
 
@@ -132,7 +132,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					solvedNode = nod;
 					//puzelKoncowy = puzelek;
 					stillRun = false;
-					frontier.push(nod);
+					frontier.push_back(nod);
 
 					break; // wyskakuje z while
 				}
@@ -148,7 +148,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				}
 
 				// czy potrzeba tez w frontiered sprawdzic?
-				/*
+				
                 //TODO trzeba to uwzglednic
 				if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list
 				{
@@ -165,10 +165,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					}
 
 				}
-				*/
+				
+
 				if (!czyJuzJest)
 				{
-					frontier.push(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
+					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
 					//SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
 					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
@@ -305,7 +306,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 
 
-    solution.save();
+    //solution.save();
 }
 //TODO jeszcze trzeba sprawdzac stany przetworzone czy nie ma elementu
 // przerobic frontier na liste i sprawdzac czy nie ma tam elementu tez
