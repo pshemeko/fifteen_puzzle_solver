@@ -2,6 +2,7 @@
 #include "Puzzle.h"
 #include "MethodBFS.h"
 #include "MethodDFS.h"
+#include "MethodAStar.h"
 #include "Contex.h"
 
 #include <vector>

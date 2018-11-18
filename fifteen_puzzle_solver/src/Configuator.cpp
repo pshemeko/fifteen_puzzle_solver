@@ -123,13 +123,17 @@ auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych met
 
         return metho;
     }
-	if (strategy == Strategy::bfs)
+	else if (strategy == Strategy::bfs)
 	{
 		Methods *metho = new MethodBFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
 
 		return metho;
 	}
-    	// TODO usun to i zmien na A gwiazdka
-	 Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
-	 return metho;
+	else //if(strategy == Strategy::astr)
+	{
+		Methods *metho = new MethodAStar(conteks, fileOutputSolution, fileAdditionalInformation, heuristic);
+
+		return metho;
+	}
+
 }
