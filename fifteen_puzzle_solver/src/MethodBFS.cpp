@@ -232,11 +232,12 @@ auto MethodBFS::run(Solution &solution) -> void
 			SHOW_INFO( x << " ";);
 			//std::cout << x << " ";
 		}
+		solution.length_of_the_solution_found = listMoves.size();
 	}
 	else
 	{
 		//solution.fileSolution << -1;
-		solution.length_of_the_solution_found << -1;
+		solution.length_of_the_solution_found = -1;
 		SHOW_INFO( "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
 		//std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
 	}
@@ -248,7 +249,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeStart);
 
-	solution.length_of_the_solution_found = listMoves.size();
+	
 	solution.number_of_visited_states = frontier.size() + explored.size();
 	solution.number_of_processed_states = explored.size();
 	////?????????TODO czy to jest dobrze?

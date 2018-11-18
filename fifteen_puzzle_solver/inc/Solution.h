@@ -13,7 +13,7 @@ public:
 	std::string solution; //ciag operatorow uzytych
 	//parameter needed for program output
 
-	size_t length_of_the_solution_found;	// d³ugoœæ znaezionego rozwiazania
+	int length_of_the_solution_found;	// d³ugoœæ znaezionego rozwiazania
 	size_t number_of_visited_states;		//liczba stanów odwiedzonych
 	size_t number_of_processed_states;		//liczba stanów przetworzonych
 	int maximum_depth_of_recursion_achieved;	//maksymalna osi¹gniêta g³êbokoœæ rekursji

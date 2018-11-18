@@ -45,6 +45,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	cout << endl << "\n**************************************  DFS **************************************\n";
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
 
+	int MaxDepth = 0;
+
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 	SHOW_PUZZEL("\n MethodBFS fcja run Puzel Poczatkowy:";);
 	//std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
@@ -91,6 +93,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		frontier.pop();
 
 		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size(););
+
+		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 
 		SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
 		//cout << "-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;
@@ -198,7 +202,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	////kopiuje
 
 	std::list<Moves> listMoves;
-	if (!frontier.empty())	// nie znaleziono rozwiazania
+	if (!stillRun)	// nie znaleziono rozwiazania
 	{
 
 		bool oneMore = true;
@@ -225,23 +229,27 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	}
 
-	solution.fileSolution << "glebokosc:" << solvedNode->recursionDeph << std::endl;
+	//solution.fileSolution << "glebokosc:" << solvedNode->recursionDeph << std::endl;
 	SHOW_DEBUG("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
 	//std::cout << "\nglebokosc:" << solvedNode->recursionDeph << std::endl;
 
-	if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
+	//cout << "\n\n\t STILL RUN =" << stillRun << endl;
+	if (!stillRun)//if (!frontier.empty()&& stillRun ==false)
 	{
 		for (auto x : listMoves)
 		{
-			solution.fileSolution << x << " ";
+			//solution.fileSolution << x << " ";
 			SHOW_DEBUG(x << " ";);
 			//std::cout << x << " ";
 		}
 
+		solution.length_of_the_solution_found = listMoves.size();
+		//cout << "!!!!!!JEST ROZWIAZANIE" << endl;
 	}
 	else
 	{
-		solution.fileSolution << -1;
+		//solution.fileSolution << -1;
+		solution.length_of_the_solution_found = -1;
 		SHOW_INFO("!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
 		//std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
 	}
@@ -253,11 +261,12 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeStart);
 
-	solution.length_of_the_solution_found = listMoves.size();
+	
 	solution.number_of_visited_states = frontier.size() + explored.size();
 	solution.number_of_processed_states = explored.size();
 	////?????????TODO czy to jest dobrze?
-	solution.maximum_depth_of_recursion_achieved = solvedNode->recursionDeph;
+	solution.maximum_depth_of_recursion_achieved = MaxDepth;
+
 	if (!listMoves.empty())
 	{
 		for (auto x : listMoves)
@@ -268,10 +277,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 			if (x == Moves::Right)	solution.solution += "R";
 		}
 	}
-	else
-	{
-		solution.solution = "-1";
-	}
+	
 	SHOW_INFO("\n\n\n\n ***************************************  podsumowanie wynikow programu  ***************************************";);
     //cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
 	SHOW_INFO(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
@@ -299,7 +305,10 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 
 
-    //solution.save();
+    solution.save();
 }
 //TODO jeszcze trzeba sprawdzac stany przetworzone czy nie ma elementu
 // przerobic frontier na liste i sprawdzac czy nie ma tam elementu tez
+
+
+
