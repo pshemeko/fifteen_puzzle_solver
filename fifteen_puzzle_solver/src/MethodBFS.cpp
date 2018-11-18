@@ -38,6 +38,8 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	//TODO  zaimplementoac caly algorytm
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
+
+	int MaxDepth = 0;
 	
 	cout << endl << "\n**************************************  BFS **************************************\n";
 
@@ -71,7 +73,7 @@ auto MethodBFS::run(Solution &solution) -> void
 		explored.push_back(father);
 		frontier.pop_front();
         SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction()<< "\twielkosc frontier w while:" << frontier.size(););
-
+		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 
 		//std::cout << "\t\t\t\t\t\t\t\t\t\tstill run: " << stillRun << std::endl;
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
@@ -212,22 +214,29 @@ auto MethodBFS::run(Solution &solution) -> void
 	}
 
 
-	solution.fileSolution << "glebokosc:" << ile << std::endl;
+	//solution.fileSolution << "glebokosc:" << ile << std::endl;
 	SHOW_INFO( "\nglebokosc:" << ile << std::endl;);
 	//std::cout << "\nglebokosc:" << ile << std::endl;
+
+
+
+
 	
-	if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
+	
+	//if (!frontier.empty())//if (!frontier.empty()&& stillRun ==false)
+	if(!stillRun)
 	{
 		for (auto x : listMoves)
 		{
-			solution.fileSolution << x << " ";
+			//solution.fileSolution << x << " ";
 			SHOW_INFO( x << " ";);
 			//std::cout << x << " ";
 		}
 	}
 	else
 	{
-		solution.fileSolution << -1;
+		//solution.fileSolution << -1;
+		solution.length_of_the_solution_found << -1;
 		SHOW_INFO( "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
 		//std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";
 	}
@@ -243,7 +252,7 @@ auto MethodBFS::run(Solution &solution) -> void
 	solution.number_of_visited_states = frontier.size() + explored.size();
 	solution.number_of_processed_states = explored.size();
 	////?????????TODO czy to jest dobrze?
-	solution.maximum_depth_of_recursion_achieved = ile;
+	solution.maximum_depth_of_recursion_achieved = MaxDepth;
 
 	if (!listMoves.empty())
 	{
@@ -255,10 +264,7 @@ auto MethodBFS::run(Solution &solution) -> void
 			if (x == Moves::Right)	solution.solution += "R";
 		}
 	}
-	else
-	{
-		solution.solution = "-1";
-	}
+	
 
 	SHOW_INFO( "\n\n\n\n***************************************  podsumowanie wynikow programu  ***************************************";);
 	//cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <time.h>
 #include <chrono>
+#include <string>
 
 class Solution
 {

@@ -9,7 +9,7 @@ typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;
 
 
-static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 10;
+static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 20;  // w tresc zadania 20
 
 
 //// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
