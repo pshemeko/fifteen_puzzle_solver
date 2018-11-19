@@ -84,7 +84,11 @@ auto MethodAStar::run(Solution &sol) -> void
 	
 	cout << endl << *startPuzzel << endl;
 
+	/// obliczamy to i wrzucamy do kontenera - to ten wzor z wykladu f(n) = g(n) + herystyka  ; g- ilos krokow jakie xzajelo dojcie tutaj
+	int functionFN = father->recursionDeph + (*wskaznikNaFunkcje)(father->puzel);
 
+	// jako frontier moge dac std::set lub std:: priority_queue lub std::map - ktory wybrac 
+	
 	//while (stillRun && !frontier.empty())
 	//{
 

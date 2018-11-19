@@ -33,6 +33,7 @@ MethodDFS::~MethodDFS()
 {
 }
 
+// DFS lepiej robic rekurencyjnie mniej pamieci zajmie ale dluzej dzialac bedzie, gdy malo pamieci to lepiej dfs
 auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 {
 

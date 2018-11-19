@@ -20,3 +20,5 @@ pytania:
 czy w DFS trzeba tez sprawdzac przed wrzuceniem wezla rowniez frontier (u nas jest to kolejkka wiec usze zmienic jak cos) czy wystarczy explored???
 
 DFS przy max glebokosci =20 i pliku 4x4_07_00212.txt NIE ZNAJDUJE ROZWIAZANIA - czy to mozliwe czy cos zle
+
+Jaki jest cel stosowania maszyny stanowej do czego uzywamy w praktyce
