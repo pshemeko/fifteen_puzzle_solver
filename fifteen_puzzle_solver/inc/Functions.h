@@ -50,5 +50,9 @@ int metrykaManhattan(std::shared_ptr<Puzzle> puz)   //TODO zrobic bo liczy zle!!
      return sum;
 };
 
+int metrykaNieznana(std::shared_ptr<Puzzle> puz)
+{
+	return -1;
+}
 
 

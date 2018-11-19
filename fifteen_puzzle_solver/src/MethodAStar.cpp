@@ -2,7 +2,7 @@
 #include "MethodAStar.h"
 #include "Functions.h"
 
-#define SHOW_PUZZEL(msg)
+//#define SHOW_PUZZEL(msg)
 //#define SHOW_INFO(msg)
 //#define SHOW_DEBUG(msg)
 
@@ -36,8 +36,15 @@ auto MethodAStar::run(Solution &sol) -> void
     // wskazniki na funkcje zwracajace int i pobierajaca puzla
     heuristic;
     int(*wskaznikNaFunkcje)(std::shared_ptr<Puzzle> puz);
-    if (heuristic == Heuristics::hamm) wskaznikNaFunkcje = &metrykaHamington;
-    if (heuristic == Heuristics::manh) wskaznikNaFunkcje = &metrykaManhattan;
+	if (heuristic == Heuristics::hamm)
+	{
+		wskaznikNaFunkcje = &metrykaHamington;
+	}
+	else if (heuristic == Heuristics::manh)
+	{
+		wskaznikNaFunkcje = &metrykaManhattan;
+	}
+	else wskaznikNaFunkcje = &metrykaNieznana;
  
 
 	using namespace std;
@@ -67,12 +74,15 @@ auto MethodAStar::run(Solution &sol) -> void
 	//Puzzle puzelKoncowy = *startPuzzel.get();
 	std::shared_ptr<Node> wezelKoncowy = root;
 	SHOW_DEBUG("\nwielkosc frontier w A* przed while:" << frontier.size(););
-    //wskaznikNaFunkcje = &metrykaHamington;
-    wskaznikNaFunkcje = &metrykaManhattan;
+    
     int zFunckcji = (*wskaznikNaFunkcje)(startPuzzel);
     ///////////////////
-    cout << " \n wartosc funkcji: " << zFunckcji <<endl;
-    cout << endl << *startPuzzel << endl;
+	if (heuristic == Heuristics::hamm) SHOW_DEBUG("\n Hamilton, ";);
+	if (heuristic == Heuristics::manh) SHOW_DEBUG("\n Manhatan, ";);
+	SHOW_DEBUG(" wartosc funkcji: " << zFunckcji << endl;);
+    
+	
+	cout << endl << *startPuzzel << endl;
 
 
 	//while (stillRun && !frontier.empty())
