@@ -158,6 +158,7 @@
     <ClInclude Include="inc\Contex.h" />
     <ClInclude Include="inc\Enums.h" />
     <ClInclude Include="inc\Exception_wrong_move.h" />
+    <ClInclude Include="inc\Functions.h" />
     <ClInclude Include="inc\MethodAStar.h" />
     <ClInclude Include="inc\MethodBFS.h" />
     <ClInclude Include="inc\MethodDFS.h" />

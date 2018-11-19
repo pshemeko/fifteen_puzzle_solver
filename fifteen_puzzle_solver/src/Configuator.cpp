@@ -117,6 +117,7 @@ auto Configuator::setTest() -> void	// TODO TYMCZASOWO uzywam tej funkcji do tes
 
 auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych metod
 {
+
     if (strategy == Strategy::dfs)
     {
         Methods *metho = new MethodDFS(conteks, fileOutputSolution, fileAdditionalInformation, orderEnum);
@@ -129,11 +130,12 @@ auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych met
 
 		return metho;
 	}
-	else //if(strategy == Strategy::astr)
+	else if(strategy == Strategy::astr)
 	{
 		Methods *metho = new MethodAStar(conteks, fileOutputSolution, fileAdditionalInformation, heuristic);
 
 		return metho;
 	}
+    else throw "blad nie ma takiej strategii:";
 
 }

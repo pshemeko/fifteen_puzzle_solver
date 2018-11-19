@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MethodAStar.h"
+#include "Functions.h"
 
 #define SHOW_PUZZEL(msg)
 //#define SHOW_INFO(msg)
@@ -31,6 +32,14 @@ MethodAStar::~MethodAStar()
 // TODO Zrobic jako wskaznik na funcje i 2 funkcje
 auto MethodAStar::run(Solution &sol) -> void
 {
+ 
+    // wskazniki na funkcje zwracajace int i pobierajaca puzla
+    heuristic;
+    int(*wskaznikNaFunkcje)(std::shared_ptr<Puzzle> puz);
+    if (heuristic == Heuristics::hamm) wskaznikNaFunkcje = &metrykaHamington;
+    if (heuristic == Heuristics::manh) wskaznikNaFunkcje = &metrykaManhattan;
+ 
+
 	using namespace std;
 
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
@@ -44,7 +53,7 @@ auto MethodAStar::run(Solution &sol) -> void
 
 	SHOW_PUZZEL("Puzel Poczatkowy:" << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;)
 
-		std::list<std::shared_ptr<Node>> frontier;
+	std::list<std::shared_ptr<Node>> frontier;
 	std::list<std::shared_ptr<Node>> explored;
 
 	std::shared_ptr<Node> root = std::make_shared<Node>(startPuzzel); // poczatkowy wezel
@@ -57,14 +66,21 @@ auto MethodAStar::run(Solution &sol) -> void
 	bool stillRun = true;
 	//Puzzle puzelKoncowy = *startPuzzel.get();
 	std::shared_ptr<Node> wezelKoncowy = root;
-	SHOW_DEBUG("\nwielkosc frontier w BFS przed while:" << frontier.size(););
+	SHOW_DEBUG("\nwielkosc frontier w A* przed while:" << frontier.size(););
+    //wskaznikNaFunkcje = &metrykaHamington;
+    wskaznikNaFunkcje = &metrykaManhattan;
+    int zFunckcji = (*wskaznikNaFunkcje)(startPuzzel);
+    ///////////////////
+    cout << " \n wartosc funkcji: " << zFunckcji <<endl;
+    cout << endl << *startPuzzel << endl;
 
-	while (stillRun && !frontier.empty())
-	{
+
+	//while (stillRun && !frontier.empty())
+	//{
 
 
 
-	}
+	//}
 
 
 

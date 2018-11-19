@@ -1,5 +1,6 @@
 #pragma once
 #include "Methods.h"
+#include <cstdlib>
 
 class MethodAStar : public Methods
 {
@@ -14,4 +15,3 @@ public:
 
 	auto run(Solution &sol) -> void;
 };
-
