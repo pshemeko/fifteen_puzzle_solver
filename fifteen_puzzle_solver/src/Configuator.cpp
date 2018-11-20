@@ -54,6 +54,16 @@ void Configuator::set()
 			}
 		}
 
+    // gdy strategia A* musze miec domyslne kolejnosci  operatorow
+    if (Strategy::astr == strategy)
+    {
+        orderEnum.push_back(Moves::Left);
+        orderEnum.push_back(Moves::Right);
+        orderEnum.push_back(Moves::Up);
+        orderEnum.push_back(Moves::Down);
+
+    }
+
     fileWithStartPuzzel = argv[3];
     fileOutputSolution = argv[4];
     fileAdditionalInformation = argv[5];
@@ -135,7 +145,7 @@ auto Configuator::returnMethod() -> Methods*	//TODO rozbuduj dla pozostalych met
 	}
 	else if(strategy == Strategy::astr)
 	{
-		Methods *metho = new MethodAStar(conteks, fileOutputSolution, fileAdditionalInformation, heuristic);
+		Methods *metho = new MethodAStar(conteks, fileOutputSolution, fileAdditionalInformation, heuristic, orderEnum);
 
 		return metho;
 	}

@@ -113,7 +113,7 @@ auto MethodBFS::run(Solution &solution) -> void
 					wezelKoncowy = nod;
 					//puzelKoncowy = puzelek;
 					stillRun = false;
-					frontier.push_back(nod);
+					frontier.push_back(nod);    // CZY TO POWINNO BYC???
 					
 					break;
 				}
