@@ -5,6 +5,29 @@
 #include <vector>
 
 
+//#define SHOW_PUZZEL(msg)
+//#define SHOW_INFO(msg)
+//#define SHOW_DEBUG(msg)
+//#define SHOW_ENDING_INFOS(msg)
+
+#ifndef SHOW_PUZZEL
+#define SHOW_PUZZEL(msg) std::cout<< msg;
+#endif // !SHOW
+
+#ifndef SHOW_INFO
+#define SHOW_INFO(msg) std::cout<< msg;
+#endif // !SHOW_INFO
+
+#ifndef SHOW_DEBUG
+#define SHOW_DEBUG(msg) std::cout<< msg;
+#endif // !SHOW_DEBUG
+
+#ifndef SHOW_ENDING_INFOS
+#define SHOW_ENDING_INFOS(msg) std::cout<< msg;
+#endif // !SHOW_ENDING_INFOS
+
+
+
 typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;
 

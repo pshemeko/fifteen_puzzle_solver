@@ -3,21 +3,6 @@
 #include "Functions.h"
 #include <map>
 
-//#define SHOW_PUZZEL(msg)
-//#define SHOW_INFO(msg)
-//#define SHOW_DEBUG(msg)
-
-#ifndef SHOW_PUZZEL
-#define SHOW_PUZZEL(msg) std::cout<< msg;
-#endif // !SHOW
-
-#ifndef SHOW_INFO
-#define SHOW_INFO(msg) std::cout<< msg;
-#endif // !SHOW_INFO
-
-#ifndef SHOW_DEBUG
-#define SHOW_DEBUG(msg) std::cout<< msg;
-#endif // !SHOW_DEBUG
 
 
 MethodAStar::MethodAStar(Contex contex, char* fileOutputSolution, char* fileAdditionalInformation, Heuristics heuristic, std::vector<Moves> orderEnum)
@@ -40,10 +25,12 @@ auto MethodAStar::run(Solution &sol) -> void
 	if (heuristic == Heuristics::hamm)
 	{
 		wskaznikNaFunkcje = &metrykaHamington;
+		SHOW_DEBUG("\n Wybrana Heurystyka: Hamilton \n\n";);
 	}
 	else if (heuristic == Heuristics::manh)
 	{
 		wskaznikNaFunkcje = &metrykaManhattan;
+		SHOW_DEBUG("\n Wybrana Heurystyka: Manhatan \n\n";);
 	}
 	else wskaznikNaFunkcje = &metrykaNieznana;
  
