@@ -27,6 +27,8 @@ auto MethodBFS::run(Solution &solution) -> void
 	int MaxDepth = 0;
 	
 	cout << endl << "\n**************************************  BFS **************************************\n";
+	cout << endl << "\n*************************************  Wszerz ************************************\n";
+
 
 	SHOW_PUZZEL("Puzel Poczatkowy:"<< *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;)
 	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
@@ -272,13 +274,6 @@ auto MethodBFS::run(Solution &solution) -> void
 	SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states << std::endl;);
 
 
-	//cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
-	//cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
-	//cout << "\n Operatory uzyte: " << solution.solution;
-	//cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
-	//cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
-	//cout << endl;
 
-
-	//solution.save();
+	solution.save();
 }

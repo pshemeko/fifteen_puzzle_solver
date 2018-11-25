@@ -29,6 +29,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	//for (auto x : order) cout << x << " ";
 
 	cout << endl << "\n**************************************  DFS **************************************\n";
+	cout << endl << "\n*************************************  Wg³¹b ************************************\n";
+
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
 
 	int MaxDepth = 0;
@@ -283,17 +285,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_ENDING_INFOS("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
 	SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states<<std::endl;);
 
-    //cout << "\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count();
-    //cout << "\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;
-    //cout << "\n Operatory uzyte: " << solution.solution;
-    //cout << "\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;
-    //cout << "\n liczba stanow przetworzonych: " << solution.number_of_processed_states;
-    //cout << endl;
 
-
-
-    //solution.save();
+    solution.save();
 }
+
+
 //TODO jeszcze trzeba sprawdzac stany przetworzone czy nie ma elementu
 // przerobic frontier na liste i sprawdzac czy nie ma tam elementu tez
 

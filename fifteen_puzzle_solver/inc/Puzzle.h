@@ -5,7 +5,7 @@
 #include <vector>
 
 
-//#define SHOW_PUZZEL(msg)
+#define SHOW_PUZZEL(msg)
 //#define SHOW_INFO(msg)
 //#define SHOW_DEBUG(msg)
 //#define SHOW_ENDING_INFOS(msg)
