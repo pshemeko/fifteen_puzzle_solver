@@ -4,12 +4,14 @@
 #include <list>
 #include <vector>
 
-
+// disable logging info messages. comment this out to enable logging.
 #define SHOW_PUZZEL(msg)
-//#define SHOW_INFO(msg)
-//#define SHOW_DEBUG(msg)
-//#define SHOW_ENDING_INFOS(msg)
+#define SHOW_INFO(msg)
+#define SHOW_DEBUG(msg)
+#define SHOW_ENDING_INFOS(msg)
 
+
+// if LOG_INFO is disabled, we need an empty macro, else it will not compile. comment "#undef LOG_PUZZEL" out, if you want to log messages.
 #ifndef SHOW_PUZZEL
 #define SHOW_PUZZEL(msg) std::cout<< msg;
 #endif // !SHOW

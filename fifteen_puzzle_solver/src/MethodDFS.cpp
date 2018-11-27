@@ -28,10 +28,14 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	//for (auto x : order) cout << x << " ";
 
-	cout << endl << "\n**************************************  DFS **************************************\n";
-	cout << endl << "\n*************************************  Wg³¹b ************************************\n";
+	cout << "\n**************************************  DFS **************************************\n";
+    cout << solution.fileInput;
+    cout << "\n*************************************  Wg³¹b ************************************";
+    SHOW_DEBUG(endl << "\n*************************************  Wg³¹b ************************************\n";);
 
+    std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+   
 
 	int MaxDepth = 0;
 
@@ -108,6 +112,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				if (nod->puzel->IsOnFinishState())
 				{
+                    timeEnd = std::chrono::high_resolution_clock::now();
+
 					SHOW_PUZZEL("\nkoncowy puzel:";);
 					//cout << "\nkoncowy puzel:";
 					SHOW_PUZZEL(*nod->puzel;);
@@ -147,7 +153,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-							std::cout << "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
+                            SHOW_DEBUG("\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
 							break;
 						}
 					}
@@ -248,7 +254,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	// *********************************************      zbieranie wynikow
 
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
 
 	
 	solution.number_of_visited_states = frontier.size() + explored.size();

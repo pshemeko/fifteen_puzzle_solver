@@ -9,6 +9,7 @@ class Solution
 public:
 	char * output;
 	char* AdditionalInformation;
+    char* fileInput;
 
 	std::string solution; //ciag operatorow uzytych
 	//parameter needed for program output
@@ -23,6 +24,7 @@ public:
 	std::fstream fileSolution; // plik z rozwiazaniem
 	std::fstream fileAdditionalInformation;
 	Solution(char* fileOut, char* nameFileAdditionalInformation);
+    Solution(char* fileInput, char* fileOut, char* nameFileAdditionalInformation);
 	~Solution();
 
 	void save();	//TODO napisac zapisywanie tych danych do pliku

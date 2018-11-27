@@ -19,6 +19,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	using namespace std;
 
+    std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
 
 	//TODO  zaimplementoac caly algorytm
@@ -26,8 +27,10 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	int MaxDepth = 0;
 	
-	cout << endl << "\n**************************************  BFS **************************************\n";
-	cout << endl << "\n*************************************  Wszerz ************************************\n";
+	cout << "\n**************************************  BFS **************************************\n";
+    cout << solution.fileInput;
+    cout << "\n*************************************  Wszerz ************************************";
+    SHOW_DEBUG("\n*************************************  Wszerz ************************************\n";);
 
 
 	SHOW_PUZZEL("Puzel Poczatkowy:"<< *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;)
@@ -88,7 +91,10 @@ auto MethodBFS::run(Solution &solution) -> void
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov, (father->recursionDeph) +1);
 
 				////sprawdz czy jest docelowy
-				if (nod->puzel->IsOnFinishState()) {
+				if (nod->puzel->IsOnFinishState()) 
+                {
+                    timeEnd = std::chrono::high_resolution_clock::now();
+
 					SHOW_PUZZEL( "\nkoncowy puzel:";);
 					//cout << "\nkoncowy puzel:";
 					SHOW_PUZZEL( *nod->puzel;);
@@ -128,7 +134,7 @@ auto MethodBFS::run(Solution &solution) -> void
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-							SHOW_INFO( "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+							SHOW_DEBUG( "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
 							//std::cout << "\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;
 							break;
 						}
@@ -234,7 +240,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	// *********************************************      zbieranie wynikow
 
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
 
 	
 	solution.number_of_visited_states = frontier.size() + explored.size();
@@ -257,7 +263,7 @@ auto MethodBFS::run(Solution &solution) -> void
 	SHOW_ENDING_INFOS( "\n\n\n\n***************************************  podsumowanie wynikow programu  ***************************************";);
 	//cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
 
-	SHOW_ENDING_INFOS(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
+	SHOW_ENDING_INFOS("\n\n\n\nPuzel poczatkowy:\n";);
 	//cout << endl << endl << endl << endl<<"Puzel poczatkowy:\n";
 	SHOW_ENDING_INFOS(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
 	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
