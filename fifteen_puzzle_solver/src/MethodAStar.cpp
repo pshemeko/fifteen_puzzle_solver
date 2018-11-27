@@ -24,12 +24,12 @@ auto MethodAStar::run(Solution &solution) -> void
 	if (heuristic == Heuristics::hamm)
 	{
 		wskaznikNaFunkcje = &metrykaHamington;
-		SHOW_DEBUG("\n Wybrana Heurystyka: Hamilton \n\n";);
+		//SHOW_DEBUG("\n Wybrana Heurystyka: Hamilton \n\n";);
 	}
 	else if (heuristic == Heuristics::manh)
 	{
 		wskaznikNaFunkcje = &metrykaManhattan;
-		SHOW_DEBUG("\n Wybrana Heurystyka: Manhatan \n\n";);
+		//SHOW_DEBUG("\n Wybrana Heurystyka: Manhatan \n\n";);
 	}
 	else wskaznikNaFunkcje = &metrykaNieznana;
  
@@ -46,7 +46,7 @@ auto MethodAStar::run(Solution &solution) -> void
     //if (heuristic == Heuristics::manh) SHOW_DEBUG("*********************************** Wybrana Heurystyka: Manhatan \n\n";);
     
 
-	            SHOW_PUZZEL("Puzel Poczatkowy:" << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl)
+	            //SHOW_PUZZEL("Puzel Poczatkowy:" << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl)
 
     std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 
@@ -65,16 +65,16 @@ auto MethodAStar::run(Solution &solution) -> void
 
     /// obliczamy to i wrzucamy do kontenera - to ten wzor z wykladu f(n) = g(n) + herystyka  ; g- ilos krokow jakie xzajelo dojcie tutaj
     int functionFN = father->recursionDeph + (*wskaznikNaFunkcje)(father->puzel);
-                SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
+               // SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
     int zFunckcji = (*wskaznikNaFunkcje)(startPuzzel);
-                SHOW_DEBUG("\n wartosc funkcji: " << zFunckcji << endl);
+                //SHOW_DEBUG("\n wartosc funkcji: " << zFunckcji << endl);
 
     frontier.insert(std::pair<int, std::shared_ptr<Node>>(functionFN, root) );
 
 	bool stillRun = true;
 
 	std::shared_ptr<Node> solvedNode = root; // wezel koncowy
-	            SHOW_DEBUG("\nwielkosc frontier w A* przed while:" << frontier.size());
+	            //SHOW_DEBUG("\nwielkosc frontier w A* przed while:" << frontier.size());
                 int ile = 5;
 
 	while (stillRun && !frontier.empty())
@@ -86,13 +86,13 @@ auto MethodAStar::run(Solution &solution) -> void
 
         for (auto x : frontier)
         {
-            SHOW_DEBUG( "metryka: " << x.first << " recursionDeph:" << x.second->recursionDeph << " puzel Hash: " << x.second->puzel->hasHFunction() << std::endl;);
+            //SHOW_DEBUG( "metryka: " << x.first << " recursionDeph:" << x.second->recursionDeph << " puzel Hash: " << x.second->puzel->hasHFunction() << std::endl;);
         }
 
-        SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size());
+        //SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size());
         if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 
-        SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl);
+        //SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl);
 
         for (auto mov : order)
         {
@@ -108,16 +108,16 @@ auto MethodAStar::run(Solution &solution) -> void
                 {
                     timeEnd = std::chrono::high_resolution_clock::now();
 
-                    SHOW_PUZZEL("\nkoncowy puzel:";);
-                    SHOW_PUZZEL(*nod->puzel;);
-                    SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
-                    SHOW_DEBUG("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+                    //SHOW_PUZZEL("\nkoncowy puzel:";);
+                    //SHOW_PUZZEL(*nod->puzel;);
+                    //SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+                    //SHOW_DEBUG("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
 
                     solvedNode = nod;
                     stillRun = false;
                     /// obliczamy to i wrzucamy do kontenera - to ten wzor z wykladu f(n) = g(n) + herystyka  ; g- ilos krokow jakie xzajelo dojcie tutaj
                     int functionFN = father->recursionDeph + (*wskaznikNaFunkcje)(father->puzel);
-                    SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
+                    //SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
                 
                     frontier.insert(std::pair<int, std::shared_ptr<Node>>(functionFN, nod));
                 
@@ -130,7 +130,7 @@ auto MethodAStar::run(Solution &solution) -> void
                     if ((x->puzel->hasHFunction()) == nod->puzel->hasHFunction())
                     {
                         czyJuzJest = true;
-                        SHOW_INFO("\n\t******** jest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+                        //SHOW_INFO("\n\t******** jest juz w explored:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
                         break;
                     }
                 }
@@ -143,7 +143,7 @@ auto MethodAStar::run(Solution &solution) -> void
                         if( x.second->puzel->hasHFunction() == nod->puzel->hasHFunction())
                         {
                             czyJuzJest = true;
-                            SHOW_INFO("\n\t******* jest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+                            //SHOW_INFO("\n\t******* jest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
                             break;
                         }
                     }
@@ -153,14 +153,14 @@ auto MethodAStar::run(Solution &solution) -> void
                 if (!czyJuzJest)
                 {
                     int functionFN = father->recursionDeph + (*wskaznikNaFunkcje)(father->puzel);
-                    SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
+                   // SHOW_DEBUG("recursionDepth:" << father->recursionDeph << " wartosc meryki dla root: " << (*wskaznikNaFunkcje)(father->puzel));
 
                     frontier.insert(std::pair<int, std::shared_ptr<Node>>(functionFN, nod));
 
-                    SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
-                        << nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
+                    //SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
+                    //    << nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
                
-                    SHOW_PUZZEL(*nod->puzel << endl;);
+                    //SHOW_PUZZEL(*nod->puzel << endl;);
                 }
             
             }
@@ -186,26 +186,26 @@ auto MethodAStar::run(Solution &solution) -> void
             wezel = wezel->parrent;
             if (wezel->parrent == nullptr) oneMore = false;			//TODO ******************************************* blad
         }
-        SHOW_DEBUG("\t\t size listrevert:" << listMoves.size(););
+       // SHOW_DEBUG("\t\t size listrevert:" << listMoves.size(););
  
         std::reverse(std::begin(listMoves), std::end(listMoves)); // odwracam liste
     }
 
-    SHOW_DEBUG("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
+   // SHOW_DEBUG("\nglebokosc:" << solvedNode->recursionDeph << std::endl;);
 
     if (!stillRun)//if (!frontier.empty()&& stillRun ==false)
     {
-        for (auto x : listMoves)
-        {
-            SHOW_DEBUG(x << " ";);
-        }
+       // for (auto x : listMoves)
+       // {
+       //     SHOW_DEBUG(x << " ";);
+       // }
 
         solution.length_of_the_solution_found = listMoves.size();
     }
     else
     {
         solution.length_of_the_solution_found = -1;
-        SHOW_INFO("!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
+        //SHOW_INFO("!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZNALEZIONO ROZWIAZANIA ";);
     }
     
 
@@ -230,17 +230,17 @@ auto MethodAStar::run(Solution &solution) -> void
         }
     }
 
-    SHOW_ENDING_INFOS("\n\n\n\n ***************************************  podsumowanie wynikow programu  ***************************************";);
-    SHOW_ENDING_INFOS("\n\n\n\nPuzel poczatkowy:\n";);
-    SHOW_ENDING_INFOS(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
-    SHOW_ENDING_INFOS("\nPuzel koncowy:";);
-    SHOW_ENDING_INFOS(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;);
-    SHOW_ENDING_INFOS("\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count(););
-    SHOW_ENDING_INFOS("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
-    SHOW_ENDING_INFOS("\n Operatory uzyte: " << solution.solution;);
-    SHOW_ENDING_INFOS("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
-    SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states << std::endl;);
-
+    //SHOW_ENDING_INFOS("\n\n\n\n ***************************************  podsumowanie wynikow programu  ***************************************";);
+    //SHOW_ENDING_INFOS("\n\n\n\nPuzel poczatkowy:\n";);
+    //SHOW_ENDING_INFOS(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+    //SHOW_ENDING_INFOS("\nPuzel koncowy:";);
+    //SHOW_ENDING_INFOS(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;);
+    //SHOW_ENDING_INFOS("\n Czas rozwiazania w milisekundach: " << solution.time_duration_of_process.count(););
+    //SHOW_ENDING_INFOS("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
+    //SHOW_ENDING_INFOS("\n Operatory uzyte: " << solution.solution;);
+    //SHOW_ENDING_INFOS("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
+    //SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states << std::endl;);
+	
 
     solution.save();
  
