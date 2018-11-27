@@ -37,10 +37,10 @@ auto MethodAStar::run(Solution &solution) -> void
 	using namespace std;
 
  
-	cout << endl << "**************************************  ASTAR **************************************\n";
-    cout << solution.fileInput<<std::endl;
-    if (heuristic == Heuristics::hamm) cout << "*********************************** Wybrana Heurystyka: Hamilton ";
-    if (heuristic == Heuristics::manh) cout << "*********************************** Wybrana Heurystyka: Manhatan ";
+	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  ASTAR **************************************\n";);
+	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << std::endl;);
+	if (heuristic == Heuristics::hamm) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Hamilton ";);
+	if (heuristic == Heuristics::manh) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Manhatan ";);
 
     //if (heuristic == Heuristics::hamm) SHOW_DEBUG("*********************************** Wybrana Heurystyka: Hamilton \n\n";);
     //if (heuristic == Heuristics::manh) SHOW_DEBUG("*********************************** Wybrana Heurystyka: Manhatan \n\n";);

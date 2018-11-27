@@ -27,9 +27,19 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	int MaxDepth = 0;
 	
-	cout << "\n**************************************  BFS **************************************\n";
-    cout << solution.fileInput;
-    cout << "\n*************************************  Wszerz ************************************";
+	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  BFS **************************************\n";);
+	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
+    
+        for (auto x : order)
+        {
+			if (x == Moves::Down)	SHOW_INFOS_FOR_SCRYPTS("D";);
+			if (x == Moves::Up)		SHOW_INFOS_FOR_SCRYPTS("U";);
+			if (x == Moves::Left)	SHOW_INFOS_FOR_SCRYPTS("L";);
+			if (x == Moves::Right)	SHOW_INFOS_FOR_SCRYPTS("R";);
+        }
+   
+
+		SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wszerz ************************************";);
     SHOW_DEBUG("\n*************************************  Wszerz ************************************\n";);
 
 

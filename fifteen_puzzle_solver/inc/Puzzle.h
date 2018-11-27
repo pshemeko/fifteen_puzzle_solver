@@ -9,7 +9,7 @@
 #define SHOW_INFO(msg)
 #define SHOW_DEBUG(msg)
 #define SHOW_ENDING_INFOS(msg)
-
+//#define SHOW_INFOS_FOR_SCRYPTS(msg)
 
 // if LOG_INFO is disabled, we need an empty macro, else it will not compile. comment "#undef LOG_PUZZEL" out, if you want to log messages.
 #ifndef SHOW_PUZZEL
@@ -28,7 +28,9 @@
 #define SHOW_ENDING_INFOS(msg) std::cout<< msg;
 #endif // !SHOW_ENDING_INFOS
 
-
+#ifndef SHOW_INFOS_FOR_SCRYPTS
+#define SHOW_INFOS_FOR_SCRYPTS(msg) std::cout<< msg;
+#endif // !SHOW_INFOS_FOR_SCRYPTS
 
 typedef uint16_t puzzleDataType;
 //using puzzleDataType = std::uint8_t;

@@ -28,10 +28,19 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	//for (auto x : order) cout << x << " ";
 
-	cout << "\n**************************************  DFS **************************************\n";
-    cout << solution.fileInput;
-    cout << "\n*************************************  Wg³¹b ************************************";
-    SHOW_DEBUG(endl << "\n*************************************  Wg³¹b ************************************\n";);
+	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  DFS **************************************\n";);
+	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
+    for (auto x : order)
+    {
+		if (x == Moves::Down)	SHOW_INFOS_FOR_SCRYPTS("D";);
+		if (x == Moves::Up)		SHOW_INFOS_FOR_SCRYPTS("U";);
+		if (x == Moves::Left)	SHOW_INFOS_FOR_SCRYPTS("L";);
+		if (x == Moves::Right)	SHOW_INFOS_FOR_SCRYPTS("R";);
+    }
+    
+	SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab ************************************";);
+
+    SHOW_DEBUG(endl << "\n*************************************  Wglab ************************************\n";);
 
     std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
