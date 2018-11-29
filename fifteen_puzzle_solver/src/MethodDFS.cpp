@@ -82,6 +82,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	//for (auto x : order) cout << x << " ";
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 
+    bool isResolved = false;
+
 	//while(stillRun)
     SHOW_DEBUG("\nwielkos frontier w DFS przed while:" << frontier.size(););
 	while (stillRun && !frontier.empty()) // TODO jak zle zostaw samo stillRun
@@ -89,9 +91,13 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
         SHOW_DEBUG("\nwielkows frontier  w while:" << frontier.size(););
 
 		// zdejmuje czowke i wrzucam do explored i przetwarzam ja teraz
-		father = frontier.front();// top();
-		explored.insert(father->puzel->hasHFunction());
-		frontier.pop_front();// pop();
+		//father = frontier.front();// top();
+		//explored.insert(father->puzel->hasHFunction());
+		//frontier.pop_front();// pop();
+        father = frontier.back();
+        explored.insert(father->puzel->hasHFunction());
+        frontier.pop_back();
+
 
 		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size(););
 
@@ -122,14 +128,14 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				if (nod->puzel->IsOnFinishState())
 				{
                     timeEnd = std::chrono::high_resolution_clock::now();
-
+                    isResolved = true;
 					SHOW_PUZZEL("\nkoncowy puzel:";);
 					//cout << "\nkoncowy puzel:";
 					SHOW_PUZZEL(*nod->puzel;);
 					//cout << *nod->puzel;
 					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
 					//std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
-					SHOW_DEBUG("\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					SHOW_DEBUG("\nten puzel ma hash: " << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
 					//std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
 
 					solvedNode = nod;
@@ -162,7 +168,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-                            SHOW_DEBUG("\n\t\t\t\tjest juz w frontier:" << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+                            SHOW_DEBUG("\n\t\t\t\tjest juz w frontier: " << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
 							break;
 						}
 					}
@@ -175,7 +181,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
 					//SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
-					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
+					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
 						<< nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
 					
 					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
@@ -195,7 +201,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 
 	}
-
+    if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
 	//******************************** WYSWIETLANIE 
 
 
@@ -298,8 +304,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_ENDING_INFOS("\n Dlugosc znalezionego rozwiazania: " << solution.length_of_the_solution_found;);
 	SHOW_ENDING_INFOS("\n Operatory uzyte: " << solution.solution;);
 	SHOW_ENDING_INFOS("\n liczba stanow odwierdzonych:  " << solution.number_of_visited_states;);
-	SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states<<std::endl;);
-
+	SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states;);
+    SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
     solution.save();
 }
