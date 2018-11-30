@@ -8,7 +8,7 @@
 #define SHOW_PUZZEL(msg)
 #define SHOW_INFO(msg)
 #define SHOW_DEBUG(msg)
-#define SHOW_ENDING_INFOS(msg)
+//#define SHOW_ENDING_INFOS(msg)
 //#define SHOW_INFOS_FOR_SCRYPTS(msg)
 
 // if LOG_INFO is disabled, we need an empty macro, else it will not compile. comment "#undef LOG_PUZZEL" out, if you want to log messages.
@@ -48,7 +48,7 @@ public:
 
 	int dimensionX; // from one if 1x1 it =1, when 2x2 it have 2
 	int dimensionY;
-    size_t zeroPosition; // form 0 to (dimensionX * dimensionY)-1
+	unsigned long long zeroPosition; // form 0 to (dimensionX * dimensionY)-1
 
 	std::vector<puzzleDataType> board;
 
@@ -59,16 +59,14 @@ public:
 
 	Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, std::vector<puzzleDataType> org);
 
-	Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, Puzzle &puzel, Moves mov);	// wyrzucic???
+	//Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, Puzzle &puzel, Moves mov);	// wyrzucic???
 
     auto PositionZero() ->  size_t;
-
-	//auto DisplayElements() -> std::list<int>; // potrzeba do wyswietlania elementow //Albo jako lista list 
 
 	auto IsOnFinishState() -> bool;
 
     // zrobic jako template  /// MOZE zwracac operator lub null
-	auto MoveZero(Moves mov) -> bool;// moze rzucac wyj¹tek exception_wrong_move - wyjatki dzialaja dluzej // 
+	auto MoveZero(Moves mov) -> bool;
 
 	void Fill(std::vector<puzzleDataType> org); // chyba skasowac
 

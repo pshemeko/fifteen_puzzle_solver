@@ -41,10 +41,7 @@ auto MethodAStar::run(Solution &solution) -> void
 	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << std::endl;);
 	if (heuristic == Heuristics::hamm) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Hamilton ";);
 	if (heuristic == Heuristics::manh) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Manhatan ";);
-
-    //if (heuristic == Heuristics::hamm) SHOW_DEBUG("*********************************** Wybrana Heurystyka: Hamilton \n\n";);
-    //if (heuristic == Heuristics::manh) SHOW_DEBUG("*********************************** Wybrana Heurystyka: Manhatan \n\n";);
-    
+	    
     std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 
 	            SHOW_PUZZEL("Puzel Poczatkowy:" << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl)
@@ -74,13 +71,11 @@ auto MethodAStar::run(Solution &solution) -> void
 
 	std::shared_ptr<Node> solvedNode = root; // wezel koncowy
 	            SHOW_DEBUG("\nwielkosc frontier w A* przed while:" << frontier.size());
-    //int ile = 5;
 
     bool isResolved = false;
 
 	while (stillRun && !frontier.empty())
 	{
-                    //ile--;
         father = frontier.begin()->second;
         explored.push_back(father);
         frontier.erase(frontier.begin());
