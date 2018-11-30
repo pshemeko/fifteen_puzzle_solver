@@ -55,7 +55,7 @@ void Puzzle::Fill(std::vector<puzzleDataType> org)
 //
 //}
 //
-
+/*
 std::list<Moves> Puzzle::PossibleMoves()
 {
     std::list<Moves> l;
@@ -65,6 +65,7 @@ std::list<Moves> Puzzle::PossibleMoves()
     if ( CanMoveDown() )    l.push_back(Moves::Down);
     return l;
 }
+*/
 
 bool Puzzle::IsOnFinishState() //std::vector<puzzleDataType> org)
 {
@@ -137,6 +138,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition - 1]);
             zeroPosition -= 1;
             isMoved = true;
+			hashValue = hasHFunction();
         }
     }
     if (mov == Moves::Right)
@@ -146,6 +148,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition + 1]);
             zeroPosition += 1;
             isMoved = true;
+			hashValue = hasHFunction();
         }
     }
     if (mov == Moves::Up)
@@ -155,6 +158,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition - dimensionY]);
             zeroPosition -= dimensionY;
             isMoved = true;
+			hashValue = hasHFunction();
         }
     }
     if (mov == Moves::Down)
@@ -164,6 +168,7 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition + dimensionY]);
             zeroPosition += dimensionY;
             isMoved = true;
+			hashValue = hasHFunction();
         }
     }
     return isMoved;

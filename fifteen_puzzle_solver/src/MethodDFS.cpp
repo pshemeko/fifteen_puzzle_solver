@@ -51,7 +51,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 	SHOW_PUZZEL("\n MethodBFS fcja run Puzel Poczatkowy:";);
 	//std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
-	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hashValue << std::endl;);
 	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
 	//int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 
@@ -95,11 +95,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		//explored.insert(father->puzel->hasHFunction());
 		//frontier.pop_front();// pop();
         father = frontier.back();
-        explored.insert(father->puzel->hasHFunction());
+        explored.insert(father->puzel->hashValue);
         frontier.pop_back();
 
 
-		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hasHFunction() << "\twielkosc frontier w while:" << frontier.size(););
+		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
 
 		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 
@@ -135,7 +135,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					//cout << *nod->puzel;
 					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
 					//std::cout << " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";
-					SHOW_DEBUG("\nten puzel ma hash: " << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
+					SHOW_DEBUG("\nten puzel ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " :";);
 					//std::cout << "\nten puzel ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";
 
 					solvedNode = nod;
@@ -147,7 +147,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				}
 				bool czyJuzJest = false;
 
-				auto hash = nod->puzel->hasHFunction();
+				auto hash = nod->puzel->hashValue;
 
 				if (explored.find(hash) != std::end(explored))
 				{
@@ -164,11 +164,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 					for (auto x : frontier)
 					{
-						if ((x->puzel->hasHFunction()) == nod->puzel->hasHFunction())
+						if ((x->puzel->hashValue) == nod->puzel->hashValue)
 						{
 							czyJuzJest = true;
 							//if (  *nod.get() == *x.get()) czyJuzJest = true;
-                            SHOW_DEBUG("\n\t\t\t\tjest juz w frontier: " << nod->puzel->hasHFunction() << "ruch byl:" << mov << std::endl;);
+                            SHOW_DEBUG("\n\t\t\t\tjest juz w frontier: " << nod->puzel->hashValue << "ruch byl:" << mov << std::endl;);
 							break;
 						}
 					}
@@ -181,7 +181,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
 					//SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :";);
-					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " wykonano na nim ruch:"
+					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
 						<< nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
 					
 					//std::cout << "\nwrzucilem wezel do frontier puz nowy ma hash" << nod->puzel->hasHFunction() << "  father ma hash: " << nod->parrent->puzel->hasHFunction() << " :"; //(*father->puzel).hasHFunction() << std::endl;
@@ -291,9 +291,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_ENDING_INFOS("\n\n\n\n ***************************************  podsumowanie wynikow programu  ***************************************";);
     //cout << "\n\n\n\n ***************************************   podsumowanie wynikow programu";
 	SHOW_ENDING_INFOS(endl << endl << endl << endl << "Puzel poczatkowy:\n";);
-	SHOW_ENDING_INFOS(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
+	SHOW_ENDING_INFOS(*startPuzzel << " jego hash: " << startPuzzel->hashValue << std::endl;);
 	SHOW_ENDING_INFOS("\nPuzel koncowy:";);
-	SHOW_ENDING_INFOS(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hasHFunction() << std::endl;);
+	SHOW_ENDING_INFOS(*solvedNode->puzel << " jego hash: " << solvedNode->puzel->hashValue << std::endl;);
 
     //cout << endl << endl << endl << endl << "Puzel poczatkowy:\n";
     //std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
