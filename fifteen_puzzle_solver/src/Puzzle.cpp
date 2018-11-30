@@ -10,6 +10,7 @@ Puzzle::Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY,
 {
     //if (puzzleDimensionX*puzzleDimensionY != org.size()) { throw Exception_wrong_move("zly wymiar vektora lub wymiary x,y"); };
 	setZero();
+    hashValue = hasHFunction(); // TODO skasuj czy nie spowalnia
 	//TODO dokonczyc konstruktor
 }
 
@@ -197,11 +198,11 @@ auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
 	return !(operator==(rhs));
 }
 
-auto Puzzle::hasHFunction() -> size_t
+auto Puzzle::hasHFunction() -> unsigned long long
 {
-	size_t hash = 0;
-	size_t two = 1;//2^0, 2^1, 2^2, 2^3....
-	for (size_t i = 0; i < board.size(); ++i)
+    unsigned long long hash = 0;
+    unsigned long long two = 1;//2^0, 2^1, 2^2, 2^3....
+	for (unsigned long long i = 0; i < board.size(); ++i)
 	{
 		hash += two * static_cast<int>(board[i]);
 		two *= 2;

@@ -24,3 +24,4 @@ DFS przy max glebokosci =20 i pliku 4x4_07_00212.txt NIE ZNAJDUJE ROZWIAZANIA - 
 Jaki jest cel stosowania maszyny stanowej do czego uzywamy w praktyce
 
 czy dfs musi osiagnac max glebokosci zawwsze??
+czy glebokosc rekursji powinnna byc sprawdzana na poczatku czy na koncu petli zdejmujaceej z frontier i dajacej do explored

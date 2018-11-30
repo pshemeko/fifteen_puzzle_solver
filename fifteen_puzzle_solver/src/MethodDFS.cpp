@@ -51,7 +51,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 	SHOW_PUZZEL("\n MethodBFS fcja run Puzel Poczatkowy:";);
 	//std::cout << "\n MethodBFS fcja run Puzel Poczatkowy:";
-	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hashValue << std::endl;);
+	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
 	//std::cout << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;
 	//int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 
@@ -95,25 +95,27 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		//explored.insert(father->puzel->hasHFunction());
 		//frontier.pop_front();// pop();
         father = frontier.back();
-        explored.insert(father->puzel->hashValue);
+        //explored.insert(father->puzel->hashValue);
         frontier.pop_back();
 
+        if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
+        if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
+        {
+            //stillRun = false;
+            SHOW_DEBUG("\n\t\t\t\t************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+            //cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
+            //cout << "\n********************************************************************************************************************************************";
+            SHOW_INFO("\n********************************************************************************************************************************************";);
+            continue;
+        }
 
+        explored.insert(father->puzel->hashValue);
+        
+        SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
 		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
 
-		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
-
-		SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
+        SHOW_DEBUG("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
 		//cout << "-------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;
-		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
-		{
-			//stillRun = false;
-			SHOW_DEBUG("\n\t\t\t\t************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
-			//cout << "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";
-			//cout << "\n********************************************************************************************************************************************";
-			SHOW_INFO("\n********************************************************************************************************************************************";);
-			continue;
-		}
 
 		for (auto mov : order)
 		{
@@ -147,11 +149,11 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				}
 				bool czyJuzJest = false;
 
-				auto hash = nod->puzel->hashValue;
+				//auto hash = nod->puzel->hashValue;
 
-				if (explored.find(hash) != std::end(explored))
+				if (explored.find(nod->puzel->hashValue) != std::end(explored))
 				{
-					SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << hash;);
+					SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << nod->puzel->hashValue;);
 					//cout << "\nISTNIEJE JUZ HASH w explored: " << hash;
 					czyJuzJest = true;
 				}
@@ -194,7 +196,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 			}
 
-			if (!stillRun) break; // przenosze braeak dalej
+			//if (!stillRun) break; // TODO chyba mozna to skasowac bo jest break gdy finish state !!!!!!!!przenosze braeak dalej
 
 		}
 
@@ -308,6 +310,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
     solution.save();
+
 }
 
 

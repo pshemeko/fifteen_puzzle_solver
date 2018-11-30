@@ -92,7 +92,7 @@ public:
 	auto operator==(Puzzle const& rhs) const -> bool;
 	auto operator!=(Puzzle const& rhs) const -> bool;
 
-	auto hasHFunction() -> size_t;
+	auto hasHFunction() -> unsigned long long;
     friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
 
     // moze zrobic wczytywanie z pliku tutaj
