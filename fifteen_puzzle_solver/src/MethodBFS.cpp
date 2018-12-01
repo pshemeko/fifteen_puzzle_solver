@@ -174,7 +174,7 @@ auto MethodBFS::run(Solution &solution) -> void
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 					SHOW_DEBUG( "\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
-						<< NaString(nod->operatorUsed) << " Rozmiar frontier: " <<frontier.size(););
+						<< ToString(nod->operatorUsed) << " Rozmiar frontier: " <<frontier.size(););
 					SHOW_PUZZEL( *nod->puzel << endl;);
 				}
 

@@ -32,7 +32,7 @@ enum Heuristics
 };
 
 
-std::string static NaString(Moves m)
+std::string static ToString(Moves m)
 {
 	std::string s;
 	switch (m)

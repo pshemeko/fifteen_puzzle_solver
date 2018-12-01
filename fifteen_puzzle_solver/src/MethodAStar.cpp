@@ -153,7 +153,7 @@ auto MethodAStar::run(Solution &solution) -> void
 
                     frontier.insert(std::pair<int, std::shared_ptr<Node>>(functionFN, nod));
 
-                    SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:" << NaString(nod->operatorUsed) << " Rozmiar frontier:" << frontier.size(););
+                    SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:" << ToString(nod->operatorUsed) << " Rozmiar frontier:" << frontier.size(););
                
                     SHOW_PUZZEL(*nod->puzel << endl;);
                 }

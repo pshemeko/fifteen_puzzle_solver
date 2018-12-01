@@ -27,7 +27,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  DFS **************************************\n";);
 	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
-    for (auto x : order) SHOW_INFOS_FOR_SCRYPTS(NaString(x););
+    for (auto x : order) SHOW_INFOS_FOR_SCRYPTS(ToString(x););
 	SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab ************************************";);
 
 	// poczatek algorytmu
@@ -147,7 +147,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " 
 						<< nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
-						<< NaString( nod->operatorUsed) << " Rozmiar frontier:" << frontier.size(););
+						<< ToString( nod->operatorUsed) << " Rozmiar frontier:" << frontier.size(););
 					SHOW_PUZZEL(*nod->puzel << endl;); // to chyba bez sensu
 					
 				}
