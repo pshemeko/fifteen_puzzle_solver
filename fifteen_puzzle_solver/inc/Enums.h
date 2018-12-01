@@ -15,6 +15,7 @@ enum Moves
 	Right,
 	Up,
 	Down
+
 };
 
 enum Strategy
@@ -29,6 +30,24 @@ enum Heuristics
 	hamm,
 	manh
 };
+
+
+std::string static NaString(Moves m)
+{
+	std::string s;
+	switch (m)
+	{
+	case Moves::Left:	s = "L"; break;
+	case Moves::Right:	s = "R"; break;
+	case Moves::Up:		s = "U"; break;
+	case Moves::Down:	s = "D"; break;
+
+	default: s = "Nieznany"; break;
+
+	}
+	return s;
+}
+
 
 /*
 //! Function for using name of enum LogLevel

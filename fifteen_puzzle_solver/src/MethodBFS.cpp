@@ -71,18 +71,45 @@ auto MethodBFS::run(Solution &solution) -> void
 	{
 
 		father = frontier.front();
-		explored.push_back(father);
+		//explored.push_back(father);
 		frontier.pop_front();
-        SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
+        SHOW_DEBUG(" kglebokosc rekursjii:" << father->recursionDeph;);
         SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
 		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
+		
+		////
+		//if(father->puzel->hashValue == 877185)system("pause");
+		//if (father->puzel->hashValue == 876993)system("pause");
+		if (father->puzel->hashValue == 876545)
+		{
+			system("pause");
+			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+			cout << endl;
+		}
+		if (father->puzel->hashValue == 861185)
+		{
+			system("pause");
+			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+			cout << endl;
+		}
+		if (father->puzel->hashValue == 873473)
+		{
+			system("pause");
+			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+			cout << endl;
+		}
+		if (father->puzel->hashValue == 704513)system("pause");
+		if (father->puzel->hashValue == 458751)system("pause");
+
 
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
 		{
 			//stillRun = false;
-			SHOW_DEBUG( "\n\n\n\t\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+			SHOW_DEBUG( "\t\t\t\t\tPRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n";);
 			continue;
 		}
+
+		explored.push_back(father);
 
 		for (auto mov : order)
 		{
@@ -95,22 +122,7 @@ auto MethodBFS::run(Solution &solution) -> void
 
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov, (father->recursionDeph) +1);
 
-				////sprawdz czy jest docelowy
-				if (nod->puzel->IsOnFinishState()) 
-                {
-                    timeEnd = std::chrono::high_resolution_clock::now();
-                    isResolved = true;
-					SHOW_PUZZEL( "\nkoncowy puzel:";);
-					SHOW_PUZZEL( *nod->puzel;);
-					SHOW_PUZZEL( " \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
-					SHOW_PUZZEL( "\nten puzel ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " :";);
-					wezelKoncowy = nod;
-					//puzelKoncowy = puzelek;
-					stillRun = false;
-					frontier.push_back(nod);    // CZY TO POWINNO BYC???
-					
-					break;
-				}
+
 				//////////////////////////TO DO  sprawdz czy dziala break jak docelowy to koniec moze lepiej goto;
 				bool czyJuzJest = false;
 
@@ -136,14 +148,33 @@ auto MethodBFS::run(Solution &solution) -> void
 							break;
 						}
 					}
+					if (czyJuzJest) continue;
 
+				}
+				else continue; // to jst continues dla poprzedniego for szukajacego w explores jak znalaz³ to wychodzi z for(auto  mov: order)
+
+				////sprawdz czy jest docelowy
+				if (nod->puzel->IsOnFinishState())
+				{
+					timeEnd = std::chrono::high_resolution_clock::now();
+					isResolved = true;
+					SHOW_PUZZEL("\nkoncowy puzel:";);
+					SHOW_PUZZEL(*nod->puzel;);
+					SHOW_PUZZEL(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					SHOW_PUZZEL("\nten puzel ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " :";);
+					wezelKoncowy = nod;
+					//puzelKoncowy = puzelek;
+					stillRun = false;
+					frontier.push_back(nod);    // CZY TO POWINNO BYC???
+
+					break;
 				}
 
 				if (!czyJuzJest)
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 					SHOW_DEBUG( "\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
-						<< nod->operatorUsed << " Rozmiar frontier: " <<frontier.size(););
+						<< NaString(nod->operatorUsed) << " Rozmiar frontier: " <<frontier.size(););
 					SHOW_PUZZEL( *nod->puzel << endl;);
 				}
 

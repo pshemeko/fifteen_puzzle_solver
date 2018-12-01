@@ -25,3 +25,16 @@ Jaki jest cel stosowania maszyny stanowej do czego uzywamy w praktyce
 
 czy dfs musi osiagnac max glebokosci zawwsze??
 czy glebokosc rekursji powinnna byc sprawdzana na poczatku czy na koncu petli zdejmujaceej z frontier i dajacej do explored
+
+funkcje haszuj¹ce przyklad w cpp:
+https://eduinf.waw.pl/inf/alg/001_search/0067e.php
+
+zmienic wyniki i wpisywanie ilosci stanow odwiedzonych i przetworzonych img_1803.mov opisuje
+
+musze zrobic tablice mieszajaca i funkcje mieszaj¹ca spytac czy marcin albo draku i jezu zrobili
+zwykle tablica haszujaca ma 70-80 % wiecej miejc niz potencjalnie elem ktore mogibysmy wrzucic
+pozycja wyliczonjest ustawiana przez modulo przezl tablicy: img_1803.mov - 39::00 minuta
+sprawozdanie opis: img_1803.mov - 1:00:00
+wyniki i wykresy 1:10:00
+4 wykresy dla kazdego punktu(dlugosc rozwiazania, ilosc stanow przetworzonych, odwiedzonych czas....)
+1:18:00 - dla chetnych dodatkowo odchylenie standardowe i srednia

@@ -5,9 +5,9 @@
 #include <vector>
 
 // disable logging info messages. comment this out to enable logging.
-#define SHOW_PUZZEL(msg)
-#define SHOW_INFO(msg)
-#define SHOW_DEBUG(msg)
+//#define SHOW_PUZZEL(msg)
+//#define SHOW_INFO(msg)
+//#define SHOW_DEBUG(msg)
 //#define SHOW_ENDING_INFOS(msg)
 //#define SHOW_INFOS_FOR_SCRYPTS(msg)
 
@@ -33,10 +33,11 @@
 #endif // !SHOW_INFOS_FOR_SCRYPTS
 
 typedef uint16_t puzzleDataType;
+typedef unsigned long long HashType;
 //using puzzleDataType = std::uint8_t;
 
 
-static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 20;  // w tresc zadania 20
+static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 2;  // w tresc zadania 20
 
 
 //// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
@@ -48,11 +49,11 @@ public:
 
 	int dimensionX; // from one if 1x1 it =1, when 2x2 it have 2
 	int dimensionY;
-	unsigned long long zeroPosition; // form 0 to (dimensionX * dimensionY)-1
+	size_t zeroPosition; // form 0 to (dimensionX * dimensionY)-1
 
 	std::vector<puzzleDataType> board;
 
-	size_t hashValue;
+	HashType hashValue;
 
 	//auto clone() -> Puzzle; TODO zamiast tu w metodzie  wykonujacej robic memcopy
 public:
@@ -90,7 +91,7 @@ public:
 	auto operator==(Puzzle const& rhs) const -> bool;
 	auto operator!=(Puzzle const& rhs) const -> bool;
 
-	auto hasHFunction() -> unsigned long long;
+	auto hasHFunction() ->HashType;
     friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
 
     // moze zrobic wczytywanie z pliku tutaj

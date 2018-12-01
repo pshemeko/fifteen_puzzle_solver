@@ -22,37 +22,29 @@ MethodDFS::~MethodDFS()
 auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 {
 
-
+	//wyswietlanie opisu
 	SHOW_DEBUG("\n" << (Moves::Down) << "    i co teraz!!!\nkolejnosc:";);
 	for (auto x : order) SHOW_DEBUG(x << " ";);
 	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  DFS **************************************\n";);
 	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
-    for (auto x : order)
-    {
-		if (x == Moves::Down)	SHOW_INFOS_FOR_SCRYPTS("D";);
-		if (x == Moves::Up)		SHOW_INFOS_FOR_SCRYPTS("U";);
-		if (x == Moves::Left)	SHOW_INFOS_FOR_SCRYPTS("L";);
-		if (x == Moves::Right)	SHOW_INFOS_FOR_SCRYPTS("R";);
-    }
-	SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab *************************************";);
-    //SHOW_DEBUG(endl << "\n*************************************  Wglab ************************************\n";);
+    for (auto x : order) SHOW_INFOS_FOR_SCRYPTS(NaString(x););
+	SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab ************************************";);
 
+	// poczatek algorytmu
 	std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
 	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
-   
 
 	int MaxDepth = 0;
 
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 	SHOW_PUZZEL("\n MethodBFS fcja run Puzel Poczatkowy:";);
 	SHOW_PUZZEL(*startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;);
-
-
+	
 	//std::list<std::shared_ptr<Node>> frontier;
 	//std::list<std::shared_ptr<Node>> explored;
 
 	auto frontier = std::list<std::shared_ptr<Node>>{};
-	auto explored = std::unordered_set<std::size_t>{};
+	auto explored = std::unordered_set<HashType>{};
 
 	//jako ze wrzucam w odwrotnej kolejnosci trzba odwroic w tej metodzie
 	std::reverse(std::begin(order), std::end(order));
@@ -79,7 +71,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	{
 			SHOW_DEBUG("\nwielkows frontier  w while:" << frontier.size(););
 
-		// zdejmuje czowke i wrzucam do explored i przetwarzam ja teraz
+		// zdejmuje z wierzchu i wrzucam do explored oraz przetwarzam ja dalej
 		//father = frontier.front();// top();
 		//explored.insert(father->puzel->hasHFunction());
 		//frontier.pop_front();// pop();
@@ -91,7 +83,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
         if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
         {
             //stillRun = false;
-            SHOW_DEBUG("\n\t\t\t\t********************************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n\n";);
+            SHOW_DEBUG("\n\t\t\t\t********************************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n";);
             continue;
         }
 
@@ -111,34 +103,14 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, copy, mov, (father->recursionDeph) + 1);
 
-				if (nod->puzel->IsOnFinishState())
-				{
-                    timeEnd = std::chrono::high_resolution_clock::now();
-                    isResolved = true;
-					SHOW_PUZZEL("\nkoncowy puzel:";);
-					SHOW_PUZZEL(*nod->puzel;);
-					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
-					SHOW_DEBUG("\nten puzel ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " :";);
-
-					solvedNode = nod;
-					//puzelKoncowy = puzelek;
-					stillRun = false;
-					frontier.push_back(nod);
-
-					break; // wyskakuje z while
-				}
 				bool czyJuzJest = false;
 				
 				if (explored.find(nod->puzel->hashValue) != std::end(explored))
 				{
 					SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << nod->puzel->hashValue;);
 					czyJuzJest = true;
-				}
-
-				// czy potrzeba tez w frontiered sprawdzic?
-				
-                //TODO trzeba to uwzglednic
-				if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list
+					continue;
+				}else //if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list
 				{
 
 					for (auto x : frontier)
@@ -154,13 +126,28 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 				}
 				
+				if (nod->puzel->IsOnFinishState())
+				{
+					timeEnd = std::chrono::high_resolution_clock::now();
+					isResolved = true;
+					SHOW_PUZZEL("\nkoncowy puzel:";);
+					SHOW_PUZZEL(*nod->puzel;);
+					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					SHOW_DEBUG("\nten puzel ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " :";);
 
-				if (!czyJuzJest)
+					solvedNode = nod;
+					//puzelKoncowy = puzelek;
+					stillRun = false;
+					frontier.push_back(nod);
+
+					break; // wyskakuje z while
+				} else if (!czyJuzJest) // chyba wystarczy samo else
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
-					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " << nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
-						<< nod->operatorUsed << " Rozmiar frontier:" << frontier.size(););
+					SHOW_DEBUG("\n+++wrzucilem wezel do frontier puz nowy ma hash: " << nod->puzel->hashValue << "  father ma hash: " 
+						<< nod->parrent->puzel->hashValue << " wykonano na nim ruch:"
+						<< NaString( nod->operatorUsed) << " Rozmiar frontier:" << frontier.size(););
 					SHOW_PUZZEL(*nod->puzel << endl;); // to chyba bez sensu
 					
 				}

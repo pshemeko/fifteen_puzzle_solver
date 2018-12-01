@@ -198,11 +198,13 @@ auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
 	return !(operator==(rhs));
 }
 
-auto Puzzle::hasHFunction() -> unsigned long long
+// jest tez auto hasher = std::hash<State>{}
+// wywolanie auto currentStateHash = hasher(*currentState);
+auto Puzzle::hasHFunction() -> HashType
 {
-    unsigned long long hash = 0;
-    unsigned long long two = 1;//2^0, 2^1, 2^2, 2^3....
-	for (unsigned long long i = 0; i < board.size(); ++i)
+	HashType hash = 0;
+	HashType two = 1;//2^0, 2^1, 2^2, 2^3....
+	for (HashType i = 0; i < board.size(); ++i)
 	{
 		hash += two * static_cast<int>(board[i]);
 		two *= 2;
