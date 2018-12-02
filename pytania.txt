@@ -43,3 +43,9 @@ pytania:
 czasem algrorytm nie znajduje rozwiazania tj dojdzie do glebokosci 20 i nie znajdzie czy to poprawiac?
 bo to jest prawdopodobnie przez to ze dojdzie do poziomu 20 zobaczy ze jest na max poziomie i wychodzi nie sprawdza czy to stan docelowy tylko wrzuca na frontier
 w przypadu dfs
+
+czy w DFS sprawdzamy obie listy explored i fronier czy tylko explored?
+
+jak powinienem liczyc ilosc odwierdzonych wezlow i ilosc wezlow przetworzonych
+
+czy ta ulepszona wersja z liczeniem glebokosci  ktora dodalem w niedziele po rozmowie jest dobrze

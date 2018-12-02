@@ -28,5 +28,8 @@ public:
 	~Solution();
 
 	void save();	//TODO napisac zapisywanie tych danych do pliku
+	void open(void);
+	void close();
+
 };
 

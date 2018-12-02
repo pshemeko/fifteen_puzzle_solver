@@ -3,6 +3,7 @@
 
 #include <stack>
 #include <unordered_set>
+#include <unordered_map>
 
 
 
@@ -45,7 +46,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	//std::list<std::shared_ptr<Node>> explored;
 
 	auto frontier = std::list<std::shared_ptr<Node>>{};
-	auto explored = std::unordered_set<HashType>{};
+	auto explored = std::unordered_map<HashType, puzzleDataType>{}; // drugim jest glebokosc siezki jaka doszlismy do tego hasha // zamiast puzzleDataType moze byc jakis inny typ kbyle mial malo wielkosc
 
 	//jako ze wrzucam w odwrotnej kolejnosci trzba odwroic w tej metodzie
 	std::reverse(std::begin(order), std::end(order));
@@ -64,7 +65,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		for (auto x : order) SHOW_DEBUG(x << " ";);
 
     bool isResolved = false;
-
+	size_t doubled = 0; // licze ile razy malem podwojony stan i na koncu musze te wartosc dodac do rozmiaru explored
 	//while(stillRun)
 		SHOW_DEBUG("\nwielkos frontier w DFS przed while:" << frontier.size(););
 
@@ -131,9 +132,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 			continue;
         }
 
-        explored.insert(father->puzel->hashValue);//jak zdjalem z frontier wezel to tu wrzucam go do explored bo bede przetwarza³ ten wezel
-
-
+        //explored.insert(father->puzel->hashValue);//jak zdjalem z frontier wezel to tu wrzucam go do explored bo bede przetwarza³ ten wezel
+		explored[father->puzel->hashValue] = father->recursionDeph;//jak zdjalem z frontier wezel to tu wrzucam go do explored bo bede przetwarza³ ten wezel
+		// TODO chyba nie moze byc tego explored[] tyko trzeba t lub zostawic lub przeniesc na sam koniec tgo for ponizej
 		for (auto mov : order)
 		{
 			Puzzle puzelek = *father->puzel;
@@ -145,15 +146,28 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, copy, mov, (father->recursionDeph) + 1);
 
 				bool czyJuzJest = false;
-				
-				if (explored.find(nod->puzel->hashValue) != std::end(explored))
+				//if (auto occurence = explored.find(currentStateHash); occurence != std::end(explored))
+				//auto look = explored.find(nod->puzel->hashValue);
+				//if ( look != std::end(explored))
+				//std::unordered_map<HashType, puzzleDataType>::iterator exist = explored.find(nod->puzel->hashValue);
+				if (explored.find(nod->puzel->hashValue) != std::end(explored)) // czy jest na explored
 				{
-					SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << nod->puzel->hashValue;);
-					czyJuzJest = true;
-					continue;
-				}else //if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list
+					// sprawdzam czy jego sciezka nie jest krotsza niz tego ktorego mam juz we frontier
+					if (explored.at(nod->puzel->hashValue) <= nod->recursionDeph)
+					{
+						SHOW_INFO("\nISTNIEJE JUZ HASH w explored: " << nod->puzel->hashValue;);
+						czyJuzJest = true; // chyba jest niepotrzebne bo wyjdzie z petli
+						continue;
+					}else
+					{
+						SHOW_DEBUG("\n!!!!!!!!!!!!!!!!!!!!!!! PODMIENIONO ELEMENTY W TABLICY EXPLORED!! STARA glebokosc: "
+							<< explored.at(nod->puzel->hashValue) << " NOWA: " << nod->recursionDeph;);
+						explored.at(nod->puzel->hashValue) = nod->recursionDeph;
+						++doubled;
+						// nie robie nic wiecej podmienilem dlugosc sciezki i rozwija wezel dalej jakby go nie bylo jeszcze
+					}
+				}else //if (!czyJuzJest) //  ale trzeba zmienic wtedy stack na list // czy jest na fronter
 				{
-
 					for (auto x : frontier)
 					{
 						if ((x->puzel->hashValue) == nod->puzel->hashValue)
@@ -164,10 +178,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 							break;
 						}
 					}
-
 				}
 				
-				if (nod->puzel->IsOnFinishState())
+				if (nod->puzel->IsOnFinishState()) // czy jest stanem docelowym
 				{
 					timeEnd = std::chrono::high_resolution_clock::now();
 					isResolved = true;
@@ -182,7 +195,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 					frontier.push_back(nod);
 
 					break; // wyskakuje z while
-				} else if (!czyJuzJest) // chyba wystarczy samo else
+				} else if (!czyJuzJest) // chyba wystarczy samo else // jak nigdzie nie ma to wrzucam
 				{
 					frontier.push_back(nod);  // albo na poczatek wrzucaaj tj frontier.emplace(frontier.begin(),nod)
 
@@ -258,7 +271,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	
 	solution.number_of_visited_states = frontier.size() + explored.size();
-	solution.number_of_processed_states = explored.size();
+	solution.number_of_processed_states = explored.size() + doubled;
 	////?????????TODO czy to jest dobrze?
 	solution.maximum_depth_of_recursion_achieved = MaxDepth;
 

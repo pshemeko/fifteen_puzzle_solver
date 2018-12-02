@@ -8,8 +8,8 @@
 Solution::Solution(char* fileOutput, char* nameFileAdditionalInformation)
 	:output{fileOutput}, AdditionalInformation{ nameFileAdditionalInformation }
 {
-	fileSolution.open(output, std::ios::out);
-	fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
+	//fileSolution.open(output, std::ios::out);
+	//fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
 	length_of_the_solution_found = 0;
 	number_of_visited_states = 0;
 	number_of_processed_states = 0;
@@ -17,11 +17,12 @@ Solution::Solution(char* fileOutput, char* nameFileAdditionalInformation)
 	time_duration_of_process = std::chrono::milliseconds::zero();
 }
 
+
 Solution::Solution(char * fileInput, char * fileOutput, char * nameFileAdditionalInformation)
     :output{ fileOutput }, AdditionalInformation{ nameFileAdditionalInformation }, fileInput{ fileInput }
 {
-    fileSolution.open(output, std::ios::out);
-    fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
+    //fileSolution.open(output, std::ios::out);
+    //fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
     length_of_the_solution_found = 0;
     number_of_visited_states = 0;
     number_of_processed_states = 0;
@@ -30,10 +31,24 @@ Solution::Solution(char * fileInput, char * fileOutput, char * nameFileAdditiona
 }
 
 
-Solution::~Solution()
+void Solution::open(void)
+{
+	fileSolution.open(output, std::ios::out);
+	fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
+}
+
+
+void Solution::close()
 {
 	fileSolution.close();
 	fileAdditionalInformation.close();
+}
+
+
+Solution::~Solution()
+{
+	//fileSolution.close();
+	//fileAdditionalInformation.close();
 }
 
 void Solution::save()
@@ -65,3 +80,5 @@ void Solution::save()
 
 
 }
+
+
