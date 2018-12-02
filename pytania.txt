@@ -38,3 +38,8 @@ sprawozdanie opis: img_1803.mov - 1:00:00
 wyniki i wykresy 1:10:00
 4 wykresy dla kazdego punktu(dlugosc rozwiazania, ilosc stanow przetworzonych, odwiedzonych czas....)
 1:18:00 - dla chetnych dodatkowo odchylenie standardowe i srednia
+
+pytania:
+czasem algrorytm nie znajduje rozwiazania tj dojdzie do glebokosci 20 i nie znajdzie czy to poprawiac?
+bo to jest prawdopodobnie przez to ze dojdzie do poziomu 20 zobaczy ze jest na max poziomie i wychodzi nie sprawdza czy to stan docelowy tylko wrzuca na frontier
+w przypadu dfs

@@ -5,10 +5,10 @@
 #include <vector>
 
 // disable logging info messages. comment this out to enable logging.
-//#define SHOW_PUZZEL(msg)
-//#define SHOW_INFO(msg)
-//#define SHOW_DEBUG(msg)
-//#define SHOW_ENDING_INFOS(msg)
+#define SHOW_PUZZEL(msg)
+#define SHOW_INFO(msg)
+#define SHOW_DEBUG(msg)
+#define SHOW_ENDING_INFOS(msg)
 //#define SHOW_INFOS_FOR_SCRYPTS(msg)
 
 // if LOG_INFO is disabled, we need an empty macro, else it will not compile. comment "#undef LOG_PUZZEL" out, if you want to log messages.
@@ -33,12 +33,11 @@
 #endif // !SHOW_INFOS_FOR_SCRYPTS
 
 typedef uint16_t puzzleDataType;
-typedef unsigned long long HashType;
+typedef int HashType; // okresla jak wielka jest zakres hasha warto zmienic z unsigned long long na  int lub unsigned int na size_t lub inny
 //using puzzleDataType = std::uint8_t;
+typedef std::vector<puzzleDataType> Board;
 
-
-static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 2;  // w tresc zadania 20
-
+static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 20;  // w tresc zadania 20
 
 //// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
 
@@ -51,7 +50,7 @@ public:
 	int dimensionY;
 	size_t zeroPosition; // form 0 to (dimensionX * dimensionY)-1
 
-	std::vector<puzzleDataType> board;
+	Board board;
 
 	HashType hashValue;
 
@@ -101,5 +100,21 @@ public:
 		// mozliwe ruchy dla tego kloca, tej ukladanki
 	//auto PossibleMoves()->std::list<Moves>;
 
+	// strony do hash
+//https://stackoverflow.com/questions/628790/have-a-good-hash-function-for-a-c-hash-table
+	//https://itproblemy.pl/questions/6899392/generic-hash-function-for-all-stlcontainers
 };
 
+
+template <typename T>
+struct Hash {
+	//
+	inline int operator()(const Board &v)const {
+		std::hash<T> hasher;
+		T seed(0);
+		for (auto & it : v)
+			//for (auto & itt : it)
+			seed ^= hasher(it) + 0x933779b9 + (seed << 6) + (seed >> 2);
+		return seed;
+	}
+};

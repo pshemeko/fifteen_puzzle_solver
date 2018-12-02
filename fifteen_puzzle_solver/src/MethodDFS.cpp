@@ -24,11 +24,12 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	//wyswietlanie opisu
 	SHOW_DEBUG("\n" << (Moves::Down) << "    i co teraz!!!\nkolejnosc:";);
-	for (auto x : order) SHOW_DEBUG(x << " ";);
-	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  DFS **************************************\n";);
-	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
+	for (auto x : order) SHOW_DEBUG(ToString(x) << " ";);
+	SHOW_INFOS_FOR_SCRYPTS("\nDFS (Wglab) :";);
+	
     for (auto x : order) SHOW_INFOS_FOR_SCRYPTS(ToString(x););
-	SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab ************************************";);
+	//SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wglab ************************************";);
+	SHOW_INFOS_FOR_SCRYPTS(" " <<solution.fileInput ;);
 
 	// poczatek algorytmu
 	std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
@@ -79,19 +80,59 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
         //explored.insert(father->puzel->hashValue);
         frontier.pop_back();
 
+		//if (father->puzel->hashValue == 209414076)system("pause");
+		//if (father->puzel->hashValue == -1764611956)system("pause");
+		//if (father->puzel->hashValue == -757648687)system("pause");
+		//if (father->puzel->hashValue == -1990889808)system("pause");
+		//if (father->puzel->hashValue == -983442453)system("pause");
+
+		SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
+		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
+		SHOW_DEBUG("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
+
         if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
         if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
         {
             //stillRun = false;
             SHOW_DEBUG("\n\t\t\t\t********************************** PRZEKROCZONO DOPUSZCZALNA GLEBOKOSC\n";);
-            continue;
+            
+				/* // dla debagu
+				std::list<Moves> listMoves;
+				bool oneMore = true;
+				std::shared_ptr <Node> wezel = father;
+				while (oneMore)
+				{
+					listMoves.push_back(wezel->operatorUsed);
+					wezel = wezel->parrent;
+					if (wezel->parrent == nullptr) oneMore = false;			//TODO ******************************************* blad
+				}
+				SHOW_DEBUG("\t\t size listMoves:" << listMoves.size(););
+				std::reverse(std::begin(listMoves), std::end(listMoves));
+				SHOW_DEBUG("\nUzyto operatorow by dojsc: ";);
+				for (auto x : listMoves) SHOW_DEBUG(ToString(x) << " ";);
+				*/
+
+				// dodalem sprawcdzanie czy tu nie jest na koncowym stanie - troche spowolni ale jak wroziwazanie bedzie na glebokosci 20 to teraz je znajdzie
+				// TODO nie wiem czy to niepotrzebnie nie jest zrobione tu dodatkowo
+				if (father->puzel->IsOnFinishState())
+				{
+					timeEnd = std::chrono::high_resolution_clock::now();
+					isResolved = true;
+					SHOW_PUZZEL("\nkoncowy puzel:";);
+					SHOW_PUZZEL(*father->puzel;);
+					SHOW_DEBUG(" \n\n\n\t\t\t\t\t teraz uruchomil sie BREAK - IS ON FINISH STATE";);
+					SHOW_DEBUG("\nten puzel ma hash: " << father->puzel->hashValue << "  father ma hash: " << father->parrent->puzel->hashValue << " :";);
+					solvedNode = father;
+					stillRun = false;
+					frontier.push_back(father);
+					break; // wyskakuje z while
+				}
+
+			continue;
         }
 
-        explored.insert(father->puzel->hashValue);
+        explored.insert(father->puzel->hashValue);//jak zdjalem z frontier wezel to tu wrzucam go do explored bo bede przetwarza³ ten wezel
 
-        SHOW_DEBUG("\n kglebokosc rekursjii:" << father->recursionDeph;);
-		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
-        SHOW_DEBUG("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
 
 		for (auto mov : order)
 		{
@@ -165,7 +206,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
     if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
 
-	//******************************** WYSWIETLANIE 
+	//******************************** KONIEC ALGORYTMU
+	//******************************** WYSWIETLANIE DANYCH TERAZ I PODUMOWANIE
 
 
 	//jako ze wrzucam w odwrotnej kolejnosci trzba odwroic jkeszcze raz by do wynikow dac dobra kolejnosc
@@ -198,7 +240,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	{
 		for (auto x : listMoves)
 		{
-			SHOW_DEBUG(x << " ";);
+			SHOW_DEBUG(ToString(x) << " ";);
 		}
 
 		solution.length_of_the_solution_found = listMoves.size();
@@ -210,7 +252,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	}
 
 	
-	// *********************************************      zbieranie wynikow
+	// *********************************************      zbieranie wynikow do plików
 
 	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
 
@@ -243,6 +285,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states;);
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
+	SHOW_INFOS_FOR_SCRYPTS(" Czas : " << solution.time_duration_of_process.count(););
     solution.save();
 
 }

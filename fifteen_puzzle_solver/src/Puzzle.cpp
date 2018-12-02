@@ -139,7 +139,8 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition - 1]);
             zeroPosition -= 1;
             isMoved = true;
-			hashValue = hasHFunction();
+			//hashValue = hasHFunction();
+			hashValue = Hash< HashType>()(board);
         }
     }
     if (mov == Moves::Right)
@@ -149,7 +150,8 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition + 1]);
             zeroPosition += 1;
             isMoved = true;
-			hashValue = hasHFunction();
+			//hashValue = hasHFunction();
+			hashValue = Hash< HashType>()(board);
         }
     }
     if (mov == Moves::Up)
@@ -159,7 +161,8 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition - dimensionY]);
             zeroPosition -= dimensionY;
             isMoved = true;
-			hashValue = hasHFunction();
+			//hashValue = hasHFunction();
+			hashValue = Hash< HashType>()(board);
         }
     }
     if (mov == Moves::Down)
@@ -169,7 +172,8 @@ auto Puzzle::MoveZero(Moves mov) -> bool// moze rzucac wyj¹tek exception_wrong_m
             std::swap(board[zeroPosition], board[zeroPosition + dimensionY]);
             zeroPosition += dimensionY;
             isMoved = true;
-			hashValue = hasHFunction();
+			//hashValue = hasHFunction();
+			hashValue = Hash< HashType>()(board);
         }
     }
     return isMoved;

@@ -37,11 +37,11 @@ auto MethodAStar::run(Solution &solution) -> void
 	using namespace std;
 
  
-	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  ASTAR **************************************\n";);
-	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << std::endl;);
-	if (heuristic == Heuristics::hamm) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Hamilton ";);
-	if (heuristic == Heuristics::manh) SHOW_INFOS_FOR_SCRYPTS("*********************************** Wybrana Heurystyka: Manhatan ";);
-	    
+	SHOW_INFOS_FOR_SCRYPTS("\nASTAR";);
+	if (heuristic == Heuristics::hamm) SHOW_INFOS_FOR_SCRYPTS(" Heurystyka: Hamilton ";);
+	if (heuristic == Heuristics::manh) SHOW_INFOS_FOR_SCRYPTS(" Heurystyka: Manhatan ";);
+	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput;);
+
     std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
 
 	            SHOW_PUZZEL("Puzel Poczatkowy:" << *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl)
@@ -239,6 +239,7 @@ auto MethodAStar::run(Solution &solution) -> void
     SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states );
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
+	SHOW_INFOS_FOR_SCRYPTS(" Czas : " << solution.time_duration_of_process.count(););
     solution.save();
  
 

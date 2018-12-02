@@ -27,25 +27,25 @@ auto MethodBFS::run(Solution &solution) -> void
 
 	int MaxDepth = 0;
 	
-	SHOW_INFOS_FOR_SCRYPTS("\n**************************************  BFS **************************************\n";);
-	SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
+	SHOW_INFOS_FOR_SCRYPTS("\n*BFS (Wszerz) : ";);
+	//SHOW_INFOS_FOR_SCRYPTS(solution.fileInput << "\t\t wersja:";);
     
-        for (auto x : order)
-        {
-			if (x == Moves::Down)	SHOW_INFOS_FOR_SCRYPTS("D";);
-			if (x == Moves::Up)		SHOW_INFOS_FOR_SCRYPTS("U";);
-			if (x == Moves::Left)	SHOW_INFOS_FOR_SCRYPTS("L";);
-			if (x == Moves::Right)	SHOW_INFOS_FOR_SCRYPTS("R";);
-        }
-   
-
-		SHOW_INFOS_FOR_SCRYPTS("\n*************************************  Wszerz ************************************";);
+	for (auto x : order) SHOW_INFOS_FOR_SCRYPTS(ToString(x););
+   //     for (auto x : order)
+   //     {
+			//if (x == Moves::Down)	SHOW_INFOS_FOR_SCRYPTS("D";);
+			//if (x == Moves::Up)		SHOW_INFOS_FOR_SCRYPTS("U";);
+			//if (x == Moves::Left)	SHOW_INFOS_FOR_SCRYPTS("L";);
+			//if (x == Moves::Right)	SHOW_INFOS_FOR_SCRYPTS("R";);
+   //     }
+		SHOW_INFOS_FOR_SCRYPTS(" " << solution.fileInput );
+				
     SHOW_DEBUG("\n*************************************  Wszerz ************************************\n";);
 
 
 	SHOW_PUZZEL("Puzel Poczatkowy:"<< *startPuzzel << " jego hash: " << startPuzzel->hasHFunction() << std::endl;)
 
-	int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
+	//int maximum = MAXIMUM_PERMITTED_RECURSION_DEPTH;// uzywac tego ograniczenia
 
 
 	std::list<std::shared_ptr<Node>> frontier;
@@ -78,29 +78,30 @@ auto MethodBFS::run(Solution &solution) -> void
 		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 		
 		////
-		//if(father->puzel->hashValue == 877185)system("pause");
-		//if (father->puzel->hashValue == 876993)system("pause");
-		if (father->puzel->hashValue == 876545)
-		{
-			system("pause");
-			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
-			cout << endl;
-		}
-		if (father->puzel->hashValue == 861185)
-		{
-			system("pause");
-			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
-			cout << endl;
-		}
-		if (father->puzel->hashValue == 873473)
-		{
-			system("pause");
-			for (auto x : frontier) cout << x->puzel->hashValue << ", ";
-			cout << endl;
-		}
-		if (father->puzel->hashValue == 704513)system("pause");
-		if (father->puzel->hashValue == 458751)system("pause");
-
+//if(father->puzel->hashValue == 877185)system("pause");
+//if (father->puzel->hashValue == 876993)system("pause");
+/*
+if (father->puzel->hashValue == 876545)
+{
+	system("pause");
+	for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+	cout << endl;
+}
+if (father->puzel->hashValue == 861185)
+{
+	system("pause");
+	for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+	cout << endl;
+}
+if (father->puzel->hashValue == 873473)
+{
+	system("pause");
+	for (auto x : frontier) cout << x->puzel->hashValue << ", ";
+	cout << endl;
+}
+if (father->puzel->hashValue == 704513)system("pause");
+if (father->puzel->hashValue == 458751)system("pause");
+*/
 
 		if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
 		{
@@ -109,7 +110,7 @@ auto MethodBFS::run(Solution &solution) -> void
 			continue;
 		}
 
-		explored.push_back(father);
+		explored.push_back(father);	// przenioslem tu nizej by ¿eby wykryl mi w ukladance rozwiazanie przy poziomie 20
 
 		for (auto mov : order)
 		{
@@ -271,6 +272,6 @@ auto MethodBFS::run(Solution &solution) -> void
     SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states;);
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
-
+	SHOW_INFOS_FOR_SCRYPTS(" Czas : " << solution.time_duration_of_process.count(););
 	solution.save();
 }
