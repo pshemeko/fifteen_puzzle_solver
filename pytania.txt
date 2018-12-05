@@ -49,3 +49,6 @@ czy w DFS sprawdzamy obie listy explored i fronier czy tylko explored?
 jak powinienem liczyc ilosc odwierdzonych wezlow i ilosc wezlow przetworzonych
 
 czy ta ulepszona wersja z liczeniem glebokosci  ktora dodalem w niedziele po rozmowie jest dobrze
+
+zmien bo maksymalna glebokosc rekursji liczy o jeden za malo -ok
+zmienic jeszcze liczenie czasu bo jest za malosame 0;

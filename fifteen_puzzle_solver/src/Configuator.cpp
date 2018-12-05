@@ -29,9 +29,17 @@ Configuator::~Configuator()
 
 void Configuator::set()
 {
-    if (argv[1] == std::string("bfs")) strategy = Strategy::bfs;
-    if (argv[1] == std::string("dfs")) strategy = Strategy::dfs;
-    if (argv[1] == std::string("astr")) strategy = Strategy::astr;
+	if (argv[1] == std::string("bfs")) 
+	{
+		strategy = Strategy::bfs;
+	}else if (argv[1] == std::string("dfs")) 
+	{
+		strategy = Strategy::dfs;
+	}else if (argv[1] == std::string("astr")) 
+	{ 
+		strategy = Strategy::astr; 
+	}
+	else throw "Wybano zly parametr 1 rodzaj algorytmu";
     
     if (argv[2] == std::string("hamm"))
 	{ 
@@ -44,13 +52,14 @@ void Configuator::set()
 			for (size_t i = 0; i < 4; ++i)
 			{
 				if (order[i] == 'L') orderEnum.push_back(Moves::Left);
-				if (order[i] == 'l') orderEnum.push_back(Moves::Left);
-				if (order[i] == 'R') orderEnum.push_back(Moves::Right);
-				if (order[i] == 'r') orderEnum.push_back(Moves::Right);
-				if (order[i] == 'U') orderEnum.push_back(Moves::Up);
-				if (order[i] == 'u') orderEnum.push_back(Moves::Up);
-				if (order[i] == 'D') orderEnum.push_back(Moves::Down);
-				if (order[i] == 'd') orderEnum.push_back(Moves::Down);
+				else if (order[i] == 'l') orderEnum.push_back(Moves::Left);
+				else if (order[i] == 'R') orderEnum.push_back(Moves::Right);
+				else if (order[i] == 'r') orderEnum.push_back(Moves::Right);
+				else if (order[i] == 'U') orderEnum.push_back(Moves::Up);
+				else if (order[i] == 'u') orderEnum.push_back(Moves::Up);
+				else if (order[i] == 'D') orderEnum.push_back(Moves::Down);
+				else if (order[i] == 'd') orderEnum.push_back(Moves::Down);
+				else throw "wybrano zly parametr 3 porzadek lub heurystyka";
 			}
 		}
 

@@ -48,7 +48,7 @@ auto MethodAStar::run(Solution &solution) -> void
                     
     int MaxDepth = 0;
 
-    std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
+				std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
     std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
     
     // jako frontier moge dac std::set lub std:: priority_queue lub std::map - ktory wybrac 
@@ -80,13 +80,13 @@ auto MethodAStar::run(Solution &solution) -> void
         explored.push_back(father);
         frontier.erase(frontier.begin());
 
-        for (auto x : frontier)
-        {
-            SHOW_DEBUG( "metryka: " << x.first << " recursionDeph:" << x.second->recursionDeph << " puzel Hash: " << x.second->puzel->hashValue << std::endl;);
-        }
+        //for (auto x : frontier)
+        //{
+        //    SHOW_DEBUG( "metryka: " << x.first << " recursionDeph:" << x.second->recursionDeph << " puzel Hash: " << x.second->puzel->hashValue << std::endl;);
+        //}
 
         SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size());
-        if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
+        //if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 
         SHOW_INFO("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl);
 
@@ -99,6 +99,8 @@ auto MethodAStar::run(Solution &solution) -> void
                 std::shared_ptr<Puzzle> copy = std::make_shared<Puzzle>(newPuzel);
 
                 std::shared_ptr<Node> nod = std::make_shared<Node>(father, copy, mov, (father->recursionDeph) + 1);
+
+				if (MaxDepth < nod->recursionDeph) MaxDepth = nod->recursionDeph;
 
                 if (nod->puzel->IsOnFinishState())
                 {

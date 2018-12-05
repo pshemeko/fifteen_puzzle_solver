@@ -75,7 +75,7 @@ auto MethodBFS::run(Solution &solution) -> void
 		frontier.pop_front();
         SHOW_DEBUG(" kglebokosc rekursjii:" << father->recursionDeph;);
         SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
-		if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
+		//if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
 		
 		////
 //if(father->puzel->hashValue == 877185)system("pause");
@@ -123,7 +123,7 @@ if (father->puzel->hashValue == 458751)system("pause");
 
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, kopia, mov, (father->recursionDeph) +1);
 
-
+				if (MaxDepth < nod->recursionDeph) MaxDepth = nod->recursionDeph;
 				//////////////////////////TO DO  sprawdz czy dziala break jak docelowy to koniec moze lepiej goto;
 				bool czyJuzJest = false;
 
@@ -156,7 +156,7 @@ if (father->puzel->hashValue == 458751)system("pause");
 
 				////sprawdz czy jest docelowy
 				if (nod->puzel->IsOnFinishState())
-				{
+				{					
 					timeEnd = std::chrono::high_resolution_clock::now();
 					isResolved = true;
 					SHOW_PUZZEL("\nkoncowy puzel:";);

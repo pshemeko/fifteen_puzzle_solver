@@ -91,7 +91,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 		SHOW_DEBUG("\n----Pobralem wezel: " << father->puzel->hashValue << "\twielkosc frontier w while:" << frontier.size(););
 		SHOW_DEBUG("---------- wezel father ma depth: " << father->recursionDeph << " frontier ma rozmiar: " << frontier.size() << endl;);
 
-        if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
+        //if (MaxDepth < father->recursionDeph) MaxDepth = father->recursionDeph;
         if (MAXIMUM_PERMITTED_RECURSION_DEPTH == father->recursionDeph)
         {
             //stillRun = false;
@@ -144,6 +144,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				std::shared_ptr<Puzzle> copy = std::make_shared<Puzzle>(puzelek);
 
 				std::shared_ptr<Node> nod = std::make_shared<Node>(father, copy, mov, (father->recursionDeph) + 1);
+
+				if (MaxDepth < nod->recursionDeph) MaxDepth = nod->recursionDeph;
 
 				bool czyJuzJest = false;
 				//if (auto occurence = explored.find(currentStateHash); occurence != std::end(explored))
