@@ -269,7 +269,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	
 	// *********************************************      zbieranie wynikow do plików
 
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(timeEnd - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
 
 	
 	solution.number_of_visited_states = frontier.size() + explored.size();
