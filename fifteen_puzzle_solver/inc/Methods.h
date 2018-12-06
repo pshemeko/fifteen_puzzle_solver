@@ -7,6 +7,9 @@
 #include <chrono>
 #include <string>
 #include "Solution.h"
+#include <iostream>
+#include <iomanip>
+#include <time.h>
 
 class Methods
 {

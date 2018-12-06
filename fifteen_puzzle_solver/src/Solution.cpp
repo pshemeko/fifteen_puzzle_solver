@@ -72,6 +72,8 @@ void Solution::save()
 		fileAdditionalInformation << number_of_processed_states << std::endl;
 		fileAdditionalInformation << maximum_depth_of_recursion_achieved << std::endl;
 		// teraz podaje w sekoundach bo przeliczam mili na sekundy
+		//double czas = time_duration_of_process.count();
+		//czas /= 1000.0;
 		fileAdditionalInformation << std::setprecision(3) << std::fixed << time_duration_of_process.count() << std::endl; // 1000.0 << std::endl;	// TODO czy tak czy zmieniac by bylo do 3 mejsc po przecinku jak w tresci
 		
 		//fileAdditionalInformation << std::chrono::duration_cast<std::chrono::seconds>(time_duration_of_process).count();

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MethodBFS.h"
 #include <queue>
+#include <iomanip>
 
 
 
@@ -272,6 +273,6 @@ if (father->puzel->hashValue == 458751)system("pause");
     SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states;);
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
-	SHOW_INFOS_FOR_SCRYPTS(" Czas : " << solution.time_duration_of_process.count(););
+	SHOW_INFOS_FOR_SCRYPTS(" Czas : " <<std::setprecision(3) << std::fixed << solution.time_duration_of_process.count(););
 	solution.save();
 }
