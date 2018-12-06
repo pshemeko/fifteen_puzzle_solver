@@ -243,7 +243,7 @@ if (father->puzel->hashValue == 458751)system("pause");
 	// *********************************************      zbieranie wynikow
 
 	//solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+	solution.time_duration_of_process = (std::chrono::high_resolution_clock::now() - timeStart);
 		
 	solution.number_of_visited_states = frontier.size() + explored.size();
 	solution.number_of_processed_states = explored.size();
