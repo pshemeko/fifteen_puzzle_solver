@@ -18,8 +18,8 @@ public:
 	size_t number_of_visited_states;		//liczba stanów odwiedzonych
 	size_t number_of_processed_states;		//liczba stanów przetworzonych
 	int maximum_depth_of_recursion_achieved;	//maksymalna osi¹gniêta g³êbokoœæ rekursji
-
-	std::chrono::milliseconds time_duration_of_process;	// czas trwania procesu oliczeniowego
+	//std::chrono::microseconds a;
+	std::chrono::microseconds time_duration_of_process;	// czas trwania procesu oliczeniowego
 
 	std::fstream fileSolution; // plik z rozwiazaniem
 	std::fstream fileAdditionalInformation;

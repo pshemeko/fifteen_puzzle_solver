@@ -14,7 +14,7 @@ Solution::Solution(char* fileOutput, char* nameFileAdditionalInformation)
 	number_of_visited_states = 0;
 	number_of_processed_states = 0;
 	maximum_depth_of_recursion_achieved = 0;
-	time_duration_of_process = std::chrono::milliseconds::zero();
+	time_duration_of_process = std::chrono::microseconds::zero();
 }
 
 
@@ -27,7 +27,7 @@ Solution::Solution(char * fileInput, char * fileOutput, char * nameFileAdditiona
     number_of_visited_states = 0;
     number_of_processed_states = 0;
     maximum_depth_of_recursion_achieved = 0;
-    time_duration_of_process = std::chrono::milliseconds::zero();
+    time_duration_of_process = std::chrono::microseconds::zero();
 }
 
 

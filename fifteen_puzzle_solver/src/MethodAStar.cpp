@@ -210,8 +210,8 @@ auto MethodAStar::run(Solution &solution) -> void
 
     //******************************** WYSWIETLANIE WYNIKOW
 
-
-    solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+	//microseconds
+    solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(timeEnd - timeStart);
 
     solution.number_of_visited_states = frontier.size() + explored.size();
     solution.number_of_processed_states = explored.size();
