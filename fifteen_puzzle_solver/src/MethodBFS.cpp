@@ -19,9 +19,10 @@ auto MethodBFS::run(Solution &solution) -> void
 {
 
 	using namespace std;
-
-    std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
-	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+	
+    //std::chrono::time_point<std::chrono::steady_clock> timeEnd = std::chrono::high_resolution_clock::now();
+	//std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+	auto timeStart = std::chrono::high_resolution_clock::now();
 
 	//TODO  zaimplementoac caly algorytm
 	std::shared_ptr<Puzzle> startPuzzel = contex.GetStartPuzzle();
@@ -158,7 +159,7 @@ if (father->puzel->hashValue == 458751)system("pause");
 				////sprawdz czy jest docelowy
 				if (nod->puzel->IsOnFinishState())
 				{					
-					timeEnd = std::chrono::high_resolution_clock::now();
+					//timeEnd = std::chrono::high_resolution_clock::now();
 					isResolved = true;
 					SHOW_PUZZEL("\nkoncowy puzel:";);
 					SHOW_PUZZEL(*nod->puzel;);
@@ -194,7 +195,7 @@ if (father->puzel->hashValue == 458751)system("pause");
 
 	}
 
-    if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
+    //if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
 
 
     SHOW_DEBUG("\n wyszlo z while - glebokosc rekursji" << father->recursionDeph;);
@@ -241,9 +242,9 @@ if (father->puzel->hashValue == 458751)system("pause");
 
 	// *********************************************      zbieranie wynikow
 
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
-
-	
+	//solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+		
 	solution.number_of_visited_states = frontier.size() + explored.size();
 	solution.number_of_processed_states = explored.size();
 	////?????????TODO czy to jest dobrze?
@@ -273,6 +274,6 @@ if (father->puzel->hashValue == 458751)system("pause");
     SHOW_ENDING_INFOS("\n liczba stanow przetworzonych: " << solution.number_of_processed_states;);
     SHOW_ENDING_INFOS("\n maksymalna glebokosc rekursji: " << solution.maximum_depth_of_recursion_achieved << std::endl;);
 
-	SHOW_INFOS_FOR_SCRYPTS(" Czas : " <<std::setprecision(3) << std::fixed << solution.time_duration_of_process.count(););
+	SHOW_INFOS_FOR_SCRYPTS(" Czas : " << solution.time_duration_of_process.count(););
 	solution.save();
 }

@@ -48,9 +48,10 @@ auto MethodAStar::run(Solution &solution) -> void
                     
     int MaxDepth = 0;
 
-				std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
-    std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
-    
+	//			std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
+    //std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+    auto timeStart = std::chrono::high_resolution_clock::now();
+
     // jako frontier moge dac std::set lub std:: priority_queue lub std::map - ktory wybrac 
     std::multimap<int, std::shared_ptr<Node> > frontier{};
     std::list<std::shared_ptr<Node> > explored{};
@@ -104,7 +105,7 @@ auto MethodAStar::run(Solution &solution) -> void
 
                 if (nod->puzel->IsOnFinishState())
                 {
-                    timeEnd = std::chrono::high_resolution_clock::now();
+                   // timeEnd = std::chrono::high_resolution_clock::now();
                     isResolved = true;
                     SHOW_PUZZEL("\nkoncowy puzel:";);
                     SHOW_PUZZEL(*nod->puzel;);
@@ -168,7 +169,7 @@ auto MethodAStar::run(Solution &solution) -> void
         
     }
 
-    if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
+    //if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
 
     //******************************** PRZYGOTOWANIE WYNIKOW
 
@@ -211,7 +212,9 @@ auto MethodAStar::run(Solution &solution) -> void
     //******************************** WYSWIETLANIE WYNIKOW
 
 
-    solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+    //solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - timeStart);
+
 
     solution.number_of_visited_states = frontier.size() + explored.size();
     solution.number_of_processed_states = explored.size();

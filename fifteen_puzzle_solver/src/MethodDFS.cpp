@@ -33,8 +33,9 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	SHOW_INFOS_FOR_SCRYPTS(" " <<solution.fileInput ;);
 
 	// poczatek algorytmu
-	std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
-	std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+	//std::chrono::time_point<std::chrono::steady_clock> timeEnd;// = std::chrono::high_resolution_clock::now();
+	//std::chrono::time_point<std::chrono::steady_clock> timeStart = std::chrono::high_resolution_clock::now();
+	auto timeStart = std::chrono::high_resolution_clock::now();
 
 	int MaxDepth = 0;
 
@@ -117,7 +118,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				// TODO nie wiem czy to niepotrzebnie nie jest zrobione tu dodatkowo
 				if (father->puzel->IsOnFinishState())
 				{
-					timeEnd = std::chrono::high_resolution_clock::now();
+					//timeEnd = std::chrono::high_resolution_clock::now();
 					isResolved = true;
 					SHOW_PUZZEL("\nkoncowy puzel:";);
 					SHOW_PUZZEL(*father->puzel;);
@@ -184,7 +185,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 				
 				if (nod->puzel->IsOnFinishState()) // czy jest stanem docelowym
 				{
-					timeEnd = std::chrono::high_resolution_clock::now();
+					//timeEnd = std::chrono::high_resolution_clock::now();
 					isResolved = true;
 					SHOW_PUZZEL("\nkoncowy puzel:";);
 					SHOW_PUZZEL(*nod->puzel;);
@@ -219,7 +220,7 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 
 	}
 
-    if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
+    //if (!isResolved)  timeEnd = std::chrono::high_resolution_clock::now();
 
 	//******************************** KONIEC ALGORYTMU
 	//******************************** WYSWIETLANIE DANYCH TERAZ I PODUMOWANIE
@@ -269,7 +270,8 @@ auto MethodDFS::run(Solution &solution) -> void //Nowy jako drugi robilem
 	
 	// *********************************************      zbieranie wynikow do plików
 
-	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+	//solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+	solution.time_duration_of_process = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - timeStart);
 
 	
 	solution.number_of_visited_states = frontier.size() + explored.size();
