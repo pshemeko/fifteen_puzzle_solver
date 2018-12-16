@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Methods">
+    <Position X="4.75" Y="1.25" Width="2" />
+    <Members>
+      <Method Name="~Methods" Hidden="true" />
+      <Method Name="Methods" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAgAABAAAAAAEg=</HashCode>
+      <FileName>inc\Methods.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MethodDFS">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="~MethodDFS" Hidden="true" />
+      <Method Name="MethodDFS" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAgABAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>inc\MethodDFS.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MethodBFS">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="~MethodBFS" Hidden="true" />
+      <Method Name="MethodBFS" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAgABAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>inc\MethodBFS.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MethodAStar">
+    <Position X="3" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="~MethodAStar" Hidden="true" />
+      <Method Name="MethodAStar" Hidden="true" />
+      <Field Name="order" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAgABAAAAACAAAAAAAAAAAABCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>inc\MethodAStar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solution">
+    <Position X="2.25" Y="1" Width="1.5" />
+    <Members>
+      <Method Name="~Solution" Hidden="true" />
+      <Field Name="AdditionalInformation" Hidden="true" />
+      <Method Name="close" Hidden="true" />
+      <Field Name="fileAdditionalInformation" Hidden="true" />
+      <Field Name="fileInput" Hidden="true" />
+      <Field Name="fileSolution" Hidden="true" />
+      <Field Name="length_of_the_solution_found" Hidden="true" />
+      <Field Name="maximum_depth_of_recursion_achieved" Hidden="true" />
+      <Field Name="number_of_processed_states" Hidden="true" />
+      <Field Name="number_of_visited_states" Hidden="true" />
+      <Method Name="open" Hidden="true" />
+      <Field Name="output" Hidden="true" />
+      <Field Name="solution" Hidden="true" />
+      <Method Name="Solution" Hidden="true" />
+      <Field Name="time_duration_of_process" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAiQEAAAACABAEBACABAAAAAAIAAEQAAIAA=</HashCode>
+      <FileName>inc\Solution.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Contex">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="~Contex" Hidden="true" />
+      <Method Name="Contex" Hidden="true" />
+      <Field Name="finish" Hidden="true" />
+      <Method Name="SetForTest" Hidden="true" />
+      <Field Name="sizeX" Hidden="true" />
+      <Field Name="sizeY" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABgAAQAAAAAACIAAAAAEACgCAAAAAA=</HashCode>
+      <FileName>inc\Contex.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Configuator">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <Members>
+      <Method Name="~Configuator" Hidden="true" />
+      <Method Name="Configuator" Hidden="true" />
+      <Field Name="fileAdditionalInformation" Hidden="true" />
+      <Field Name="fileOutputSolution" Hidden="true" />
+      <Field Name="fileWithStartPuzzel" Hidden="true" />
+      <Field Name="orderEnum" Hidden="true" />
+      <Method Name="setForTest" Hidden="true" />
+      <Method Name="setTest" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>MBAAAAABAEgAACAAAAQCAACBAAAAAACAEAAAAAAAQAw=</HashCode>
+      <FileName>inc\Configuator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <Members>
+      <Method Name="~Node" Hidden="true" />
+      <Method Name="Node" Hidden="true" />
+      <Field Name="puzel" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABgCAAAAAAEAACAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>inc\Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <Members>
+      <Method Name="~Puzzle" Hidden="true" />
+      <Method Name="CanMoveDown" Hidden="true" />
+      <Method Name="CanMoveLeft" Hidden="true" />
+      <Method Name="CanMoveRight" Hidden="true" />
+      <Method Name="CanMoveUp" Hidden="true" />
+      <Method Name="Fill" Hidden="true" />
+      <Method Name="hasHFunction" Hidden="true" />
+      <Field Name="hashValue" Hidden="true" />
+      <Method Name="operator!=" Hidden="true" />
+      <Method Name="operator=" Hidden="true" />
+      <Method Name="operator==" Hidden="true" />
+      <Method Name="Puzzle" Hidden="true" />
+      <Method Name="setZero" Hidden="true" />
+      <Method Name="toString" Hidden="true" />
+      <Field Name="zeroPosition" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAABAEAAAAAAAABQEMAAAACAIA8AAwAAAAAAE=</HashCode>
+      <FileName>inc\Puzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

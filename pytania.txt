@@ -52,3 +52,6 @@ czy ta ulepszona wersja z liczeniem glebokosci  ktora dodalem w niedziele po roz
 
 zmien bo maksymalna glebokosc rekursji liczy o jeden za malo -ok
 zmienic jeszcze liczenie czasu bo jest za malosame 0;
+
+
+zmienic w DFS liczenie stanow przetwozonych i odwiedzonych zrobic zmienne bo jak przerobi³em to teraz powtarzaja sie elementy
