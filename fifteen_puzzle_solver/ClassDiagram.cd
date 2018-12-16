@@ -74,13 +74,12 @@
     <Members>
       <Method Name="~Contex" Hidden="true" />
       <Method Name="Contex" Hidden="true" />
-      <Field Name="finish" Hidden="true" />
       <Method Name="SetForTest" Hidden="true" />
       <Field Name="sizeX" Hidden="true" />
       <Field Name="sizeY" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABgAAQAAAAAACIAAAAAEACgCAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABgAAQAAAAAACIAAAAAEACgAAAAAAA=</HashCode>
       <FileName>inc\Contex.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -93,11 +92,9 @@
       <Field Name="fileOutputSolution" Hidden="true" />
       <Field Name="fileWithStartPuzzel" Hidden="true" />
       <Field Name="orderEnum" Hidden="true" />
-      <Method Name="setForTest" Hidden="true" />
-      <Method Name="setTest" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>MBAAAAABAEgAACAAAAQCAACBAAAAAACAEAAAAAAAQAw=</HashCode>
+      <HashCode>MBAAAAABAAgAACAAAAQCAAABAAAAAACAEAAAAAAAQAw=</HashCode>
       <FileName>inc\Configuator.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -109,7 +106,7 @@
       <Field Name="puzel" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABgCAAAAAAEAACAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAABACAAAAAAEAACAgAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>inc\Node.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -121,7 +118,6 @@
       <Method Name="CanMoveLeft" Hidden="true" />
       <Method Name="CanMoveRight" Hidden="true" />
       <Method Name="CanMoveUp" Hidden="true" />
-      <Method Name="Fill" Hidden="true" />
       <Method Name="hasHFunction" Hidden="true" />
       <Field Name="hashValue" Hidden="true" />
       <Method Name="operator!=" Hidden="true" />
@@ -133,7 +129,7 @@
       <Field Name="zeroPosition" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAACAAAABAEAAAAAAAABQEMAAAACAIA8AAwAAAAAAE=</HashCode>
+      <HashCode>AAAACAAAABAEAAAAAAAABQEMAAAAAAIA8AAwAAAAAAE=</HashCode>
       <FileName>inc\Puzzle.h</FileName>
     </TypeIdentifier>
   </Class>

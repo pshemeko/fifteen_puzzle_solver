@@ -1,17 +1,15 @@
 #include "pch.h"
 #include "Puzzle.h"
 #include "Exception_wrong_move.h"
-//#include "D:\Politechnika - Informatyka\III rok\Vsem\git\SISE\fifteen_puzzle_solver\fifteen_puzzle_solver\Exception_wrong_move.h"
-
 
 
 Puzzle::Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, std::vector<puzzleDataType> org)
 	:dimensionX{ puzzleDimensionX }, dimensionY{ puzzleDimensionY }, board{ std::move(org) }
 {
-    //if (puzzleDimensionX*puzzleDimensionY != org.size()) { throw Exception_wrong_move("zly wymiar vektora lub wymiary x,y"); };
+   
 	setZero();
-    hashValue = hasHFunction(); // TODO skasuj czy nie spowalnia
-	//TODO dokonczyc konstruktor
+    hashValue = hasHFunction(); 
+	
 }
 
 auto Puzzle::PositionZero() ->  size_t
@@ -21,7 +19,7 @@ auto Puzzle::PositionZero() ->  size_t
 
 void Puzzle::setZero()
 {
-	// or give it to autput function
+
 	for (std::size_t i = 0; i < board.size(); ++i)
 	{
 		if (0 == board[i])
@@ -32,51 +30,10 @@ void Puzzle::setZero()
 	}
 }
 
-void Puzzle::Fill(std::vector<puzzleDataType> org)
-{
-	if (org.size() != board.size()) throw Exception_wrong_move("Wrong numbers of Parametrs in Puzzle::Fill");
-	else
-	{
-		board.swap(org);
-	}
-}
 
-//Puzzle::Puzzle(const Puzzle &p)
-//{
-//	dimensionX = p.dimensionX;
-//	dimensionY = p.dimensionY;
-//	zeroPosition = p.zeroPosition;
-//	board = p.board;
-//
-//}
-
-//
-//std::list<int> Puzzle::DisplayElements()
-//{
-//
-//}
-//
-/*
-std::list<Moves> Puzzle::PossibleMoves()
-{
-    std::list<Moves> l;
-    if ( CanMoveLeft() )    l.push_back(Moves::Left);
-    if ( CanMoveRight() )   l.push_back(Moves::Right);
-    if ( CanMoveUp() )      l.push_back(Moves::Up);
-    if ( CanMoveDown() )    l.push_back(Moves::Down);
-    return l;
-}
-*/
 
 bool Puzzle::IsOnFinishState() //std::vector<puzzleDataType> org)
 {
-	/*for (uint_fast8_t i = 0; i< board.size()-1; ++i)
-	{
-		if (i+1 != board[i]) return false;
-	}
-	if (board[board.size() - 1] != 0) return false;
-	return true;
-	*/
 
 	for (size_t i = 0; i < board.size()-1; ++i)
 	{
@@ -88,24 +45,20 @@ bool Puzzle::IsOnFinishState() //std::vector<puzzleDataType> org)
 
 Puzzle & Puzzle::operator=(const Puzzle &p)
 {
-	//Puzzle pu(p);
+
 		dimensionX = p.dimensionX;
 		dimensionY = p.dimensionY;
 		zeroPosition = p.zeroPosition;
 		board = p.board;
 
 		return *this;
-	// TODO: tu wstawiæ instrukcjê return
+
 }
 
 Puzzle::~Puzzle()
 {
 }
 
-//
-//bool Puzzle::MoveZero(Moves mov)
-//{
-//}
 
 auto Puzzle::CanMoveRight() -> bool
 {
@@ -202,8 +155,7 @@ auto Puzzle::operator!=(Puzzle const& rhs) const -> bool
 	return !(operator==(rhs));
 }
 
-// jest tez auto hasher = std::hash<State>{}
-// wywolanie auto currentStateHash = hasher(*currentState);
+
 auto Puzzle::hasHFunction() -> HashType
 {
 	HashType hash = 0;

@@ -12,7 +12,6 @@ public:
     char* fileInput;
 
 	std::string solution; //ciag operatorow uzytych
-	//parameter needed for program output
 
 	int length_of_the_solution_found;	// d³ugoœæ znaezionego rozwiazania
 	size_t number_of_visited_states;		//liczba stanów odwiedzonych
@@ -27,7 +26,7 @@ public:
     Solution(char* fileInput, char* fileOut, char* nameFileAdditionalInformation);
 	~Solution();
 
-	void save();	//TODO napisac zapisywanie tych danych do pliku
+	void save();
 	void open(void);
 	void close();
 

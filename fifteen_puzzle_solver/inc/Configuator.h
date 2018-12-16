@@ -20,9 +20,6 @@ public:
 	Configuator(int argc, char** argv, Contex conteks); //  char * argv[]
 	~Configuator();
 
-    //tymcvzasowo do testowania
-	//Configuator(Contex con);
-
     char* fileWithStartPuzzel;
     char* fileOutputSolution;
     char* fileAdditionalInformation;
@@ -31,17 +28,15 @@ public:
     Heuristics heuristic;  // only for astar
 
     char* order;
-    std::vector<Moves> orderEnum; // jedno z nich skasuj
+    std::vector<Moves> orderEnum; 
+
+	auto returnMethod()->Methods*;
 
     auto set() -> void;
-	// do test Methods
-	auto setForTest() -> void;
-
-    // tymczasowo
-
-    auto setTest() -> void;
-
-	auto returnMethod()-> Methods*;
- 
+	
+	// tymczasowo
+	//auto setForTest() -> void;
+    //auto setTest() -> void;
+	
 };
 

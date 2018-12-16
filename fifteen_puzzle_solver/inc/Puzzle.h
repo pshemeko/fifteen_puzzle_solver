@@ -39,8 +39,6 @@ typedef std::vector<puzzleDataType> Board;
 
 static const int MAXIMUM_PERMITTED_RECURSION_DEPTH = 20;  // w tresc zadania 20
 
-//// Nie mammyzabezpiecznie zeby nie moc stworzyc elementu klasy zle np. Puzle puz(2,2,{1,2,3});
-
 class Puzzle
 {
 	void setZero();
@@ -54,21 +52,16 @@ public:
 
 	HashType hashValue;
 
-	//auto clone() -> Puzzle; TODO zamiast tu w metodzie  wykonujacej robic memcopy
 public:
 
 	Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, std::vector<puzzleDataType> org);
-
-	//Puzzle(puzzleDataType puzzleDimensionX, puzzleDataType puzzleDimensionY, Puzzle &puzel, Moves mov);	// wyrzucic???
 
     auto PositionZero() ->  size_t;
 
 	auto IsOnFinishState() -> bool;
 
-    // zrobic jako template  /// MOZE zwracac operator lub null
+    // zrobic jako template  
 	auto MoveZero(Moves mov) -> bool;
-
-	void Fill(std::vector<puzzleDataType> org); // chyba skasowac
 
 	Puzzle(const Puzzle &) = default;
 	Puzzle(Puzzle &&) = default;
@@ -83,9 +76,6 @@ public:
     auto CanMoveDown() -> bool;
 
     auto toString()-> std::string;
-	//tworze
-
-	// operators
 
 	auto operator==(Puzzle const& rhs) const -> bool;
 	auto operator!=(Puzzle const& rhs) const -> bool;
@@ -93,14 +83,6 @@ public:
 	auto hasHFunction() ->HashType;
     friend std::ostream& operator<< (std::ostream& stream, const Puzzle& matrix);
 
-    // moze zrobic wczytywanie z pliku tutaj
-
-	// chyba nie potrzebne te nizej sa
-
-		// mozliwe ruchy dla tego kloca, tej ukladanki
-	//auto PossibleMoves()->std::list<Moves>;
-
-	// strony do hash
 //https://stackoverflow.com/questions/628790/have-a-good-hash-function-for-a-c-hash-table
 	//https://itproblemy.pl/questions/6899392/generic-hash-function-for-all-stlcontainers
 };
@@ -113,7 +95,6 @@ struct Hash {
 		std::hash<T> hasher;
 		T seed(0);
 		for (auto & it : v)
-			//for (auto & itt : it)
 			seed ^= hasher(it) + 0x933779b9 + (seed << 6) + (seed >> 2);
 		return seed;
 	}

@@ -9,8 +9,6 @@
 Solution::Solution(char* fileOutput, char* nameFileAdditionalInformation)
 	:output{fileOutput}, AdditionalInformation{ nameFileAdditionalInformation }
 {
-	//fileSolution.open(output, std::ios::out);
-	//fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
 	length_of_the_solution_found = 0;
 	number_of_visited_states = 0;
 	number_of_processed_states = 0;
@@ -22,8 +20,6 @@ Solution::Solution(char* fileOutput, char* nameFileAdditionalInformation)
 Solution::Solution(char * fileInput, char * fileOutput, char * nameFileAdditionalInformation)
     :output{ fileOutput }, AdditionalInformation{ nameFileAdditionalInformation }, fileInput{ fileInput }
 {
-    //fileSolution.open(output, std::ios::out);
-    //fileAdditionalInformation.open(AdditionalInformation, std::ios::out);
     length_of_the_solution_found = 0;
     number_of_visited_states = 0;
     number_of_processed_states = 0;
@@ -48,8 +44,7 @@ void Solution::close()
 
 Solution::~Solution()
 {
-	//fileSolution.close();
-	//fileAdditionalInformation.close();
+
 }
 
 void Solution::save()
@@ -71,10 +66,7 @@ void Solution::save()
 		fileAdditionalInformation << number_of_visited_states << std::endl;
 		fileAdditionalInformation << number_of_processed_states << std::endl;
 		fileAdditionalInformation << maximum_depth_of_recursion_achieved << std::endl;
-		// teraz podaje w sekoundach bo przeliczam mili na sekundy
-		//double czas = time_duration_of_process.count();
-		//czas /= 1000.0;
-		fileAdditionalInformation << std::setprecision(3) << std::fixed << time_duration_of_process.count(); // 1000.0 << std::endl;	// TODO czy tak czy zmieniac by bylo do 3 mejsc po przecinku jak w tresci
+		fileAdditionalInformation << std::setprecision(3) << std::fixed << time_duration_of_process.count(); 
 		fileAdditionalInformation << std::endl;
 
 		//fileAdditionalInformation << std::chrono::duration_cast<std::chrono::seconds>(time_duration_of_process).count();

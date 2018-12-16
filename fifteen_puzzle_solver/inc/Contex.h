@@ -11,17 +11,13 @@
 // tworzy stan poczatkowy ukladanki Puzzle
 class Contex
 {
-	//puzzleDataType sizeX;
-	//puzzleDataType sizeY;
     int sizeX;
     int sizeY;
 
 public:
 	std::shared_ptr<Puzzle> start;
-    std::shared_ptr<Puzzle> finish; //NIepotrzebne chyba bo jest metoda w klasie Puzzle sprawdzajaca czy stan koncowy jest
 
     auto GetStartPuzzle()  -> std::shared_ptr<Puzzle>;
-    //auto GetFinishPuzzle() -> std::shared_ptr<Puzzle>;
 
 	Contex(puzzleDataType size_x, puzzleDataType size_y, std::vector< puzzleDataType> setup); // chyba wywalic
     Contex() = default;
